@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="100%" height="100%" fill="none">
+  <!-- Minimalist Sofa Silhouette Logomark -->
+  <g transform="translate(10, 14)">
+    <!-- Sofa Base & Cushion Curves -->
+    <rect x="0" y="22" width="48" height="20" rx="7" fill="#18222D" />
+    <path d="M4 22C4 13.1634 11.1634 6 20 6H28C36.8366 6 44 13.1634 44 22V24H4V22Z" fill="#D9822B" />
+    <!-- Armrests -->
+    <rect x="0" y="14" width="7" height="28" rx="3.5" fill="#18222D" />
+    <rect x="41" y="14" width="7" height="28" rx="3.5" fill="#18222D" />
+    <!-- Legs -->
+    <path d="M8 42L6 52H10L11 42H8Z" fill="#18222D" />
+    <path d="M40 42L42 52H38L37 42H40Z" fill="#18222D" />
+  </g>
+  
+  <!-- Wordmark COZLY -->
+  <text x="74" y="45" font-family="'Inter', 'Playfair Display', -apple-system, sans-serif" font-weight="800" font-size="32" letter-spacing="4" fill="#18222D">
+    COZLY
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="76" y="60" font-family="'Inter', -apple-system, sans-serif" font-weight="600" font-size="8.5" letter-spacing="3.5" fill="#D9822B">
+    SOFA ATELIER • KERALA
+  </text>
+</svg>

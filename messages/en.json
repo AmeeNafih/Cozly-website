@@ -1,0 +1,25 @@
+{
+  "brand": {
+    "name": "COZLY",
+    "tagline": "Sofa Atelier • Erattupetta, Kerala"
+  },
+  "nav": {
+    "home": "Home",
+    "collection": "Collection",
+    "customize": "Customize Your Sofa",
+    "whyCozly": "Why COZLY",
+    "about": "About Us",
+    "contact": "Contact",
+    "cart": "Cart"
+  },
+  "hero": {
+    "title": "Mastercrafted Sofas. Direct from Our Kerala Atelier.",
+    "subtitle": "Solid Teakwood & bespoke upholstery tailored to your living space. Handcrafted in Erattupetta, Kottayam with factory-direct transparent pricing."
+  },
+  "cta": {
+    "explore": "Explore Collection",
+    "customize": "Customize Your Sofa",
+    "orderWhatsApp": "Place Order on WhatsApp",
+    "enquireWhatsApp": "Enquire on WhatsApp"
+  }
+}

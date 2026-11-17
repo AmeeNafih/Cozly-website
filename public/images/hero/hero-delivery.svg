@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" height="100%">
+  <defs>
+    <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141D26" />
+      <stop offset="50%" stop-color="#1B2836" />
+      <stop offset="100%" stop-color="#0F161E" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.04" />
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#heroBg)" />
+  <rect width="1600" height="900" fill="url(#grid)" />
+
+  <!-- Atmospheric Glow -->
+  <circle cx="1200" cy="450" r="400" fill="#D9822B" opacity="0.08" />
+
+  <!-- Architectural 3D Sofa Art in Hero -->
+  <g transform="translate(720, 260)">
+    <!-- Floor shadow -->
+    <ellipse cx="400" cy="460" rx="360" ry="32" fill="#000000" opacity="0.4" />
+    <!-- Plinth -->
+    <rect x="60" y="380" width="680" height="30" rx="8" fill="#9E6738" />
+    <!-- Base cushion -->
+    <rect x="70" y="300" width="660" height="90" rx="18" fill="#243447" />
+    <!-- Backrests -->
+    <rect x="80" y="160" width="200" height="150" rx="20" fill="#18222D" />
+    <rect x="300" y="160" width="200" height="150" rx="20" fill="#18222D" />
+    <rect x="520" y="160" width="200" height="150" rx="20" fill="#18222D" />
+    <!-- Armrests -->
+    <rect x="40" y="210" width="60" height="180" rx="16" fill="#18222D" />
+    <rect x="700" y="210" width="60" height="180" rx="16" fill="#18222D" />
+    <!-- Throw cushions -->
+    <rect x="110" y="250" width="90" height="90" rx="14" fill="#D9822B" transform="rotate(-12 110 250)" />
+    <rect x="600" y="250" width="90" height="90" rx="14" fill="#FAF8F5" fill-opacity="0.8" transform="rotate(8 600 250)" />
+  </g>
+
+  <!-- Editorial Typography Overlay -->
+  <g transform="translate(120, 360)">
+    <rect x="0" y="0" width="280" height="32" rx="6" fill="#D9822B" fill-opacity="0.2" />
+    <text x="16" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="12" letter-spacing="3" fill="#D9822B">
+      HANDCRAFTED IN ERATTUPETTA
+    </text>
+    <text x="0" y="90" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="52" fill="#FAF8F5">
+      Factory-Direct Delivery.
+    </text>
+    <text x="0" y="140" font-family="'Inter', sans-serif" font-weight="400" font-size="18" fill="#9CA3AF">
+      Kerala, Tamil Nadu & Bangalore with zero transit damage.
+    </text>
+  </g>
+</svg>
