@@ -44,7 +44,7 @@ export default function QuickPriceEditorPage() {
           name: p.name,
           slug: p.slug,
           category: p.category,
-          coverImage: p.images.find((i) => i.isCover)?.url || p.images[0]?.url || '/images/products/malabar-teak.svg',
+          coverImage: p.images.find((i) => i.isCover)?.url || p.images[0]?.url || '/images/real/cozly-photo-14.jpg',
           originalPriceVal: p.price,
           price: p.price,
           offerPrice: p.originalPrice || '',

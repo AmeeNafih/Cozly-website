@@ -2,127 +2,120 @@ import React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShieldCheck, Award, HeartHandshake, MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowUpRight } from 'lucide-react';
 import { getSiteSettings } from '@/lib/data-store';
 
 export const metadata: Metadata = {
-  title: 'About Us | The COZLY by Zoffaro IN Story & Heritage',
+  title: 'About | COZLY by Zoffaro IN',
   description:
-    'Learn about COZLY by Zoffaro IN, an artisanal sofa manufacturer in Erattupetta, Kottayam, Kerala. Ethical teakwood craftsmanship, Scandinavian design, and workshop-direct values.',
+    'Artisanal sofa manufacturing based in Erattupetta, Kottayam, Kerala. Solid timber frames, tailored fabrics, and direct workshop delivery.',
 };
 
 export default async function AboutPage() {
   const settings = await getSiteSettings();
 
   return (
-    <div className="py-12 sm:py-20 bg-white">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-3xl space-y-4">
-          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
-            Born in Erattupetta, Kottayam
+    <div className="bg-white">
+      {/* Intro Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-12">
+        <div className="max-w-2xl space-y-4">
+          <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500">
+            About the Atelier
           </span>
-          <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-tight leading-tight">
-            Honest Craftsmanship for the Modern Indian Home
+          <h1 className="text-3xl sm:text-5xl font-normal text-black tracking-[-0.02em] leading-[1.15]">
+            Built with care in Erattupetta.
           </h1>
-          <p className="text-base sm:text-lg text-brand-charcoal-600 leading-relaxed">
-            COZLY by Zoffaro IN was founded with a singular conviction: furniture should be made from real solid timber, built to endure decades of family life, and priced without extravagant retail showroom overheads.
+          <p className="text-base text-neutral-600 leading-relaxed">
+            COZLY by Zoffaro IN is an independent sofa workshop located in Erattupetta, Kottayam. We craft sofas using seasoned solid timber and tailored upholstery fabrics, delivering directly to homes across South India.
           </p>
         </div>
       </div>
 
-      {/* Visual Split */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative aspect-[4/3] rounded-cozly overflow-hidden bg-brand-grey-100 border border-brand-border shadow-soft">
-            <Image
-              src="/images/products/factory-craft.svg"
-              alt="COZLY by Zoffaro IN workshop carpentry in Erattupetta"
-              fill
-              className="object-cover"
-            />
+      {/* Large Photography Split */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 sm:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-7">
+            <div className="relative aspect-[4/3] rounded-[4px] overflow-hidden bg-neutral-100 border border-neutral-200/80">
+              <Image
+                src="/images/real/cozly-photo-13.jpg"
+                alt="COZLY by Zoffaro IN workshop joinery in Erattupetta"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
-          <div className="space-y-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
-              Where Kerala Woodcraft Meets Scandinavian Balance
+
+          <div className="lg:col-span-5 space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-normal text-black tracking-[-0.015em]">
+              Solid timber and thoughtful proportions
             </h2>
-            <p className="text-xs sm:text-sm text-brand-charcoal-700 leading-relaxed">
-              Located in Erattupetta, at the foothills of Kerala’s lush high-ranges, our atelier brings together generational woodcrafters and modern upholstery engineers. Every tree we source is ethically harvested, seasoned in vacuum kilns until moisture falls below 10%, and inspected for natural grain beauty.
+            <p className="text-sm text-neutral-600 leading-relaxed">
+              Every sofa begins with an internal frame of seasoned solid timber, assembled by experienced woodcrafters using traditional mortise-and-tenon and dowel joints.
             </p>
-            <p className="text-xs sm:text-sm text-brand-charcoal-700 leading-relaxed">
-              We eliminate the traditional middleman chain: agents, distributors, and expensive city mall showrooms. When you order from COZLY by Zoffaro IN, your sofa is hand-built right here in our workshop and transported directly into your home.
+            <p className="text-sm text-neutral-600 leading-relaxed">
+              We sell directly from our workshop to you. This keeps communication clear, enables custom dimensions, and avoids retail middleman markups.
             </p>
 
-            <div className="pt-2 flex items-center gap-4 text-xs font-bold text-black">
+            <div className="pt-2 flex items-center gap-6 text-xs text-neutral-700">
               <div className="flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-black stroke-[1.5]" />
-                <span>Erattupetta, Kottayam</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-black stroke-[1.5]" />
-                <span>10-Yr Timber Warranty</span>
+                <span>Erattupetta, Kottayam, Kerala</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Our 3 Pillars */}
-      <div className="bg-black text-white py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-2xl mx-auto text-center space-y-3 mb-16">
-            <span className="text-xs uppercase tracking-widest font-semibold text-gray-400 block">
-              Our Principles
+      {/* 3 Calm Principles */}
+      <div className="bg-[#FAFAFA] border-t border-neutral-200 py-24 sm:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16">
+            <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 mb-2">
+              Principles
             </span>
-            <h2 className="text-3xl font-bold text-white tracking-tight">What We Stand For</h2>
+            <h2 className="text-2xl sm:text-3xl font-normal text-black tracking-tight">
+              How we work
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-cozly bg-white/5 border border-white/10 space-y-4">
-              <span className="text-2xl font-bold text-brand-kraft">01</span>
-              <h3 className="font-bold text-lg text-white">Authentic Materials Only</h3>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                Zero particle board. Zero cheap cardboard cores. We use solid Kerala Teakwood, multi-layer birch ply, and high-resilience 40D foams that maintain bounce for decades.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <div className="space-y-3">
+              <span className="text-xs uppercase tracking-[0.16em] text-neutral-400 font-medium">01</span>
+              <h3 className="text-base font-medium text-black">Solid Wood Frames</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                We build sofa frames with solid seasoned wood. We do not use particle board or hollow honeycomb cardboard.
               </p>
             </div>
 
-            <div className="p-8 rounded-cozly bg-white/5 border border-white/10 space-y-4">
-              <span className="text-2xl font-bold text-brand-kraft">02</span>
-              <h3 className="font-bold text-lg text-white">Direct-to-Customer Value</h3>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                By operating directly from our Erattupetta factory, our customers save 30% to 50% compared to luxury retail chain prices without sacrificing an ounce of quality.
+            <div className="space-y-3">
+              <span className="text-xs uppercase tracking-[0.16em] text-neutral-400 font-medium">02</span>
+              <h3 className="text-base font-medium text-black">Factory-Direct Pricing</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                By manufacturing in Erattupetta and delivering directly to your door, we provide honest workshop prices.
               </p>
             </div>
 
-            <div className="p-8 rounded-cozly bg-white/5 border border-white/10 space-y-4">
-              <span className="text-2xl font-bold text-brand-kraft">03</span>
-              <h3 className="font-bold text-lg text-white">Tailored Customization</h3>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                We believe your sofa should match your living space, not the other way around. Every dimension, fabric, firmness, and finish can be tailored to your preference.
+            <div className="space-y-3">
+              <span className="text-xs uppercase tracking-[0.16em] text-neutral-400 font-medium">03</span>
+              <h3 className="text-base font-medium text-black">Custom Dimensions</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                Every living room is different. We modify lengths, cushion densities, and fabric colors to fit your space.
               </p>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Call to Action */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 text-center space-y-6">
-        <h2 className="text-3xl font-bold text-black tracking-tight">
-          Ready to Craft Your Family's Next Heirloom?
-        </h2>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/collection"
-            className="px-6 py-3.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded-cozly hover:bg-brand-charcoal-800 transition-colors shadow-sm"
-          >
-            Explore Catalogue
-          </Link>
-          <Link
-            href="/customize"
-            className="px-6 py-3.5 bg-white border border-brand-border text-black text-xs font-bold uppercase tracking-wider rounded-cozly hover:bg-brand-grey-100 transition-colors shadow-sm"
-          >
-            Customize Your Sofa
-          </Link>
+          <div className="mt-16 pt-8 border-t border-neutral-200 flex flex-wrap gap-4 items-center justify-between">
+            <p className="text-xs text-neutral-500">
+              Have questions about visiting our Erattupetta workshop?
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-black underline underline-offset-4 font-medium"
+            >
+              <span>Workshop contact details</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

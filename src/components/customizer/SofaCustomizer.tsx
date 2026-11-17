@@ -3,15 +3,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import {
-  SlidersHorizontal,
   Check,
   ChevronRight,
   ChevronLeft,
   ShoppingBag,
   MessageCircle,
-  Sparkles,
-  Shield,
-  RotateCcw,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { formatINR, cleanWhatsAppNumber } from '@/lib/formatters';
@@ -22,6 +18,7 @@ interface CustomizerProps {
 
 export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: CustomizerProps) {
   const { addToCart } = useCart();
+  const [isAddedFeedback, setIsAddedFeedback] = useState(false);
 
   // Current Step (1 to 7)
   const [currentStep, setCurrentStep] = useState(1);
@@ -31,7 +28,7 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
     id: 'type-3seater',
     name: '3-Seater Classic Living',
     basePrice: 38000,
-    image: '/images/products/malabar-teak.svg',
+    image: '/images/real/cozly-photo-16.jpg',
   });
 
   const [selectedSize, setSelectedSize] = useState({
@@ -43,14 +40,14 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
 
   const [selectedWood, setSelectedWood] = useState({
     id: 'wood-teak',
-    name: '100% Solid Kiln-Dried Kerala Teak',
+    name: 'Solid Kiln-Dried Kerala Teak',
     modifier: 4500,
-    desc: 'Heirloom grade, moisture <10%, 10-year structural warranty',
+    desc: 'Ethically harvested Kerala Teakwood seasoned for lifetime structural stability',
   });
 
   const [selectedFabric, setSelectedFabric] = useState({
     id: 'fab-linen',
-    name: 'Premium Belgian Textured Linen',
+    name: 'Belgian Textured Linen',
     type: 'Linen',
     modifier: 0,
   });
@@ -64,7 +61,7 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
     id: 'firm-medium',
     name: 'Medium-Balanced (40D High Resilience)',
     modifier: 0,
-    desc: 'Optimal support for everyday family seating and posture balance',
+    desc: 'Optimal ergonomic balance for everyday family seating and posture support',
   });
 
   const [selectedLegs, setSelectedLegs] = useState({
@@ -84,30 +81,30 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
 
   // Options Data
   const types = [
-    { id: 'type-2seater', name: '2-Seater Studio Lounge', basePrice: 28000, image: '/images/products/highrange-2seater.svg' },
-    { id: 'type-3seater', name: '3-Seater Classic Living', basePrice: 38000, image: '/images/products/malabar-teak.svg' },
-    { id: 'type-lshape', name: 'L-Shape Modular Sectional', basePrice: 54000, image: '/images/products/vembanad-lshape.svg' },
-    { id: 'type-sofabed', name: 'Hydraulic Sofa-Cum-Bed', basePrice: 44000, image: '/images/products/sahyadri-sofabed.svg' },
-    { id: 'type-recliner', name: 'Push-Back Recliner Lounger', basePrice: 30000, image: '/images/products/munnar-recliner.svg' },
-    { id: 'type-chaise', name: 'Organic Curved Chaise', basePrice: 36000, image: '/images/products/periyar-chaise.svg' },
+    { id: 'type-2seater', name: '2-Seater Studio Lounge', basePrice: 28000, image: '/images/real/cozly-photo-09.jpg' },
+    { id: 'type-3seater', name: '3-Seater Classic Living', basePrice: 38000, image: '/images/real/cozly-photo-16.jpg' },
+    { id: 'type-lshape', name: 'L-Shape Modular Sectional', basePrice: 54000, image: '/images/real/cozly-photo-08.jpg' },
+    { id: 'type-sofabed', name: 'Hydraulic Sofa-Cum-Bed', basePrice: 44000, image: '/images/real/cozly-photo-21.jpg' },
+    { id: 'type-recliner', name: 'Push-Back Recliner Lounger', basePrice: 30000, image: '/images/real/cozly-photo-06.jpg' },
+    { id: 'type-chaise', name: 'Organic Curved Chaise', basePrice: 36000, image: '/images/real/cozly-photo-01.jpg' },
   ];
 
   const sizes = [
-    { id: 'size-std', name: 'Standard Ergonomic (210cm)', modifier: 0, desc: 'Optimized standard dimensions for standard living rooms' },
-    { id: 'size-deep', name: 'Deep-Lounge Extra (+15cm Depth)', modifier: 3500, desc: 'Ultra-deep seating for curling up with cushions' },
-    { id: 'size-grand', name: 'Grand Living (+30cm Length)', modifier: 6000, desc: 'Spacious configuration for open-concept floor plans' },
+    { id: 'size-std', name: 'Standard Ergonomic (210cm)', modifier: 0, desc: 'Optimized standard dimensions for modern living rooms' },
+    { id: 'size-deep', name: 'Deep-Lounge Extra (+15cm Depth)', modifier: 3500, desc: 'Extra deep seating for lounging with cushions' },
+    { id: 'size-grand', name: 'Grand Living (+30cm Length)', modifier: 6000, desc: 'Spacious extended configuration for open-concept floor plans' },
   ];
 
   const woods = [
-    { id: 'wood-teak', name: '100% Solid Kiln-Dried Kerala Teak', modifier: 4500, desc: 'Ethically sourced Kerala Teakwood with lifetime structural integrity' },
-    { id: 'wood-rosewood', name: 'Solid Teak in Rosewood Stain', modifier: 3500, desc: 'Deep rich reddish-brown luster with high-gloss satin finish' },
-    { id: 'wood-concealed', name: 'Seasoned Hardwood (Concealed)', modifier: 0, desc: 'Reinforced internal hardwood frame fully encased in plush upholstery' },
+    { id: 'wood-teak', name: 'Solid Kiln-Dried Kerala Teak', modifier: 4500, desc: 'Ethically sourced Kerala Teakwood with lifetime structural integrity' },
+    { id: 'wood-rosewood', name: 'Solid Teak in Rosewood Stain', modifier: 3500, desc: 'Deep warm reddish-brown luster with satin hand-rubbed finish' },
+    { id: 'wood-concealed', name: 'Seasoned Hardwood (Internal)', modifier: 0, desc: 'Reinforced internal hardwood frame fully encased in upholstery' },
   ];
 
   const fabrics = [
     { id: 'fab-linen', name: 'Belgian Textured Linen', type: 'Linen', modifier: 0 },
-    { id: 'fab-velvet', name: 'Royal Italian Velvet (Stain-Guarded)', type: 'Velvet', modifier: 2500 },
-    { id: 'fab-boucle', name: 'Architectural Bouclé (Scandinavian)', type: 'Bouclé', modifier: 3000 },
+    { id: 'fab-velvet', name: 'Italian Cotton Velvet', type: 'Velvet', modifier: 2500 },
+    { id: 'fab-boucle', name: 'Scandinavian Architectural Bouclé', type: 'Bouclé', modifier: 3000 },
     { id: 'fab-performance', name: 'Pet-Friendly Microfiber Weave', type: 'Performance', modifier: 2000 },
     { id: 'fab-leatherette', name: 'Full-Grain Vintage Leatherette', type: 'Leatherette', modifier: 3500 },
   ];
@@ -124,16 +121,16 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
   ];
 
   const firmnesses = [
-    { id: 'firm-soft', name: 'Soft-Cloud (32D Supersoft)', modifier: 0, desc: 'Plush sink-in comfort with down-like microfibers' },
-    { id: 'firm-medium', name: 'Medium-Balanced (40D High Resilience)', modifier: 0, desc: 'Our most popular balance of ergonomic support and comfort' },
-    { id: 'firm-ortho', name: 'Orthopedic Extra-Firm (50D Bonded Base)', modifier: 1500, desc: 'Superior spine and lumbar alignment, recommended for elders' },
+    { id: 'firm-soft', name: 'Soft-Cloud (32D)', modifier: 0, desc: 'Plush sink-in comfort with down-like microfibers' },
+    { id: 'firm-medium', name: 'Medium-Balanced (40D)', modifier: 0, desc: 'Our standard balanced ergonomic support for everyday seating' },
+    { id: 'firm-ortho', name: 'Orthopedic Extra-Firm (50D)', modifier: 1500, desc: 'Superior spine alignment and firmer lumbar support' },
   ];
 
   const legs = [
-    { id: 'legs-teak', name: 'Tapered Solid Teak Nordic 6"', modifier: 0 },
-    { id: 'legs-brass', name: 'Brushed Brass PVD Spindle Legs', modifier: 1800 },
-    { id: 'legs-block', name: 'Low-Profile Architectural Block Feet', modifier: 0 },
-    { id: 'legs-black', name: 'Matte Charcoal Steel Spindle', modifier: 800 },
+    { id: 'legs-teak', name: 'Tapered Solid Teak 6"', modifier: 0 },
+    { id: 'legs-brass', name: 'Brushed Brass PVD Spindle', modifier: 1800 },
+    { id: 'legs-block', name: 'Low-Profile Architectural Block', modifier: 0 },
+    { id: 'legs-black', name: 'Matte Charcoal Steel', modifier: 800 },
   ];
 
   const stepsList = [
@@ -141,7 +138,7 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
     { num: 2, label: 'Size' },
     { num: 3, label: 'Timber' },
     { num: 4, label: 'Fabric' },
-    { num: 5, label: 'Color' },
+    { num: 5, label: 'Colour' },
     { num: 6, label: 'Cushions' },
     { num: 7, label: 'Legs' },
   ];
@@ -164,433 +161,382 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
         legs: selectedLegs.name,
       },
     });
+
+    setIsAddedFeedback(true);
+    setTimeout(() => setIsAddedFeedback(false), 2500);
   };
 
   const handleDirectWhatsApp = () => {
     const cleanNumber = cleanWhatsAppNumber(whatsappNumber);
-    let msg = `🛋️ *CUSTOM SOFA ENQUIRY (COZLY.IN)*\n`;
-    msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    msg += `I just configured a bespoke sofa design on your customizer:\n\n`;
-    msg += `• *Model / Type:* ${selectedType.name}\n`;
-    msg += `• *Dimensions:* ${selectedSize.name}\n`;
-    msg += `• *Frame Wood:* ${selectedWood.name}\n`;
-    msg += `• *Fabric:* ${selectedFabric.name}\n`;
-    msg += `• *Color Shade:* ${selectedColor.name}\n`;
-    msg += `• *Cushion Firmness:* ${selectedFirmness.name}\n`;
-    msg += `• *Leg Style:* ${selectedLegs.name}\n`;
-    msg += `\n*Estimated Config Total:* *${formatINR(totalPrice)}*\n`;
-    msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    msg += `Could you share photos of these materials from your Erattupetta workshop and confirm delivery timeline?`;
+    let msg = `CUSTOM SOFA ENQUIRY — COZLY by Zoffaro IN\n`;
+    msg += `─────────────────────────\n`;
+    msg += `I have configured a custom sofa online:\n\n`;
+    msg += `• Silhouette: ${selectedType.name}\n`;
+    msg += `• Dimensions: ${selectedSize.name}\n`;
+    msg += `• Frame Wood: ${selectedWood.name}\n`;
+    msg += `• Fabric: ${selectedFabric.name}\n`;
+    msg += `• Colour: ${selectedColor.name}\n`;
+    msg += `• Cushion Firmness: ${selectedFirmness.name}\n`;
+    msg += `• Leg Style: ${selectedLegs.name}\n`;
+    msg += `\nEstimated Total: ${formatINR(totalPrice)}\n`;
+    msg += `─────────────────────────\n`;
+    msg += `Could you share photos of these materials from your Erattupetta workshop and confirm delivery?`;
 
     window.open(`https://wa.me/${cleanNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      {/* Page Title */}
-      <div className="max-w-3xl mb-8 space-y-2">
-        <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-brand-accent">
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>Interactive Sofa Atelier</span>
-        </div>
-        <h1 className="font-serif text-3xl sm:text-5xl font-bold text-brand-primary">
-          Design Your Bespoke Sofa
-        </h1>
-        <p className="text-xs sm:text-sm text-brand-muted">
-          Configure every detail from kiln-dried timber frames to custom fabric weaves with live transparent pricing and direct WhatsApp ordering.
-        </p>
-      </div>
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        {/* Header */}
+        <div className="border-b border-neutral-200 pb-8 mb-8">
+          <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 mb-2">
+            Bespoke Configurator
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-normal text-black tracking-[-0.02em]">
+            Customize your sofa
+          </h1>
+          <p className="text-sm text-neutral-600 mt-2 max-w-xl">
+            Choose your configuration, solid wood frame, upholstery weave, and cushioning with live workshop pricing.
+          </p>
 
-      {/* Step Progress Tracker */}
-      <div className="mb-10 bg-white p-3 sm:p-4 rounded-cozly border border-brand-border shadow-soft overflow-x-auto">
-        <div className="flex items-center justify-between min-w-[580px] sm:min-w-0">
-          {stepsList.map((s, idx) => (
-            <React.Fragment key={s.num}>
+          {/* Calm Progress Indicator */}
+          <div className="mt-8 flex items-center justify-between border-t border-neutral-200 pt-4 overflow-x-auto gap-4">
+            {stepsList.map((step) => (
               <button
-                onClick={() => setCurrentStep(s.num)}
-                className="flex items-center gap-2 group cursor-pointer"
+                key={step.num}
+                onClick={() => setCurrentStep(step.num)}
+                className={`text-xs uppercase tracking-[0.14em] pb-1 whitespace-nowrap transition-colors border-b-2 ${
+                  currentStep === step.num
+                    ? 'border-black text-black font-semibold'
+                    : currentStep > step.num
+                    ? 'border-neutral-300 text-neutral-800'
+                    : 'border-transparent text-neutral-400 hover:text-neutral-700'
+                }`}
               >
-                <span
-                  className={`w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-all ${
-                    currentStep === s.num
-                      ? 'bg-black text-white ring-4 ring-black/10'
-                      : currentStep > s.num
-                      ? 'bg-black text-white'
-                      : 'bg-brand-grey-100 text-brand-charcoal-400'
-                  }`}
-                >
-                  {currentStep > s.num ? <Check className="w-3.5 h-3.5 stroke-[2.5]" /> : s.num}
-                </span>
-                <span
-                  className={`text-xs uppercase tracking-wider ${
-                    currentStep === s.num
-                      ? 'text-black font-bold'
-                      : currentStep > s.num
-                      ? 'text-black font-semibold'
-                      : 'text-brand-charcoal-400 font-medium'
-                  }`}
-                >
-                  {s.label}
-                </span>
+                {step.num}. {step.label}
               </button>
-              {idx < stepsList.length - 1 && (
-                <div
-                  className={`flex-1 h-[2px] mx-2 transition-colors ${
-                    currentStep > s.num ? 'bg-black' : 'bg-brand-border'
-                  }`}
-                />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Two-Column Configurator Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left Column: Interactive Selection Steps (7 cols) */}
-        <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-cozly border border-brand-border shadow-soft space-y-6">
-          {/* STEP 1: TYPE */}
-          {currentStep === 1 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 1 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Sofa Silhouette & Type</h3>
-                <p className="text-xs text-brand-charcoal-600">Choose the underlying layout structure for your room.</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {types.map((t) => (
-                  <button
-                    key={t.id}
-                    onClick={() => setSelectedType(t)}
-                    className={`p-4 rounded-cozly border text-left transition-all ${
-                      selectedType.id === t.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <div className="relative h-24 w-full bg-brand-grey-100 rounded-lg mb-2 overflow-hidden">
-                      <Image src={t.image} alt={t.name} fill className="object-contain p-2" />
-                    </div>
-                    <h4 className="font-bold text-xs text-black">{t.name}</h4>
-                    <p className="text-xs font-semibold text-brand-charcoal-700 mt-1">From {formatINR(t.basePrice)}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 2: SIZE */}
-          {currentStep === 2 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 2 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Seating Proportions & Depth</h3>
-                <p className="text-xs text-brand-charcoal-600">Scale the length and seat depth to your room's blueprint.</p>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {sizes.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => setSelectedSize(s)}
-                    className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
-                      selectedSize.id === s.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <div>
-                      <h4 className="font-bold text-sm text-black">{s.name}</h4>
-                      <p className="text-xs text-brand-charcoal-600 mt-0.5">{s.desc}</p>
-                    </div>
-                    <span className="text-xs font-bold text-black">
-                      {s.modifier === 0 ? 'Included' : `+${formatINR(s.modifier)}`}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 3: WOOD */}
-          {currentStep === 3 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 3 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Frame Timber & Exposed Finish</h3>
-                <p className="text-xs text-brand-charcoal-600">All our timber is kiln-dried to sub-10% moisture to eliminate warping in tropical weather.</p>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {woods.map((w) => (
-                  <button
-                    key={w.id}
-                    onClick={() => setSelectedWood(w)}
-                    className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
-                      selectedWood.id === w.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <div>
-                      <h4 className="font-bold text-sm text-black">{w.name}</h4>
-                      <p className="text-xs text-brand-charcoal-600 mt-0.5">{w.desc}</p>
-                    </div>
-                    <span className="text-xs font-bold text-black">
-                      {w.modifier === 0 ? 'Included' : `+${formatINR(w.modifier)}`}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 4: FABRIC TYPE */}
-          {currentStep === 4 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 4 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Upholstery Fabric Category</h3>
-                <p className="text-xs text-brand-charcoal-600">High Rub-Count (30,000+ Martindale) designer fabrics woven for everyday resilience.</p>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {fabrics.map((f) => (
-                  <button
-                    key={f.id}
-                    onClick={() => setSelectedFabric(f)}
-                    className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
-                      selectedFabric.id === f.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <div>
-                      <h4 className="font-bold text-sm text-black">{f.name}</h4>
-                      <span className="text-[10px] uppercase tracking-wider font-semibold text-brand-charcoal-600">
-                        {f.type}
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-black">
-                      {f.modifier === 0 ? 'Included' : `+${formatINR(f.modifier)}`}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 5: COLOR SWATCH */}
-          {currentStep === 5 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 5 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Fabric Color Shade</h3>
-                <p className="text-xs text-brand-charcoal-600">Chosen: <strong className="text-black">{selectedColor.name}</strong></p>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                {colors.map((c) => (
-                  <button
-                    key={c.name}
-                    onClick={() => setSelectedColor(c)}
-                    className={`p-3 rounded-cozly border text-center flex flex-col items-center gap-2 transition-all ${
-                      selectedColor.name === c.name
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <span
-                      className="w-10 h-10 rounded-full border-2 border-white shadow-md"
-                      style={{ backgroundColor: c.hex }}
-                    />
-                    <span className="text-xs font-semibold text-black">{c.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 6: CUSHION FIRMNESS */}
-          {currentStep === 6 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 6 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Cushion Core Density</h3>
-                <p className="text-xs text-brand-charcoal-600">Tailor the seating firmness to your comfort preference.</p>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {firmnesses.map((fm) => (
-                  <button
-                    key={fm.id}
-                    onClick={() => setSelectedFirmness(fm)}
-                    className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
-                      selectedFirmness.id === fm.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <div>
-                      <h4 className="font-bold text-sm text-black">{fm.name}</h4>
-                      <p className="text-xs text-brand-charcoal-600 mt-0.5">{fm.desc}</p>
-                    </div>
-                    <span className="text-xs font-bold text-black">
-                      {fm.modifier === 0 ? 'Included' : `+${formatINR(fm.modifier)}`}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 7: LEG STYLE */}
-          {currentStep === 7 && (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 7 of 7</span>
-                <h3 className="font-bold text-xl text-black">Select Foot & Leg Style</h3>
-                <p className="text-xs text-brand-charcoal-600">Complete the architecture with solid wood or brass accented legs.</p>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {legs.map((lg) => (
-                  <button
-                    key={lg.id}
-                    onClick={() => setSelectedLegs(lg)}
-                    className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
-                      selectedLegs.id === lg.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
-                        : 'border-brand-border hover:border-black/30'
-                    }`}
-                  >
-                    <h4 className="font-bold text-sm text-black">{lg.name}</h4>
-                    <span className="text-xs font-bold text-black">
-                      {lg.modifier === 0 ? 'Included' : `+${formatINR(lg.modifier)}`}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Next / Prev Navigation Buttons */}
-          <div className="pt-6 border-t border-brand-border flex items-center justify-between">
-            <button
-              onClick={() => setCurrentStep((prev) => Math.max(1, prev - 1))}
-              disabled={currentStep === 1}
-              className={`px-4 py-2.5 rounded-cozly text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors ${
-                currentStep === 1
-                  ? 'text-gray-300 cursor-not-allowed'
-                  : 'text-black hover:bg-brand-grey-100'
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Back</span>
-            </button>
-
-            {currentStep < 7 ? (
-              <button
-                onClick={() => setCurrentStep((prev) => Math.min(7, prev + 1))}
-                className="px-6 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-1.5 shadow-sm transition-colors"
-              >
-                <span>Continue to Step {currentStep + 1}</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            ) : (
-              <span className="text-xs font-bold text-black flex items-center gap-1.5">
-                <Check className="w-4 h-4 stroke-[2]" />
-                Configuration Complete!
-              </span>
-            )}
+            ))}
           </div>
         </div>
 
-        {/* Right Column: Live Visual Render & Itemized Order Summary (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          {/* Visual Stage */}
-          <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
-            <div className="relative aspect-[4/3] rounded-lg bg-brand-grey-50 overflow-hidden border border-brand-border">
+        {/* Two-Column Workspace: Left Configurator / Right Sticky Summary */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          {/* Left Column: Step Content (7 cols on lg) */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Step 1: Type */}
+            {currentStep === 1 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  1. Select Silhouette & Type
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {types.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setSelectedType(t)}
+                      className={`text-left rounded-[4px] overflow-hidden border transition-all ${
+                        selectedType.id === t.id
+                          ? 'border-black ring-1 ring-black'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <div className="relative aspect-[4/3] w-full bg-neutral-100">
+                        <Image src={t.image} alt={t.name} fill className="object-cover" />
+                      </div>
+                      <div className="p-3 bg-white">
+                        <p className="text-xs font-medium text-black">{t.name}</p>
+                        <p className="text-xs text-neutral-500 mt-0.5">{formatINR(t.basePrice)}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 2: Size */}
+            {currentStep === 2 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  2. Dimensions & Depth
+                </h2>
+                <div className="space-y-3">
+                  {sizes.map((s) => (
+                    <button
+                      key={s.id}
+                      onClick={() => setSelectedSize(s)}
+                      className={`w-full text-left p-4 rounded-[4px] border transition-all flex items-start justify-between gap-4 ${
+                        selectedSize.id === s.id
+                          ? 'border-black ring-1 ring-black bg-neutral-50'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-black">{s.name}</p>
+                        <p className="text-xs text-neutral-500 mt-1">{s.desc}</p>
+                      </div>
+                      <span className="text-xs font-semibold text-black shrink-0">
+                        {s.modifier > 0 ? `+${formatINR(s.modifier)}` : 'Standard'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 3: Timber Frame */}
+            {currentStep === 3 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  3. Solid Frame Timber
+                </h2>
+                <div className="space-y-3">
+                  {woods.map((w) => (
+                    <button
+                      key={w.id}
+                      onClick={() => setSelectedWood(w)}
+                      className={`w-full text-left p-4 rounded-[4px] border transition-all flex items-start justify-between gap-4 ${
+                        selectedWood.id === w.id
+                          ? 'border-black ring-1 ring-black bg-neutral-50'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-black">{w.name}</p>
+                        <p className="text-xs text-neutral-500 mt-1">{w.desc}</p>
+                      </div>
+                      <span className="text-xs font-semibold text-black shrink-0">
+                        {w.modifier > 0 ? `+${formatINR(w.modifier)}` : 'Included'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 4: Fabric */}
+            {currentStep === 4 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  4. Upholstery Weave
+                </h2>
+                <div className="space-y-3">
+                  {fabrics.map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setSelectedFabric(f)}
+                      className={`w-full text-left p-4 rounded-[4px] border transition-all flex items-center justify-between gap-4 ${
+                        selectedFabric.id === f.id
+                          ? 'border-black ring-1 ring-black bg-neutral-50'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-black">{f.name}</p>
+                        <p className="text-xs text-neutral-500 mt-0.5">Type: {f.type}</p>
+                      </div>
+                      <span className="text-xs font-semibold text-black shrink-0">
+                        {f.modifier > 0 ? `+${formatINR(f.modifier)}` : 'Standard'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 5: Colour */}
+            {currentStep === 5 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  5. Shade & Colour
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {colors.map((c) => (
+                    <button
+                      key={c.name}
+                      onClick={() => setSelectedColor(c)}
+                      className={`p-3 rounded-[4px] border text-left flex items-center gap-2.5 transition-all ${
+                        selectedColor.name === c.name
+                          ? 'border-black ring-1 ring-black bg-neutral-50'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <span
+                        className="w-4 h-4 rounded-full border border-black/10 shrink-0"
+                        style={{ backgroundColor: c.hex }}
+                      />
+                      <span className="text-xs font-medium text-black truncate">{c.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 6: Cushion Firmness */}
+            {currentStep === 6 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  6. Cushion Firmness
+                </h2>
+                <div className="space-y-3">
+                  {firmnesses.map((fm) => (
+                    <button
+                      key={fm.id}
+                      onClick={() => setSelectedFirmness(fm)}
+                      className={`w-full text-left p-4 rounded-[4px] border transition-all flex items-start justify-between gap-4 ${
+                        selectedFirmness.id === fm.id
+                          ? 'border-black ring-1 ring-black bg-neutral-50'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-black">{fm.name}</p>
+                        <p className="text-xs text-neutral-500 mt-1">{fm.desc}</p>
+                      </div>
+                      <span className="text-xs font-semibold text-black shrink-0">
+                        {fm.modifier > 0 ? `+${formatINR(fm.modifier)}` : 'Standard'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 7: Legs */}
+            {currentStep === 7 && (
+              <div className="space-y-4">
+                <h2 className="text-base font-medium text-black">
+                  7. Leg Style
+                </h2>
+                <div className="space-y-3">
+                  {legs.map((l) => (
+                    <button
+                      key={l.id}
+                      onClick={() => setSelectedLegs(l)}
+                      className={`w-full text-left p-4 rounded-[4px] border transition-all flex items-center justify-between gap-4 ${
+                        selectedLegs.id === l.id
+                          ? 'border-black ring-1 ring-black bg-neutral-50'
+                          : 'border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <p className="text-sm font-medium text-black">{l.name}</p>
+                      <span className="text-xs font-semibold text-black shrink-0">
+                        {l.modifier > 0 ? `+${formatINR(l.modifier)}` : 'Included'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="pt-6 border-t border-neutral-200 flex items-center justify-between">
+              {currentStep > 1 ? (
+                <button
+                  onClick={() => setCurrentStep(currentStep - 1)}
+                  className="px-5 py-2.5 border border-neutral-200 rounded-[4px] text-xs font-medium uppercase tracking-[0.14em] flex items-center gap-1.5 text-black hover:bg-neutral-50"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span>Previous</span>
+                </button>
+              ) : <div />}
+
+              {currentStep < 7 ? (
+                <button
+                  onClick={() => setCurrentStep(currentStep + 1)}
+                  className="px-6 py-2.5 bg-black text-white rounded-[4px] text-xs font-medium uppercase tracking-[0.14em] flex items-center gap-1.5 hover:bg-neutral-800"
+                >
+                  <span>Continue</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              ) : (
+                <button
+                  onClick={handleAddToCart}
+                  className="px-6 py-2.5 bg-black text-white rounded-[4px] text-xs font-medium uppercase tracking-[0.14em] flex items-center gap-1.5 hover:bg-neutral-800"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <span>Add to cart</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column: Sticky Configuration Summary (5 cols on lg) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 bg-neutral-50 p-6 rounded-[4px] border border-neutral-200">
+            <div className="relative aspect-[16/10] w-full bg-neutral-100 rounded-[4px] overflow-hidden border border-neutral-200">
               <Image
                 src={selectedType.image}
                 alt={selectedType.name}
                 fill
-                className="object-contain p-4"
+                className="object-cover"
               />
+            </div>
 
-              {/* Color Swatch Badge Overlay */}
-              <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-brand-border shadow-sm">
-                <span
-                  className="w-3.5 h-3.5 rounded-full border border-black/20"
-                  style={{ backgroundColor: selectedColor.hex }}
-                />
-                <span className="text-[11px] font-bold text-black">
-                  {selectedColor.name}
-                </span>
+            <div className="space-y-3 border-b border-neutral-200 pb-4">
+              <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 block">
+                Your Configuration
+              </span>
+              <h3 className="text-xl font-medium text-black">
+                Custom {selectedType.name}
+              </h3>
+              <p className="text-2xl font-semibold text-black tracking-tight">
+                {formatINR(totalPrice)}
+              </p>
+            </div>
+
+            {/* Itemized Specs */}
+            <div className="space-y-2 text-xs text-neutral-600">
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Dimensions:</span>
+                <span className="font-medium text-black text-right">{selectedSize.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Timber:</span>
+                <span className="font-medium text-black text-right">{selectedWood.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Upholstery:</span>
+                <span className="font-medium text-black text-right">{selectedFabric.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Colour:</span>
+                <span className="font-medium text-black text-right">{selectedColor.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Cushioning:</span>
+                <span className="font-medium text-black text-right">{selectedFirmness.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-500">Legs:</span>
+                <span className="font-medium text-black text-right">{selectedLegs.name}</span>
               </div>
             </div>
 
-            {/* Live Breakdown List */}
-            <div className="space-y-2.5 text-xs">
-              <h4 className="font-bold text-sm text-black pb-2 border-b border-brand-border flex items-center justify-between">
-                <span>Custom Specification Summary</span>
-                <span className="text-[10px] text-brand-kraft font-semibold uppercase tracking-wider">Workshop Blueprint</span>
-              </h4>
-
-              <div className="flex justify-between">
-                <span className="text-brand-charcoal-600">Base Model:</span>
-                <span className="font-semibold text-black text-right">{selectedType.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-brand-charcoal-600">Dimensions:</span>
-                <span className="font-semibold text-black text-right">{selectedSize.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-brand-charcoal-600">Frame Wood:</span>
-                <span className="font-semibold text-black text-right">{selectedWood.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-brand-charcoal-600">Fabric:</span>
-                <span className="font-semibold text-black text-right">{selectedFabric.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-brand-charcoal-600">Firmness:</span>
-                <span className="font-semibold text-black text-right">{selectedFirmness.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-brand-charcoal-600">Legs:</span>
-                <span className="font-semibold text-black text-right">{selectedLegs.name}</span>
-              </div>
-
-              {/* Total Row */}
-              <div className="pt-3 border-t border-brand-border flex items-baseline justify-between">
-                <div>
-                  <span className="text-xs text-brand-charcoal-600 block">Estimated Workshop Total</span>
-                  <span className="font-bold text-2xl text-black">{formatINR(totalPrice)}</span>
-                </div>
-                <span className="text-[10px] text-black bg-brand-grey-100 px-2.5 py-1 rounded-full border border-brand-border font-semibold">
-                  Inclusive of GST
-                </span>
-              </div>
-            </div>
-
-            {/* CTAs */}
+            {/* Actions */}
             <div className="pt-2 space-y-2.5">
               <button
                 onClick={handleAddToCart}
-                className="w-full py-3.5 px-4 bg-black hover:bg-brand-charcoal-800 text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-md transition-colors"
+                className="w-full py-3 px-4 bg-black hover:bg-neutral-800 text-white text-xs font-medium uppercase tracking-[0.14em] rounded-[4px] transition-colors flex items-center justify-center gap-2"
               >
-                <ShoppingBag className="w-4 h-4 text-brand-kraft" />
-                <span>Add Custom Design to Cart</span>
+                {isAddedFeedback ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span>Added to cart</span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag className="w-4 h-4" />
+                    <span>Add to cart ({formatINR(totalPrice)})</span>
+                  </>
+                )}
               </button>
 
               <button
                 onClick={handleDirectWhatsApp}
-                className="w-full py-3.5 px-4 bg-brand-whatsapp hover:bg-[#20ba59] text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-sm transition-colors"
+                className="w-full py-3 px-4 bg-white border border-neutral-200 hover:border-neutral-400 text-neutral-900 text-xs font-medium uppercase tracking-[0.14em] rounded-[4px] transition-colors flex items-center justify-center gap-2"
               >
-                <MessageCircle className="w-4 h-4 fill-white text-brand-whatsapp" />
-                <span>Enquire Design on WhatsApp</span>
+                <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
+                <span>Enquire on WhatsApp</span>
               </button>
             </div>
           </div>

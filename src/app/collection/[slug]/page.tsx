@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
-  const coverImage = product.images.find((i) => i.isCover)?.url || product.images[0]?.url || '/images/products/malabar-teak.svg';
+  const coverImage = product.images.find((i) => i.isCover)?.url || product.images[0]?.url || '/images/real/cozly-photo-14.jpg';
 
   return {
     title: product.seoTitle || `${product.name} | Handcrafted in Kerala`,

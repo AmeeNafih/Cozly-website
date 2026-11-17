@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
 import { Category } from '@/types';
 
 interface CategoryTilesProps {
@@ -11,66 +10,75 @@ interface CategoryTilesProps {
 }
 
 export default function CategoryTiles({ categories }: CategoryTilesProps) {
+  // Clean, short display titles as specified
+  const displayTitleMap: Record<string, string> = {
+    'cat-wooden': 'Wooden',
+    'cat-upholstered': 'Upholstered',
+    'cat-lshape': 'L-Shape & Sectionals',
+    'cat-sofa-bed': 'Sofa-Cum-Beds',
+    'cat-recliners': 'Recliners & Chaises',
+  };
+
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-24 sm:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        {/* Section Heading */}
+        <div className="flex items-end justify-between mb-12 sm:mb-16">
           <div>
-            <span className="section-label">
-              Explore By Configuration
+            <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 mb-2">
+              Catalogue
             </span>
-            <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-black mt-2 tracking-tight">
-              Crafted for every comfort.
+            <h2 className="text-2xl sm:text-4xl font-normal text-black tracking-[-0.015em]">
+              Shop by category
             </h2>
           </div>
           <Link
             href="/collection"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widestSection text-black hover:text-brand-charcoal-700 transition-colors self-start md:self-auto group"
+            className="text-xs uppercase tracking-[0.16em] text-neutral-600 hover:text-black underline underline-offset-8 transition-colors hidden sm:inline-block"
           >
-            <span>View All Collections</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            All sofas
           </Link>
         </div>
 
-        {/* Tiles Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/collection?category=${category.slug}`}
-              className="group relative rounded-cozly overflow-hidden bg-white border border-brand-border shadow-soft hover:shadow-elevated transition-all duration-300 flex flex-col"
-            >
-              {/* Image Preview Container */}
-              <div className="relative h-60 w-full bg-brand-grey-50 overflow-hidden">
-                <Image
-                  src={category.imageUrl || '/images/products/malabar-teak.svg'}
-                  alt={category.name}
-                  fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:bg-brand-charcoal-800 transition-colors shadow-sm">
-                  <ArrowUpRight className="w-4 h-4" />
+        {/* 5 Large Image Tiles: Title only, no paragraphs */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          {categories.slice(0, 5).map((category) => {
+            const title = displayTitleMap[category.id] || category.name;
+            return (
+              <Link
+                key={category.id}
+                href={`/collection?category=${category.slug}`}
+                className="group flex flex-col"
+              >
+                {/* 4:5 Large Photo Container */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100 rounded-[4px] border border-neutral-200/80">
+                  <Image
+                    src={category.imageUrl || '/images/real/cozly-photo-14.jpg'}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    className="object-cover object-center group-hover:scale-103 transition-transform duration-500 ease-out"
+                  />
                 </div>
-              </div>
 
-              {/* Text Info */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-2">
-                <div>
-                  <h3 className="font-heading font-bold text-base text-black group-hover:text-brand-charcoal-700 transition-colors">
-                    {category.name}
+                {/* Title Only */}
+                <div className="pt-3.5 pb-1">
+                  <h3 className="text-sm sm:text-base font-medium text-black group-hover:underline underline-offset-4 transition-all">
+                    {title}
                   </h3>
-                  <p className="text-xs text-brand-charcoal-500 leading-relaxed line-clamp-2 mt-1">
-                    {category.description}
-                  </p>
                 </div>
-                <div className="pt-3 flex items-center justify-between text-xs text-brand-charcoal-400 border-t border-brand-border">
-                  <span className="font-bold text-black uppercase tracking-wider text-[10px]">Explore models</span>
-                  <span className="text-[10px] uppercase tracking-wider">Direct Factory</span>
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 sm:hidden text-center">
+          <Link
+            href="/collection"
+            className="text-xs uppercase tracking-[0.16em] text-neutral-600 hover:text-black underline underline-offset-8 transition-colors inline-block"
+          >
+            View all sofas
+          </Link>
         </div>
       </div>
     </section>

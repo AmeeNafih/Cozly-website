@@ -67,7 +67,7 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
   // Images list
   const [images, setImages] = useState<ProductImage[]>(
     initialProduct?.images || [
-      { id: 'img-1', url: '/images/products/malabar-teak.svg', alt: 'Front Angle', isCover: true, order: 1 },
+      { id: 'img-1', url: '/images/real/cozly-photo-14.jpg', alt: 'Front Angle', isCover: true, order: 1 },
     ]
   );
   const [newImageUrl, setNewImageUrl] = useState('');
@@ -450,7 +450,7 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
             <div className="pt-2 flex gap-2">
               <input
                 type="text"
-                placeholder="Paste image URL or /images/products/photo.svg ..."
+                placeholder="Paste image URL or /images/real/cozly-photo-01.jpg ..."
                 value={newImageUrl}
                 onChange={(e) => setNewImageUrl(e.target.value)}
                 className="flex-1 text-xs px-3.5 py-2 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none"

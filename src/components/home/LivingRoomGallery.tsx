@@ -8,27 +8,27 @@ import { ArrowUpRight, Camera, Instagram } from 'lucide-react';
 export default function LivingRoomGallery() {
   const photos = [
     {
-      src: '/images/products/factory-craft.svg',
-      title: 'Precision Mortise & Tenon',
-      subtitle: 'Erattupetta Woodshop',
+      src: '/images/real/cozly-photo-21.jpg',
+      title: 'Bespoke Low-Slung Modular Lounge',
+      subtitle: 'Erattupetta Atelier Collection',
       span: 'col-span-1 md:col-span-2 row-span-2',
     },
     {
-      src: '/images/products/royal-tufting.svg',
-      title: 'Hand-Tufted Chesterfield',
-      subtitle: 'Deep Diamond Pleating',
+      src: '/images/real/cozly-photo-13.jpg',
+      title: 'Handcrafted Timber Joinery & Shelf',
+      subtitle: 'Solid Wood Craftsmanship',
       span: 'col-span-1',
     },
     {
-      src: '/images/products/sahyadri-bed-mode.svg',
-      title: 'Hydraulic Mechanism Testing',
-      subtitle: 'German Gas Lift Pistons',
+      src: '/images/real/cozly-photo-06.jpg',
+      title: 'Ergonomic Swivel Leather Lounger',
+      subtitle: 'Precision Mechanical Recliner',
       span: 'col-span-1',
     },
     {
-      src: '/images/products/malabar-teak-side.svg',
-      title: 'Solid Teak Frame Finishing',
-      subtitle: 'Natural Matte Polyurethane',
+      src: '/images/real/cozly-photo-26.jpg',
+      title: 'Architectural Curved Living Suite',
+      subtitle: 'Custom Villa Interior Project',
       span: 'col-span-1 md:col-span-2',
     },
   ];

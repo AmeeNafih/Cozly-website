@@ -6,23 +6,16 @@ import Link from 'next/link';
 import {
   ShoppingBag,
   MessageCircle,
-  ShieldCheck,
-  Truck,
-  RotateCcw,
   Check,
-  ChevronRight,
-  Ruler,
-  Layers,
-  Sparkles,
+  ChevronDown,
+  ChevronUp,
   Minus,
   Plus,
-  ZoomIn,
 } from 'lucide-react';
 import { Product } from '@/types';
 import { formatINR, generateProductEnquiryUrl } from '@/lib/formatters';
 import { useCart } from '@/context/CartContext';
 import ProductCard from '@/components/product/ProductCard';
-import BrandValueStrip from '@/components/common/BrandValueStrip';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -41,15 +34,30 @@ export default function ProductDetailView({
   const [selectedFabric, setSelectedFabric] = useState(product.fabrics[0] || null);
   const [selectedFinish, setSelectedFinish] = useState(product.woodFinishes[0] || null);
   const [quantity, setQuantity] = useState(1);
-  const [isAddedFeedback, setIsAddedFeedback] = useState(false);
-  const [activeTab, setActiveTab] = useState<'specs' | 'dimensions' | 'delivery' | 'warranty'>('specs');
+  const [isAdded, setIsAdded] = useState(false);
 
-  // Compute calculated price based on selected fabric upgrade
+  // Accordion state
+  const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({
+    details: true,
+    dimensions: false,
+    care: false,
+    delivery: false,
+    warranty: false,
+  });
+
+  const toggleAccordion = (key: string) => {
+    setOpenAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
   const fabricModifier = selectedFabric?.priceModifier || 0;
   const currentPrice = product.price + fabricModifier;
   const currentOriginalPrice = product.originalPrice ? product.originalPrice + fabricModifier : undefined;
 
-  const images = product.images.length > 0 ? product.images : [{ id: '1', url: '/images/products/malabar-teak.svg', alt: product.name, isCover: true, order: 1 }];
+  const images =
+    product.images && product.images.length > 0
+      ? product.images
+      : [{ id: '1', url: '/images/real/cozly-photo-14.jpg', alt: product.name, isCover: true, order: 1 }];
+
   const currentImage = images[activeImageIdx] || images[0];
 
   const handleAddToCart = () => {
@@ -66,11 +74,11 @@ export default function ProductDetailView({
       selectedFinish: selectedFinish?.name,
     });
 
-    setIsAddedFeedback(true);
-    setTimeout(() => setIsAddedFeedback(false), 2500);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2500);
   };
 
-  const handleWhatsAppEnquire = () => {
+  const handleWhatsAppOrder = () => {
     const url = generateProductEnquiryUrl(
       product,
       selectedFabric?.colorName,
@@ -81,435 +89,330 @@ export default function ProductDetailView({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
-      {/* Breadcrumb */}
-      <nav className="flex items-center space-x-2 text-xs text-brand-muted mb-6">
-        <Link href="/" className="hover:text-brand-primary">Home</Link>
-        <ChevronRight className="w-3.5 h-3.5" />
-        <Link href="/collection" className="hover:text-brand-primary">Collection</Link>
-        <ChevronRight className="w-3.5 h-3.5" />
-        <span className="text-brand-primary font-medium truncate">{product.name}</span>
-      </nav>
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
+        {/* Breadcrumb */}
+        <nav className="text-xs text-neutral-500 mb-8 flex items-center space-x-2">
+          <Link href="/" className="hover:text-black transition-colors">Home</Link>
+          <span>/</span>
+          <Link href="/collection" className="hover:text-black transition-colors">Collection</Link>
+          <span>/</span>
+          <span className="text-black font-medium">{product.name}</span>
+        </nav>
 
-      {/* Main Two-Column Stage */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-        {/* Left Column: Photo Gallery (7 cols on lg) */}
-        <div className="lg:col-span-7 space-y-4">
-          {/* Main Visual Display */}
-          <div className="relative aspect-[4/3] rounded-cozly overflow-hidden bg-brand-surface border border-brand-border shadow-soft group">
-            <Image
-              src={currentImage.url}
-              alt={currentImage.alt || product.name}
-              fill
-              priority
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-            />
-            {/* Tag Badges */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <span className="px-2.5 py-1 rounded bg-black/90 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-md">
-                {product.seatingCapacity}
+        {/* Main Two-Column Stage */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          {/* Left Column: Image Gallery (7 cols on lg) */}
+          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-4">
+            {/* Vertical Thumbnails on Desktop / Horizontal on Mobile */}
+            {images.length > 1 && (
+              <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-y-auto shrink-0 pb-2 sm:pb-0 sm:max-h-[640px]">
+                {images.map((img, idx) => (
+                  <button
+                    key={img.id || idx}
+                    onClick={() => setActiveImageIdx(idx)}
+                    className={`relative w-16 h-20 sm:w-20 sm:h-24 rounded-[4px] overflow-hidden border transition-all ${
+                      idx === activeImageIdx
+                        ? 'border-black opacity-100'
+                        : 'border-neutral-200 opacity-60 hover:opacity-100'
+                    }`}
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.alt || product.name}
+                      fill
+                      className="object-cover object-center"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Main Stage (4:5 Ratio) */}
+            <div className="relative aspect-[4/5] flex-1 rounded-[4px] overflow-hidden bg-neutral-100 border border-neutral-200/80 group">
+              <Image
+                src={currentImage.url}
+                alt={currentImage.alt || product.name}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover object-center group-hover:scale-103 transition-transform duration-500 ease-out"
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Sticky Product Details & Configuration (5 cols on lg) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
+            <div className="border-b border-neutral-200 pb-6 space-y-2">
+              <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 block">
+                {product.seatingCapacity} • {product.materialType === 'wooden' ? 'Solid Wood' : 'Upholstered'}
               </span>
-              {product.stockStatus === 'in_stock' ? (
-                <span className="px-2.5 py-1 rounded bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-sm border border-white/20">
-                  In Stock • Dispatch in 5-8 Days
-                </span>
-              ) : (
-                <span className="px-2.5 py-1 rounded bg-brand-kraft text-white text-[11px] font-bold uppercase tracking-wider shadow-sm">
-                  Made to Order
-                </span>
-              )}
-            </div>
-          </div>
 
-          {/* Thumbnail Strip */}
-          {images.length > 1 && (
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {images.map((img, idx) => (
-                <button
-                  key={img.id || idx}
-                  onClick={() => setActiveImageIdx(idx)}
-                  className={`relative w-20 h-20 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                    idx === activeImageIdx
-                      ? 'border-black shadow-md scale-95'
-                      : 'border-brand-border hover:border-black/40 opacity-70 hover:opacity-100'
-                  }`}
-                >
-                  <Image src={img.url} alt={img.alt} fill className="object-cover" />
-                </button>
-              ))}
-            </div>
-          )}
+              <h1 className="text-2xl sm:text-3xl font-normal text-black tracking-[-0.015em]">
+                {product.name}
+              </h1>
 
-          {/* Quick Craftsmanship Highlights */}
-          <div className="grid grid-cols-3 gap-3 pt-4 border-t border-brand-border text-center">
-            <div className="p-3 bg-white rounded-cozly border border-brand-border">
-              <ShieldCheck className="w-5 h-5 text-black mx-auto mb-1 stroke-[1.5]" />
-              <p className="text-xs font-bold text-black">{product.warrantyYears} Years</p>
-              <p className="text-[10px] text-brand-charcoal-500">Frame Warranty</p>
-            </div>
-            <div className="p-3 bg-white rounded-cozly border border-brand-border">
-              <Truck className="w-5 h-5 text-black mx-auto mb-1 stroke-[1.5]" />
-              <p className="text-xs font-bold text-black">Direct Delivery</p>
-              <p className="text-[10px] text-brand-charcoal-500">Kerala, TN & BLR</p>
-            </div>
-            <div className="p-3 bg-white rounded-cozly border border-brand-border">
-              <Sparkles className="w-5 h-5 text-black mx-auto mb-1 stroke-[1.5]" />
-              <p className="text-xs font-bold text-black">Customizable</p>
-              <p className="text-[10px] text-brand-charcoal-500">Any Size / Fabric</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Details & Actions (5 cols on lg) */}
-        <div className="lg:col-span-5 space-y-6">
-          {/* Title & Origin */}
-          <div className="space-y-1.5 border-b border-brand-border pb-5">
-            <div className="flex items-center justify-between text-xs tracking-widest uppercase font-semibold text-brand-charcoal-600">
-              <span>{product.style} • {product.materialType === 'wooden' ? 'Solid Wood' : 'Upholstered'}</span>
-              <span className="text-black bg-brand-grey-100 px-2.5 py-0.5 rounded-full border border-brand-border font-medium text-[10px]">
-                Workshop Direct
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
-              {product.name}
-            </h1>
-            <p className="text-xs text-brand-charcoal-600 leading-relaxed">
-              {product.shortDescription}
-            </p>
-          </div>
-
-          {/* Pricing Box */}
-          <div className="p-4 bg-white rounded-cozly border border-brand-border shadow-soft flex items-baseline justify-between">
-            <div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
+              {/* Price */}
+              <div className="flex items-baseline gap-3 pt-1">
+                <span className="text-2xl font-semibold text-black tracking-tight">
                   {formatINR(currentPrice)}
                 </span>
                 {currentOriginalPrice && (
-                  <span className="text-sm text-brand-charcoal-400 line-through">
+                  <span className="text-sm text-neutral-400 line-through">
                     {formatINR(currentOriginalPrice)}
                   </span>
                 )}
+                {product.stockStatus === 'made_to_order' ? (
+                  <span className="text-xs text-neutral-500 font-normal ml-auto">
+                    Made to order
+                  </span>
+                ) : (
+                  <span className="text-xs text-neutral-500 font-normal ml-auto">
+                    In stock
+                  </span>
+                )}
               </div>
-              <p className="text-[11px] text-brand-charcoal-500 mt-0.5">
-                Transparent workshop pricing • Inclusive of GST
+
+              {/* Short Factual Description (1-2 sentences) */}
+              <p className="text-sm text-neutral-600 leading-relaxed pt-2">
+                {product.shortDescription}
               </p>
             </div>
-            <div className="text-right">
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-brand-charcoal-800 bg-brand-grey-100 px-2.5 py-1 rounded-full border border-brand-border block">
-                {product.stockStatus === 'in_stock' ? 'Ships in 5-8 Days' : product.deliveryTime}
-              </span>
-            </div>
-          </div>
 
-          {/* Fabric & Color Swatches */}
-          {product.fabrics && product.fabrics.length > 0 && (
-            <div className="space-y-2.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold uppercase tracking-wider text-black">
-                  Select Fabric & Color:
-                </span>
-                <span className="text-brand-kraft font-semibold">
-                  {selectedFabric ? `${selectedFabric.type} — ${selectedFabric.colorName}` : ''}
-                </span>
+            {/* Fabric & Colour Swatches */}
+            {product.fabrics && product.fabrics.length > 0 && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-neutral-500 uppercase tracking-wider">Fabric & Colour</span>
+                  <span className="text-black font-medium">
+                    {selectedFabric ? `${selectedFabric.type} • ${selectedFabric.colorName}` : ''}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap gap-2.5">
+                  {product.fabrics.map((fab) => (
+                    <button
+                      key={fab.id}
+                      onClick={() => setSelectedFabric(fab)}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-[4px] border text-xs transition-colors ${
+                        selectedFabric?.id === fab.id
+                          ? 'border-black bg-neutral-50 font-medium text-black'
+                          : 'border-neutral-200 text-neutral-700 hover:border-neutral-400'
+                      }`}
+                    >
+                      <span
+                        className="w-3.5 h-3.5 rounded-full border border-black/10 shrink-0"
+                        style={{ backgroundColor: fab.colorHex }}
+                      />
+                      <span>{fab.colorName}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-3 gap-2">
-                {product.fabrics.map((fab) => (
+            )}
+
+            {/* Wood Finish Options (Pill Buttons) */}
+            {product.woodFinishes && product.woodFinishes.length > 0 && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-neutral-500 uppercase tracking-wider">Frame Wood Finish</span>
+                  <span className="text-black font-medium">{selectedFinish?.name}</span>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {product.woodFinishes.map((finish) => (
+                    <button
+                      key={finish.id}
+                      onClick={() => setSelectedFinish(finish)}
+                      className={`px-3.5 py-2 rounded-[4px] border text-xs transition-colors ${
+                        selectedFinish?.id === finish.id
+                          ? 'border-black bg-black text-white font-medium'
+                          : 'border-neutral-200 text-neutral-800 hover:border-neutral-400'
+                      }`}
+                    >
+                      {finish.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Quantity Selector & Primary Actions */}
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center border border-neutral-200 rounded-[4px]">
                   <button
-                    key={fab.id}
-                    onClick={() => setSelectedFabric(fab)}
-                    className={`p-2 rounded-lg border text-left flex items-center gap-2 transition-all ${
-                      selectedFabric?.id === fab.id
-                        ? 'border-black bg-brand-grey-50 ring-1 ring-black'
-                        : 'border-brand-border bg-white hover:border-black/40'
-                    }`}
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="p-2.5 text-neutral-600 hover:text-black transition-colors"
+                    aria-label="Decrease quantity"
                   >
-                    <span
-                      className="w-5 h-5 rounded-full border border-black/20 shrink-0 shadow-inner"
-                      style={{ backgroundColor: fab.colorHex }}
-                    />
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-bold text-black truncate">{fab.colorName}</p>
-                      <p className="text-[9px] text-brand-charcoal-500 truncate">{fab.type}</p>
-                    </div>
+                    <Minus className="w-3.5 h-3.5" />
                   </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Wood Finish Options */}
-          {product.woodFinishes && product.woodFinishes.length > 0 && (
-            <div className="space-y-2.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold uppercase tracking-wider text-black">
-                  Wood Frame / Leg Finish:
-                </span>
-                <span className="text-brand-kraft font-semibold">
-                  {selectedFinish?.name}
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {product.woodFinishes.map((wf) => (
+                  <span className="px-3 text-xs font-semibold text-black min-w-[32px] text-center">
+                    {quantity}
+                  </span>
                   <button
-                    key={wf.id}
-                    onClick={() => setSelectedFinish(wf)}
-                    className={`px-3 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-2 transition-all ${
-                      selectedFinish?.id === wf.id
-                        ? 'border-black bg-black text-white'
-                        : 'border-brand-border bg-white text-black hover:bg-brand-grey-100'
-                    }`}
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="p-2.5 text-neutral-600 hover:text-black transition-colors"
+                    aria-label="Increase quantity"
                   >
-                    <span
-                      className="w-3.5 h-3.5 rounded-full border border-black/20"
-                      style={{ backgroundColor: wf.colorHex }}
-                    />
-                    <span>{wf.name}</span>
+                    <Plus className="w-3.5 h-3.5" />
                   </button>
-                ))}
-              </div>
-            </div>
-          )}
+                </div>
 
-          {/* Quantity Selector & Action Buttons */}
-          <div className="space-y-3 pt-2">
-            <div className="flex items-center gap-3">
-              {/* Quantity Counter */}
-              <div className="flex items-center border border-brand-border rounded-cozly bg-white overflow-hidden shadow-sm">
+                {/* Primary Add to Cart (Black) */}
                 <button
-                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="p-3 hover:bg-brand-grey-100 text-black transition-colors"
-                  aria-label="Decrease quantity"
+                  onClick={handleAddToCart}
+                  className="flex-1 py-3 px-6 bg-black hover:bg-neutral-800 text-white text-xs font-medium uppercase tracking-[0.14em] rounded-[4px] transition-colors flex items-center justify-center gap-2"
                 >
-                  <Minus className="w-4 h-4" />
-                </button>
-                <span className="px-4 text-sm font-bold text-black min-w-[32px] text-center">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity((q) => q + 1)}
-                  className="p-3 hover:bg-brand-grey-100 text-black transition-colors"
-                  aria-label="Increase quantity"
-                >
-                  <Plus className="w-4 h-4" />
+                  {isAdded ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      <span>Added to cart</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-4 h-4 stroke-[1.5]" />
+                      <span>Add to cart</span>
+                    </>
+                  )}
                 </button>
               </div>
 
-              {/* Add to Cart Button */}
+              {/* Secondary Order on WhatsApp (Outline with WhatsApp green icon) */}
               <button
-                onClick={handleAddToCart}
-                className="flex-1 py-3.5 px-6 bg-black hover:bg-brand-charcoal-800 text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+                onClick={handleWhatsAppOrder}
+                className="w-full py-3 px-6 bg-white border border-neutral-200 hover:border-neutral-400 text-neutral-900 text-xs font-medium uppercase tracking-[0.14em] rounded-[4px] transition-colors flex items-center justify-center gap-2"
               >
-                {isAddedFeedback ? (
-                  <>
-                    <Check className="w-4 h-4 text-emerald-400" />
-                    <span>Added to Cart!</span>
-                  </>
-                ) : (
-                  <>
-                    <ShoppingBag className="w-4 h-4 text-brand-kraft" />
-                    <span>Add to Cart</span>
-                  </>
-                )}
+                <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
+                <span>Order on WhatsApp</span>
               </button>
             </div>
 
-            {/* Direct WhatsApp Enquiry Button */}
-            <button
-              onClick={handleWhatsAppEnquire}
-              className="w-full py-3.5 px-4 bg-brand-whatsapp hover:bg-[#20ba59] text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-sm transition-colors"
-            >
-              <MessageCircle className="w-4 h-4 fill-white text-brand-whatsapp" />
-              <span>Enquire & Order on WhatsApp</span>
-            </button>
+            {/* Quiet Delivery Note */}
+            <p className="text-xs text-neutral-500 pt-2 border-t border-neutral-200">
+              Direct factory delivery to Kerala, Karnataka (Bangalore) and Tamil Nadu.
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Tabs / Accordion for Specifications */}
-      <div className="mt-16 bg-white rounded-cozly border border-brand-border shadow-soft overflow-hidden">
-        {/* Tab Headers */}
-        <div className="flex border-b border-brand-border overflow-x-auto bg-brand-surface/60">
-          {[
-            { key: 'specs', label: 'Materials & Craft' },
-            { key: 'dimensions', label: 'Dimensions & Fit' },
-            { key: 'delivery', label: 'Delivery & Assembly' },
-            { key: 'warranty', label: 'Warranty & Care' },
-          ].map((tab) => (
+        {/* Clean Accordions Below (Details, Dimensions, Materials and care, Delivery, Warranty) */}
+        <div className="mt-20 pt-12 border-t border-neutral-200 max-w-4xl space-y-4">
+          {/* 1. Details */}
+          <div className="border-b border-neutral-200 pb-4">
             <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
-              className={`px-6 py-4 text-xs font-bold uppercase tracking-wider transition-colors shrink-0 ${
-                activeTab === tab.key
-                  ? 'border-b-2 border-black text-black bg-white'
-                  : 'text-brand-charcoal-500 hover:text-black'
-              }`}
+              onClick={() => toggleAccordion('details')}
+              className="w-full flex items-center justify-between text-left py-2 font-medium text-sm text-black"
             >
-              {tab.label}
+              <span>Product Details</span>
+              {openAccordions.details ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
-          ))}
+            {openAccordions.details && (
+              <div className="pt-2 pb-4 text-xs sm:text-sm text-neutral-600 space-y-2 leading-relaxed">
+                <p>{product.fullDescription || product.shortDescription}</p>
+                <p>Designed and built at our workshop in Erattupetta, Kottayam, Kerala.</p>
+              </div>
+            )}
+          </div>
+
+          {/* 2. Dimensions */}
+          <div className="border-b border-neutral-200 pb-4">
+            <button
+              onClick={() => toggleAccordion('dimensions')}
+              className="w-full flex items-center justify-between text-left py-2 font-medium text-sm text-black"
+            >
+              <span>Dimensions</span>
+              {openAccordions.dimensions ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+            {openAccordions.dimensions && (
+              <div className="pt-2 pb-4 text-xs sm:text-sm text-neutral-600 space-y-1.5">
+                <p>Width: {product.dimensions.width} {product.dimensions.unit}</p>
+                <p>Depth: {product.dimensions.depth} {product.dimensions.unit}</p>
+                <p>Height: {product.dimensions.height} {product.dimensions.unit}</p>
+                {product.dimensions.seatingHeight && (
+                  <p>Seating Height: {product.dimensions.seatingHeight} {product.dimensions.unit}</p>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* 3. Materials and Care */}
+          <div className="border-b border-neutral-200 pb-4">
+            <button
+              onClick={() => toggleAccordion('care')}
+              className="w-full flex items-center justify-between text-left py-2 font-medium text-sm text-black"
+            >
+              <span>Materials & Care</span>
+              {openAccordions.care ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+            {openAccordions.care && (
+              <div className="pt-2 pb-4 text-xs sm:text-sm text-neutral-600 space-y-2 leading-relaxed">
+                <p>Frame: {product.materialsSpec?.frameWood || 'Solid Kiln-Dried Timber'}</p>
+                <p>Cushioning: {product.materialsSpec?.foamType || 'High Resilience 40D Foam'}</p>
+                <p>Springs: {product.materialsSpec?.springSystem || 'Heavy-gauge S-spring suspension'}</p>
+                <p>Care: Vacuum upholstery regularly with a soft brush attachment. Blot spills immediately with a dry cloth. For exposed wood parts, wipe clean with a soft dry cloth.</p>
+              </div>
+            )}
+          </div>
+
+          {/* 4. Delivery */}
+          <div className="border-b border-neutral-200 pb-4">
+            <button
+              onClick={() => toggleAccordion('delivery')}
+              className="w-full flex items-center justify-between text-left py-2 font-medium text-sm text-black"
+            >
+              <span>Delivery & Handover</span>
+              {openAccordions.delivery ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+            {openAccordions.delivery && (
+              <div className="pt-2 pb-4 text-xs sm:text-sm text-neutral-600 space-y-2 leading-relaxed">
+                <p>Kerala: Delivered within 5 to 10 days direct from our Erattupetta workshop.</p>
+                <p>Karnataka (Bangalore) & Tamil Nadu: Delivered within 7 to 12 days fully assembled.</p>
+                <p>Our team handles unloading, placement in your room, and inspection.</p>
+              </div>
+            )}
+          </div>
+
+          {/* 5. Warranty */}
+          <div className="border-b border-neutral-200 pb-4">
+            <button
+              onClick={() => toggleAccordion('warranty')}
+              className="w-full flex items-center justify-between text-left py-2 font-medium text-sm text-black"
+            >
+              <span>Warranty</span>
+              {openAccordions.warranty ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+            {openAccordions.warranty && (
+              <div className="pt-2 pb-4 text-xs sm:text-sm text-neutral-600 space-y-2 leading-relaxed">
+                <p>{product.warrantyYears} years structural frame warranty covering timber joinery and internal construction.</p>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Tab Content */}
-        <div className="p-6 sm:p-8 text-sm">
-          {activeTab === 'specs' && (
-            <div className="space-y-6">
-              <p className="text-xs text-brand-charcoal-700 leading-relaxed max-w-3xl">
-                {product.fullDescription}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-brand-border">
-                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Frame Wood</span>
-                  <p className="font-semibold text-black text-xs">{product.materialsSpec.frameWood}</p>
-                </div>
-                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Foam Density</span>
-                  <p className="font-semibold text-black text-xs">{product.materialsSpec.foamType}</p>
-                </div>
-                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Suspension System</span>
-                  <p className="font-semibold text-black text-xs">{product.materialsSpec.springSystem}</p>
-                </div>
-                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Legs & Polish</span>
-                  <p className="font-semibold text-black text-xs">{product.materialsSpec.legMaterial}</p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'dimensions' && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
-                  <span className="text-xs text-brand-charcoal-500 block">Length (Width)</span>
-                  <span className="font-bold text-xl text-black">{product.dimensions.width} cm</span>
-                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">≈ {(product.dimensions.width / 2.54).toFixed(0)} inches</span>
-                </div>
-                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
-                  <span className="text-xs text-brand-charcoal-500 block">Depth</span>
-                  <span className="font-bold text-xl text-black">{product.dimensions.depth} cm</span>
-                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">≈ {(product.dimensions.depth / 2.54).toFixed(0)} inches</span>
-                </div>
-                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
-                  <span className="text-xs text-brand-charcoal-500 block">Total Height</span>
-                  <span className="font-bold text-xl text-black">{product.dimensions.height} cm</span>
-                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">≈ {(product.dimensions.height / 2.54).toFixed(0)} inches</span>
-                </div>
-                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
-                  <span className="text-xs text-brand-charcoal-500 block">Seating Height</span>
-                  <span className="font-bold text-xl text-black">{product.dimensions.seatingHeight || 45} cm</span>
-                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">Standard Ergonomic Height</span>
-                </div>
-              </div>
-              <p className="text-xs text-brand-charcoal-500 pt-2">
-                *Need custom dimensions to fit your living room wall or elevator passage? Message us on WhatsApp and our carpentry draftsmen will modify the blueprint.
-              </p>
-            </div>
-          )}
-
-          {activeTab === 'delivery' && (
-            <div className="space-y-3 text-xs text-brand-charcoal-700 leading-relaxed">
-              <p className="font-semibold text-black text-sm">Direct Factory Delivery Coverage:</p>
-              <ul className="list-disc pl-5 space-y-1.5">
-                <li><strong>Kerala:</strong> 5 to 10 Business Days via direct workshop transport to all districts.</li>
-                <li><strong>Karnataka (Bangalore):</strong> 7 to 12 Business Days with apartment elevator carriage and living room placement.</li>
-                <li><strong>Tamil Nadu:</strong> 7 to 12 Business Days with multi-tier reinforced packaging.</li>
-                <li><strong>Rest of India:</strong> Available on specialized logistics request via WhatsApp.</li>
-              </ul>
-            </div>
-          )}
-
-          {activeTab === 'warranty' && (
-            <div className="space-y-3 text-xs text-brand-charcoal-700 leading-relaxed">
-              <p className="font-semibold text-black text-sm">{product.warrantyYears}-Year Manufacturer Frame Warranty</p>
-              <p>
-                Every solid timber frame manufactured in our Erattupetta workshop is guaranteed against borer attack, termite infestation, and structural joint failure for {product.warrantyYears} full years.
-              </p>
-              <p>
-                Foam cores are guaranteed against sagging greater than 1 inch for 3 years. Removable cushion covers can be unzipped and cleaned as per care instructions.
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Brand Value Strip */}
-      <div className="mt-16">
-        <BrandValueStrip />
-      </div>
-
-      {/* Related Sofas Carousel / Grid */}
-      {relatedProducts && relatedProducts.length > 0 && (
-        <div className="mt-20 space-y-8">
-          <div className="flex items-end justify-between border-b border-brand-border pb-4">
-            <div>
-              <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
-                Complementary Pieces
+        {/* You May Also Like */}
+        {relatedProducts && relatedProducts.length > 0 && (
+          <div className="mt-24 pt-16 border-t border-neutral-200">
+            <div className="mb-10">
+              <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 mb-2">
+                Related Designs
               </span>
-              <h2 className="text-2xl font-bold text-black mt-1">
-                You May Also Admire
+              <h2 className="text-2xl sm:text-3xl font-normal text-black tracking-[-0.015em]">
+                You may also like
               </h2>
             </div>
-            <Link href="/collection" className="text-xs font-semibold uppercase tracking-wider text-black hover:text-brand-charcoal-700">
-              View All →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedProducts.slice(0, 3).map((rel) => (
-              <ProductCard key={rel.id} product={rel} whatsappNumber={whatsappNumber} />
-            ))}
-          </div>
-        </div>
-      )}
 
-      {/* Sticky Mobile Purchase Bar */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-3.5 py-2.5 bg-white/95 backdrop-blur-md border-t border-brand-border shadow-[0_-4px_25px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3 pb-safe">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <div className="w-10 h-10 rounded-lg overflow-hidden bg-brand-surface border border-brand-border shrink-0 relative">
-            <Image
-              src={currentImage.url}
-              alt={product.name}
-              fill
-              className="object-cover"
-            />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+              {relatedProducts.slice(0, 4).map((rel) => (
+                <ProductCard
+                  key={rel.id}
+                  product={rel}
+                  whatsappNumber={whatsappNumber}
+                />
+              ))}
+            </div>
           </div>
-          <div className="min-w-0">
-            <span className="font-heading font-extrabold text-sm text-black block truncate font-['Poppins']">
-              {formatINR(currentPrice)}
-            </span>
-            <span className="text-[10px] text-brand-charcoal-500 block truncate">
-              {selectedFabric ? selectedFabric.colorName : product.name}
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={handleAddToCart}
-            className="py-2.5 px-3.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-1.5 shadow-sm transition-all"
-          >
-            {isAddedFeedback ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Added</span>
-              </>
-            ) : (
-              <>
-                <ShoppingBag className="w-3.5 h-3.5 text-brand-kraft" />
-                <span>Add</span>
-              </>
-            )}
-          </button>
-          <button
-            onClick={handleWhatsAppEnquire}
-            className="p-2.5 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-cozly shadow-sm transition-all"
-            aria-label="Enquire on WhatsApp"
-            title="Chat on WhatsApp"
-          >
-            <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );

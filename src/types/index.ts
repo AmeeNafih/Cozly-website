@@ -110,6 +110,11 @@ export interface SiteSettings {
     youtube?: string;
   };
   heroContent: {
+    headline?: string;
+    subheadline?: string;
+    storyHeadline?: string;
+    storyText?: string;
+    storyImage?: string;
     slides: {
       id: string;
       title: string;

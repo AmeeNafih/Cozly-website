@@ -224,7 +224,7 @@ export default function AdminProductsPage() {
               </thead>
               <tbody className="divide-y divide-brand-border/60">
                 {filtered.map((product) => {
-                  const cover = product.images.find((i) => i.isCover)?.url || product.images[0]?.url || '/images/products/malabar-teak.svg';
+                  const cover = product.images.find((i) => i.isCover)?.url || product.images[0]?.url || '/images/real/cozly-photo-14.jpg';
                   return (
                     <tr key={product.id} className="hover:bg-brand-surface/40 transition-colors">
                       <td className="py-3 px-4">

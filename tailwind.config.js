@@ -57,12 +57,15 @@ module.exports = {
         serif: ['var(--font-poppins)', 'Poppins', '-apple-system', 'sans-serif'],
       },
       borderRadius: {
-        cozly: '12px',
+        cozly: '4px',
+        'cozly-sm': '2px',
+        'cozly-md': '6px',
+        'cozly-lg': '8px',
       },
       boxShadow: {
-        soft: '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-        elevated: '0 12px 32px -4px rgba(0, 0, 0, 0.08)',
-        modal: '0 24px 60px -8px rgba(0, 0, 0, 0.16)',
+        soft: '0 1px 4px rgba(0, 0, 0, 0.04)',
+        elevated: '0 4px 16px -2px rgba(0, 0, 0, 0.06)',
+        modal: '0 20px 48px -8px rgba(0, 0, 0, 0.12)',
       },
       letterSpacing: {
         widestSection: '0.2em',

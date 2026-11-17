@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function FAQPage() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
@@ -10,95 +10,85 @@ export default function FAQPage() {
   const faqs = [
     {
       q: 'How does WhatsApp ordering work on cozly.in?',
-      a: 'Browse our catalogue or customize your sofa, configure your fabric and wood finishes, and add items to your cart. When you click "Place Order on WhatsApp", a pre-formatted message with your complete itemized specifications, dimensions, and delivery city is sent directly to our workshop manager. We confirm timber availability, answer any questions, and send you production updates.',
+      a: 'Browse our collection or configure custom measurements, select your fabric and finish, and add items to your cart. Clicking "Send order on WhatsApp" opens a pre-formatted message with your full configuration and delivery city directly to our workshop manager. We confirm timber availability, discuss any adjustments, and guide you through delivery.',
     },
     {
-      q: 'Why is there no online credit card or payment gateway?',
-      a: 'High-end furniture is a significant personal investment. We believe in personal transparency. Speaking directly with our craftsmen ensures you can double-check living room measurements, request physical fabric swatches via courier, and review live workshop photos of the timber before making payment.',
+      q: 'Why is there no online payment gateway?',
+      a: 'A sofa is an important piece for your home. Speaking directly with our craftsmen ensures you can confirm measurements, request physical fabric swatches, and review live workshop photos of the frame before finalizing payment.',
     },
     {
       q: 'Which states and cities do you deliver to?',
-      a: 'We provide direct white-glove delivery across Kerala (all districts), Karnataka (Bangalore, Mysore, Mangalore), and Tamil Nadu (Chennai, Coimbatore, Madurai, Salem). Delivery includes bringing the furniture into your home, assembling legs, and removing packing debris. For other Indian states, we arrange specialized third-party freight with multi-layer wooden crating.',
+      a: 'We deliver directly across Kerala, Karnataka (Bangalore and surrounding cities), and Tamil Nadu. Delivery includes bringing the sofa into your room and checking the setup.',
     },
     {
-      q: 'What kind of wood do you use for your frames?',
-      a: 'We use 100% solid ethically harvested Kerala Teakwood, seasoned in vacuum kilns to reduce moisture content below 10%. This prevents warping, cracking, or termite infestation for generations. We back our solid timber frames with a comprehensive 5 to 15-year structural warranty.',
+      q: 'What wood do you use for your frames?',
+      a: 'We use solid seasoned Kerala Teakwood and internal hardwoods assembled with mortise-and-tenon joinery. We do not use particle board or hollow cardboard cores.',
     },
     {
-      q: 'Can I customize dimensions to fit my apartment lift or narrow doorway?',
-      a: 'Yes, absolutely. Because we are the actual manufacturer in Erattupetta, we can adjust lengths, depths, and backrest heights to ensure smooth transit through narrow apartment hallways and elevators. Just mention your elevator dimensions on WhatsApp.',
+      q: 'Can I customize dimensions to fit my apartment lift or narrow hallway?',
+      a: 'Yes. Because each piece is manufactured in our Erattupetta workshop, we can customize total lengths, depths, and backrest heights to fit your doorways and elevators.',
     },
     {
       q: 'What are your delivery timelines?',
-      a: 'In-stock models are dispatched within 5 to 8 business days. Made-to-order and custom-configured pieces typically take 10 to 14 business days from order confirmation to door delivery.',
+      a: 'In-stock pieces are dispatched within 5 to 8 days. Made-to-order and custom pieces typically take 10 to 14 days from order confirmation to your doorstep.',
     },
     {
-      q: 'Can I visit your factory in Erattupetta?',
-      a: 'Yes! We encourage clients to visit our workshop at Main Road, Erattupetta, Kottayam District. You can see raw timber seasoning, watch craftsmen hand-carve joinery, and test different foam densities in person.',
+      q: 'Can I visit the workshop in Erattupetta?',
+      a: 'Yes. Clients are welcome to visit our workshop at Main Road, Erattupetta, Kottayam to see timber frames, inspect joinery, and test fabric textures in person.',
     },
   ];
 
   return (
-    <div className="py-12 sm:py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="text-center space-y-3">
-          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
-            Got Questions?
+    <div className="bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        {/* Header */}
+        <div className="border-b border-neutral-200 pb-8 mb-12">
+          <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 mb-2">
+            Information
           </span>
-          <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-tight">
-            Frequently Asked Questions
+          <h1 className="text-3xl sm:text-5xl font-normal text-black tracking-[-0.02em]">
+            Frequently asked questions
           </h1>
-          <p className="text-xs sm:text-sm text-brand-charcoal-600 max-w-xl mx-auto">
-            Everything you need to know about our Kerala teakwood frames, WhatsApp ordering, custom dimensions, and white-glove South India delivery.
+          <p className="text-sm text-neutral-600 mt-2 max-w-xl">
+            Key details about our solid timber frames, WhatsApp ordering, custom sizing, and direct factory delivery.
           </p>
         </div>
-      </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-3">
+        {/* Accordions */}
+        <div className="divide-y divide-neutral-200 border-b border-neutral-200">
           {faqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div
-                key={idx}
-                className="rounded-cozly bg-white border border-brand-border overflow-hidden shadow-soft transition-all"
-              >
+              <div key={idx} className="py-5">
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-base text-black hover:text-brand-charcoal-700 transition-colors"
+                  className="w-full flex items-center justify-between text-left font-medium text-sm sm:text-base text-black"
                 >
-                  <span>{faq.q}</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-black shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180' : ''
-                    }`}
-                  />
+                  <span className="pr-4">{faq.q}</span>
+                  {isOpen ? (
+                    <ChevronUp className="w-4 h-4 text-neutral-500 shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-neutral-500 shrink-0" />
+                  )}
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-brand-charcoal-700 leading-relaxed border-t border-brand-border pt-3">
+                  <p className="text-xs sm:text-sm text-neutral-600 mt-3 leading-relaxed max-w-prose">
                     {faq.a}
-                  </div>
+                  </p>
                 )}
               </div>
             );
           })}
         </div>
 
-        {/* WhatsApp Help Banner */}
-        <div className="mt-12 p-8 rounded-cozly bg-black text-white text-center space-y-4 shadow-soft">
-          <h3 className="font-bold text-xl text-white">Have a question not listed here?</h3>
-          <p className="text-xs text-gray-300 max-w-md mx-auto">
-            Chat directly with our Erattupetta workshop craftsmen. We respond within a few minutes.
-          </p>
-          <a
-            href="https://wa.me/919846581241?text=Hello%20COZLY%20by%20Zoffaro%20IN!%20I%20have%20a%20question%20about%20ordering%20a%20sofa."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-brand-whatsapp hover:bg-[#20ba59] text-white rounded-cozly text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+        <div className="mt-16 pt-8 text-center text-xs text-neutral-500 space-y-2">
+          <p>Have a question not listed here?</p>
+          <Link
+            href="/contact"
+            className="text-black font-medium underline underline-offset-4 inline-block"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>Ask Us on WhatsApp</span>
-          </a>
+            Contact our workshop directly
+          </Link>
         </div>
       </div>
     </div>

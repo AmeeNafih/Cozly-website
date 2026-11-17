@@ -51,7 +51,7 @@ export default function AdminCategoriesPage() {
           name: newName.trim(),
           description: newDesc.trim(),
           slug: slugify(newName),
-          imageUrl: '/images/products/malabar-teak.svg',
+          imageUrl: '/images/real/cozly-photo-14.jpg',
         }),
       });
 

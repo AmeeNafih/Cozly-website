@@ -3,15 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import {
-  Sliders,
   Save,
   CheckCircle,
-  Plus,
-  Trash2,
   AlertCircle,
-  Eye,
   Megaphone,
-  ShieldCheck,
+  BookOpen,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { SiteSettings } from '@/types';
 
@@ -22,16 +19,23 @@ export default function HomepageEditorPage() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Announcement Bar state
+  // Announcement Bar
   const [announcementEnabled, setAnnouncementEnabled] = useState(true);
-  const [announcementText, setAnnouncementText] = useState('');
+  const [announcementText, setAnnouncementText] = useState('Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore.');
   const [announcementLink, setAnnouncementLink] = useState('/collection');
 
-  // Hero Slides
-  const [slides, setSlides] = useState<SiteSettings['heroContent']['slides']>([]);
+  // Hero Section
+  const [heroHeadline, setHeroHeadline] = useState('Sofas made for living.');
+  const [heroSubheadline, setHeroSubheadline] = useState('Solid timber frames and tailored upholstery, crafted in Erattupetta and delivered direct.');
+  const [heroImage, setHeroImage] = useState('/images/real/cozly-photo-05.jpg');
 
-  // Why COZLY Points
-  const [whyPoints, setWhyPoints] = useState<SiteSettings['whyCozly']>([]);
+  // Brand Story Block
+  const [storyHeadline, setStoryHeadline] = useState('Handcrafted in Erattupetta');
+  const [storyText, setStoryText] = useState('In our Erattupetta workshop, we build sofas one at a time using seasoned solid timber and balanced upholstery foam. Every piece is constructed to order by experienced local woodcrafters, without retail showroom markups or distributor layers.');
+  const [storyImage, setStoryImage] = useState('/images/real/cozly-photo-13.jpg');
+
+  // Slides array (preserved for backwards compatibility)
+  const [slides, setSlides] = useState<SiteSettings['heroContent']['slides']>([]);
 
   useEffect(() => {
     fetch('/api/admin/settings')
@@ -41,44 +45,24 @@ export default function HomepageEditorPage() {
           const s = data.settings;
           setSettings(s);
           setAnnouncementEnabled(s.announcementBar?.enabled ?? true);
-          setAnnouncementText(s.announcementBar?.text ?? '');
-          setAnnouncementLink(s.announcementBar?.link ?? '/collection');
-          setSlides(s.heroContent?.slides || []);
-          setWhyPoints(s.whyCozly || []);
+          setAnnouncementText(s.announcementBar?.text || 'Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore.');
+          setAnnouncementLink(s.announcementBar?.link || '/collection');
+
+          const hc = s.heroContent;
+          setHeroHeadline(hc?.headline || hc?.slides?.[0]?.title || 'Sofas made for living.');
+          setHeroSubheadline(hc?.subheadline || hc?.slides?.[0]?.subtitle || 'Solid timber frames and tailored upholstery, crafted in Erattupetta and delivered direct.');
+          setHeroImage(hc?.slides?.[0]?.imageUrl || '/images/real/cozly-photo-05.jpg');
+
+          setStoryHeadline(hc?.storyHeadline || 'Handcrafted in Erattupetta');
+          setStoryText(hc?.storyText || 'In our Erattupetta workshop, we build sofas one at a time using seasoned solid timber and balanced upholstery foam. Every piece is constructed to order by experienced local woodcrafters, without retail showroom markups or distributor layers.');
+          setStoryImage(hc?.storyImage || '/images/real/cozly-photo-13.jpg');
+
+          setSlides(hc?.slides || []);
         }
       })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
-
-  const handleAddSlide = () => {
-    const newSlide = {
-      id: `hero-${Date.now()}`,
-      title: 'New Artisanal Headline',
-      subtitle: 'Handcrafted solid timber furniture built in Erattupetta, Kottayam.',
-      tag: 'NEW ARRIVAL • KERALA ATELIER',
-      ctaText: 'Explore Models',
-      ctaLink: '/collection',
-      imageUrl: '/images/hero/hero-atelier.svg',
-    };
-    setSlides([...slides, newSlide]);
-  };
-
-  const handleUpdateSlide = (index: number, field: string, val: string) => {
-    const updated = [...slides];
-    updated[index] = { ...updated[index], [field]: val };
-    setSlides(updated);
-  };
-
-  const handleDeleteSlide = (index: number) => {
-    setSlides(slides.filter((_, i) => i !== index));
-  };
-
-  const handleUpdateWhyPoint = (index: number, field: 'title' | 'description', val: string) => {
-    const updated = [...whyPoints];
-    updated[index] = { ...updated[index], [field]: val };
-    setWhyPoints(updated);
-  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,12 +71,35 @@ export default function HomepageEditorPage() {
     setError(null);
 
     try {
+      // Update first slide to match hero fields for backward compatibility
+      const updatedSlides = slides.length > 0 ? [...slides] : [{
+        id: 'hero-1',
+        title: heroHeadline,
+        subtitle: heroSubheadline,
+        tag: 'COZLY BY ZOFFARO IN • KERALA ATELIER',
+        ctaText: 'Shop sofas',
+        ctaLink: '/collection',
+        imageUrl: heroImage,
+      }];
+
+      if (updatedSlides[0]) {
+        updatedSlides[0].title = heroHeadline;
+        updatedSlides[0].subtitle = heroSubheadline;
+        updatedSlides[0].imageUrl = heroImage;
+      }
+
       const res = await fetch('/api/admin/homepage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          heroContent: { slides },
-          whyCozly: whyPoints,
+          heroContent: {
+            headline: heroHeadline,
+            subheadline: heroSubheadline,
+            storyHeadline,
+            storyText,
+            storyImage,
+            slides: updatedSlides,
+          },
           announcementBar: {
             enabled: announcementEnabled,
             text: announcementText,
@@ -102,249 +109,220 @@ export default function HomepageEditorPage() {
       });
 
       const data = await res.json();
-      if (!data.success) {
-        throw new Error(data.error || 'Failed to save homepage settings');
+      if (data.success) {
+        setFeedback('Homepage content updated successfully.');
+        setTimeout(() => setFeedback(null), 3500);
+      } else {
+        setError(data.error || 'Failed to update homepage content.');
       }
-
-      setFeedback('Homepage visual settings updated! Live site will reflect changes immediately.');
-      setTimeout(() => setFeedback(null), 4000);
     } catch (err: any) {
-      setError(err.message || 'An error occurred');
+      setError(err.message || 'An error occurred.');
     } finally {
       setSaving(false);
     }
   };
 
   if (loading) {
-    return <div className="p-12 text-center text-xs text-brand-muted">Loading homepage editor...</div>;
+    return (
+      <div className="p-8 text-center text-xs text-neutral-500">
+        Loading homepage editor...
+      </div>
+    );
   }
 
   return (
-    <form onSubmit={handleSave} className="space-y-8 max-w-5xl mx-auto pb-20">
-      {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-6">
-        <div>
-          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
-            Visual Content Management
-          </span>
-          <h1 className="text-2xl sm:text-4xl font-bold text-black mt-1 tracking-tight">
-            Homepage Editor
-          </h1>
-          <p className="text-xs text-brand-charcoal-600 mt-1">
-            Control hero slides, headlines, promotional banners, and craftsmanship highlights
-          </p>
-        </div>
-
-        <button
-          type="submit"
-          disabled={saving}
-          className="px-6 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
-        >
-          <Save className="w-4 h-4 text-brand-kraft" />
-          <span>{saving ? 'Saving...' : 'Save All Changes'}</span>
-        </button>
+    <div className="space-y-8 max-w-4xl">
+      {/* Page Header */}
+      <div className="border-b border-neutral-200 pb-4">
+        <h1 className="text-xl font-medium text-black">
+          Homepage Editor
+        </h1>
+        <p className="text-xs text-neutral-500 mt-1">
+          Edit announcement text, hero photography, headline, and the workshop story block.
+        </p>
       </div>
 
       {feedback && (
-        <div className="p-4 rounded-cozly bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-          <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-3 bg-neutral-50 border border-neutral-300 rounded-[4px] text-xs text-neutral-800 flex items-center gap-2">
+          <CheckCircle className="w-4 h-4 text-black" />
           <span>{feedback}</span>
         </div>
       )}
 
       {error && (
-        <div className="p-4 rounded-cozly bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+        <div className="p-3 bg-neutral-50 border border-red-300 rounded-[4px] text-xs text-red-700 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-red-600" />
           <span>{error}</span>
         </div>
       )}
 
-      {/* 1. Announcement Bar Banner */}
-      <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
-        <div className="flex items-center justify-between border-b border-brand-border pb-3">
-          <div className="flex items-center gap-2 text-black">
-            <Megaphone className="w-4 h-4 stroke-[1.5]" />
-            <h3 className="font-bold text-base">Top Announcement Banner</h3>
+      <form onSubmit={handleSave} className="space-y-8">
+        {/* Section 1: Announcement Bar */}
+        <div className="p-6 bg-white border border-neutral-200 rounded-[4px] space-y-4">
+          <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+            <div className="flex items-center gap-2">
+              <Megaphone className="w-4 h-4 text-black" />
+              <h2 className="text-sm font-medium text-black">Announcement Bar</h2>
+            </div>
+            <label className="flex items-center gap-2 text-xs cursor-pointer">
+              <input
+                type="checkbox"
+                checked={announcementEnabled}
+                onChange={(e) => setAnnouncementEnabled(e.target.checked)}
+                className="rounded-[2px] border-neutral-300 text-black focus:ring-black"
+              />
+              <span className="text-neutral-700">Display bar</span>
+            </label>
           </div>
-          <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-black">
-            <input
-              type="checkbox"
-              checked={announcementEnabled}
-              onChange={(e) => setAnnouncementEnabled(e.target.checked)}
-              className="rounded accent-black w-4 h-4"
-            />
-            <span>Enable Announcement</span>
-          </label>
-        </div>
 
-        {announcementEnabled && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-            <div className="md:col-span-2">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-brand-primary block mb-1">
-                Banner Text
+          <div className="space-y-3">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Announcement Text (Single thin line, no emojis)
               </label>
               <input
                 type="text"
                 value={announcementText}
                 onChange={(e) => setAnnouncementText(e.target.value)}
-                className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly"
+                placeholder="Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore."
+                className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black"
               />
             </div>
             <div>
-              <label className="text-[11px] font-bold uppercase tracking-wider text-brand-primary block mb-1">
-                Destination Link
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Destination Link (Optional)
               </label>
               <input
                 type="text"
                 value={announcementLink}
                 onChange={(e) => setAnnouncementLink(e.target.value)}
-                className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly"
+                placeholder="/collection"
+                className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black"
               />
             </div>
           </div>
-        )}
-      </div>
+        </div>
 
-      {/* 2. Hero Carousel Slides */}
-      <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-6">
-        <div className="flex items-center justify-between border-b border-brand-border pb-3">
-          <div>
-            <h3 className="font-serif font-bold text-base text-brand-primary">
-              Hero Section Carousel Slides ({slides.length})
-            </h3>
-            <p className="text-xs text-brand-muted">
-              Displayed in the main full-screen hero area of the homepage
-            </p>
+        {/* Section 2: Hero Section */}
+        <div className="p-6 bg-white border border-neutral-200 rounded-[4px] space-y-4">
+          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+            <ImageIcon className="w-4 h-4 text-black" />
+            <h2 className="text-sm font-medium text-black">Hero Section (Section 1)</h2>
           </div>
-          <button
-            type="button"
-            onClick={handleAddSlide}
-            className="px-3.5 py-2 bg-brand-secondary text-brand-primary hover:bg-brand-primary hover:text-white rounded-cozly text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Add Slide</span>
-          </button>
-        </div>
 
-        <div className="space-y-6">
-          {slides.map((slide, idx) => (
-            <div
-              key={slide.id || idx}
-              className="p-5 rounded-cozly bg-brand-surface border border-brand-border space-y-4 relative"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-accent">
-                  Slide {idx + 1}
-                </span>
-                {slides.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteSlide(idx)}
-                    className="text-gray-400 hover:text-rose-600 p-1"
-                    title="Remove slide"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-brand-primary block mb-1">Headline</label>
-                  <input
-                    type="text"
-                    value={slide.title}
-                    onChange={(e) => handleUpdateSlide(idx, 'title', e.target.value)}
-                    className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly font-bold"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-brand-primary block mb-1">Subtitle</label>
-                  <input
-                    type="text"
-                    value={slide.subtitle}
-                    onChange={(e) => handleUpdateSlide(idx, 'subtitle', e.target.value)}
-                    className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-brand-primary block mb-1">Tag Badge</label>
-                  <input
-                    type="text"
-                    value={slide.tag}
-                    onChange={(e) => handleUpdateSlide(idx, 'tag', e.target.value)}
-                    className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly font-semibold text-brand-accent"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-brand-primary block mb-1">Button Text</label>
-                  <input
-                    type="text"
-                    value={slide.ctaText}
-                    onChange={(e) => handleUpdateSlide(idx, 'ctaText', e.target.value)}
-                    className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-brand-primary block mb-1">Button Link</label>
-                  <input
-                    type="text"
-                    value={slide.ctaLink}
-                    onChange={(e) => handleUpdateSlide(idx, 'ctaLink', e.target.value)}
-                    className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[10px] font-bold uppercase text-brand-primary block mb-1">Background Image URL</label>
-                <input
-                  type="text"
-                  value={slide.imageUrl}
-                  onChange={(e) => handleUpdateSlide(idx, 'imageUrl', e.target.value)}
-                  className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 3. Why COZLY Feature Points */}
-      <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
-        <div className="border-b border-brand-border pb-3">
-          <h3 className="font-serif font-bold text-base text-brand-primary">
-            "Why COZLY" Craftsmanship Pillars
-          </h3>
-          <p className="text-xs text-brand-muted">
-            Highlights why customers choose our Erattupetta solid wood manufacturing
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {whyPoints.map((point, idx) => (
-            <div key={idx} className="p-4 rounded-cozly bg-brand-surface border border-brand-border space-y-2">
-              <span className="text-[10px] font-bold uppercase text-brand-accent block">Point {idx + 1}</span>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Headline (Max 6 words recommended)
+              </label>
               <input
                 type="text"
-                value={point.title}
-                onChange={(e) => handleUpdateWhyPoint(idx, 'title', e.target.value)}
-                className="w-full text-xs font-bold px-3 py-2 bg-white border border-brand-border rounded-cozly"
-              />
-              <textarea
-                rows={2}
-                value={point.description}
-                onChange={(e) => handleUpdateWhyPoint(idx, 'description', e.target.value)}
-                className="w-full text-xs px-3 py-2 bg-white border border-brand-border rounded-cozly"
+                value={heroHeadline}
+                onChange={(e) => setHeroHeadline(e.target.value)}
+                placeholder="Sofas made for living."
+                className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black font-medium"
               />
             </div>
-          ))}
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Subline (One clear sentence)
+              </label>
+              <input
+                type="text"
+                value={heroSubheadline}
+                onChange={(e) => setHeroSubheadline(e.target.value)}
+                placeholder="Solid timber frames and tailored upholstery, crafted in Erattupetta and delivered direct."
+                className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Lifestyle Image URL
+              </label>
+              <div className="flex gap-4 items-center">
+                <input
+                  type="text"
+                  value={heroImage}
+                  onChange={(e) => setHeroImage(e.target.value)}
+                  placeholder="/images/real/cozly-photo-05.jpg"
+                  className="flex-1 text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black"
+                />
+                <div className="relative w-16 h-12 rounded-[4px] overflow-hidden bg-neutral-100 border border-neutral-200 shrink-0">
+                  <Image src={heroImage} alt="Hero preview" fill className="object-cover" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
+
+        {/* Section 3: Brand Story Block */}
+        <div className="p-6 bg-white border border-neutral-200 rounded-[4px] space-y-4">
+          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+            <BookOpen className="w-4 h-4 text-black" />
+            <h2 className="text-sm font-medium text-black">Workshop Story Block (Section 4)</h2>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Story Headline
+              </label>
+              <input
+                type="text"
+                value={storyHeadline}
+                onChange={(e) => setStoryHeadline(e.target.value)}
+                placeholder="Handcrafted in Erattupetta"
+                className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Story Description (2–3 short sentences)
+              </label>
+              <textarea
+                rows={3}
+                value={storyText}
+                onChange={(e) => setStoryText(e.target.value)}
+                placeholder="In our Erattupetta workshop, we build sofas one at a time using seasoned solid timber..."
+                className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black resize-none leading-relaxed"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-neutral-500 mb-1">
+                Workshop Photo URL
+              </label>
+              <div className="flex gap-4 items-center">
+                <input
+                  type="text"
+                  value={storyImage}
+                  onChange={(e) => setStoryImage(e.target.value)}
+                  placeholder="/images/real/cozly-photo-13.jpg"
+                  className="flex-1 text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black"
+                />
+                <div className="relative w-16 h-12 rounded-[4px] overflow-hidden bg-neutral-100 border border-neutral-200 shrink-0">
+                  <Image src={storyImage} alt="Story preview" fill className="object-cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Submit */}
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={saving}
+            className="px-6 py-3 bg-black hover:bg-neutral-800 text-white rounded-[4px] text-xs font-medium uppercase tracking-[0.14em] flex items-center gap-2 transition-colors disabled:opacity-50"
+          >
+            <Save className="w-4 h-4" />
+            <span>{saving ? 'Saving changes...' : 'Save homepage content'}</span>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

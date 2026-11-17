@@ -6,7 +6,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'wooden-sofas',
     name: 'Solid Wood Frame Sofas',
     description: 'Mastercrafted with kiln-dried Kerala Teakwood, Rosewood, and Acacia for heirloom longevity.',
-    imageUrl: '/images/products/malabar-teak.svg',
+    imageUrl: '/images/real/cozly-photo-14.jpg',
     productCount: 4,
   },
   {
@@ -14,7 +14,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'premium-upholstered',
     name: 'Premium Upholstered',
     description: 'Deep-cushioned comfort in imported velvets, heavy-duty linens, and Scandinavian bouclés.',
-    imageUrl: '/images/products/vembanad-lshape.svg',
+    imageUrl: '/images/real/cozly-photo-08.jpg',
     productCount: 4,
   },
   {
@@ -22,7 +22,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'l-shape-sectionals',
     name: 'L-Shape & Sectionals',
     description: 'Expansive family seating configured for modern open-plan living rooms.',
-    imageUrl: '/images/products/vembanad-lshape.svg',
+    imageUrl: '/images/real/cozly-photo-08.jpg',
     productCount: 3,
   },
   {
@@ -30,7 +30,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'sofa-cum-beds',
     name: 'Sofa-Cum-Beds',
     description: 'Effortless transformation mechanisms paired with high-density orthopedic mattresses.',
-    imageUrl: '/images/products/sahyadri-sofabed.svg',
+    imageUrl: '/images/real/cozly-photo-21.jpg',
     productCount: 2,
   },
   {
@@ -38,7 +38,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     slug: 'recliners-loungers',
     name: 'Recliners & Chaises',
     description: 'Ergonomically engineered for posture relaxation with smooth reclining actions.',
-    imageUrl: '/images/products/munnar-recliner.svg',
+    imageUrl: '/images/real/cozly-photo-06.jpg',
     productCount: 2,
   },
 ];
@@ -75,9 +75,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-1-1', url: '/images/products/malabar-teak.svg', alt: 'The Malabar Solid Teak 3-Seater Front Angle', isCover: true, order: 1 },
-      { id: 'img-1-2', url: '/images/products/malabar-teak-side.svg', alt: 'Malabar Teak Armrest Joinery Detail', isCover: false, order: 2 },
-      { id: 'img-1-3', url: '/images/products/factory-craft.svg', alt: 'Hand-sanding frame in Erattupetta atelier', isCover: false, order: 3 },
+      { id: 'img-1-1', url: '/images/real/cozly-photo-14.jpg', alt: 'The Malabar Solid Teak 3-Seater Front Angle', isCover: true, order: 1 },
+      { id: 'img-1-2', url: '/images/real/cozly-photo-15.jpg', alt: 'Malabar Teak Armrest Joinery Detail', isCover: false, order: 2 },
+      { id: 'img-1-3', url: '/images/real/cozly-photo-16.jpg', alt: 'Hand-sanding frame in Erattupetta atelier', isCover: false, order: 3 },
     ],
     fabrics: [
       { id: 'fab-1', name: 'Belgian Linen', type: 'Linen', colorName: 'Warm Sand', colorHex: '#D8CCA3', priceModifier: 0 },
@@ -125,8 +125,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-2-1', url: '/images/products/vembanad-lshape.svg', alt: 'Vembanad Modular L-Shape Sectional in Sand Bouclé', isCover: true, order: 1 },
-      { id: 'img-2-2', url: '/images/products/vembanad-chaise.svg', alt: 'Vembanad Chaise Lounge Angle', isCover: false, order: 2 },
+      { id: 'img-2-1', url: '/images/real/cozly-photo-08.jpg', alt: 'Vembanad Modular L-Shape Sectional in Sand Bouclé', isCover: true, order: 1 },
+      { id: 'img-2-2', url: '/images/real/cozly-photo-02.jpg', alt: 'Vembanad Chaise Lounge Angle', isCover: false, order: 2 },
     ],
     fabrics: [
       { id: 'fab-4', name: 'Architectural Bouclé', type: 'Bouclé', colorName: 'Alabaster White', colorHex: '#F0ECE1', priceModifier: 0 },
@@ -173,8 +173,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-3-1', url: '/images/products/royal-chesterfield.svg', alt: 'Erattupetta Royal Chesterfield in Royal Emerald Velvet', isCover: true, order: 1 },
-      { id: 'img-3-2', url: '/images/products/royal-tufting.svg', alt: 'Hand-tufting detail of Chesterfield arm', isCover: false, order: 2 },
+      { id: 'img-3-1', url: '/images/real/cozly-photo-16.jpg', alt: 'Erattupetta Royal Chesterfield in Royal Emerald Velvet', isCover: true, order: 1 },
+      { id: 'img-3-2', url: '/images/real/cozly-photo-17.jpg', alt: 'Hand-tufting detail of Chesterfield arm', isCover: false, order: 2 },
     ],
     fabrics: [
       { id: 'fab-7', name: 'Heavy Italian Velvet', type: 'Velvet', colorName: 'Royal Emerald', colorHex: '#1B4D3E', priceModifier: 0 },
@@ -221,8 +221,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-4-1', url: '/images/products/sahyadri-sofabed.svg', alt: 'Sahyadri Sofa-Cum-Bed in Sofa Mode', isCover: true, order: 1 },
-      { id: 'img-4-2', url: '/images/products/sahyadri-bed-mode.svg', alt: 'Sahyadri Sofa-Cum-Bed Opened into Queen Bed', isCover: false, order: 2 },
+      { id: 'img-4-1', url: '/images/real/cozly-photo-21.jpg', alt: 'Sahyadri Sofa-Cum-Bed in Sofa Mode', isCover: true, order: 1 },
+      { id: 'img-4-2', url: '/images/real/cozly-photo-22.jpg', alt: 'Sahyadri Sofa-Cum-Bed Opened into Queen Bed', isCover: false, order: 2 },
     ],
     fabrics: [
       { id: 'fab-10', name: 'Durable Textured Jute-Blend', type: 'Jute Blend', colorName: 'Stone Grey', colorHex: '#7C8288', priceModifier: 0 },
@@ -269,7 +269,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: false,
     isPublished: true,
     images: [
-      { id: 'img-5-1', url: '/images/products/munnar-recliner.svg', alt: 'Munnar Push-Back Recliner in Caramel Tan', isCover: true, order: 1 },
+      { id: 'img-5-1', url: '/images/real/cozly-photo-06.jpg', alt: 'Munnar Push-Back Recliner in Caramel Tan', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-13', name: 'Full-Grain Breathable Leatherette', type: 'Leatherette', colorName: 'Caramel Tan', colorHex: '#A25F2E', priceModifier: 0 },
@@ -315,7 +315,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-6-1', url: '/images/products/highrange-2seater.svg', alt: 'Highrange 2-Seater Nordic Sofa in Sage Green', isCover: true, order: 1 },
+      { id: 'img-6-1', url: '/images/real/cozly-photo-09.jpg', alt: 'Highrange 2-Seater Nordic Sofa in Sage Green', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-16', name: 'Textured Linen Blend', type: 'Linen', colorName: 'Nordic Sage', colorHex: '#7D8F7B', priceModifier: 0 },
@@ -362,7 +362,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: false,
     isPublished: true,
     images: [
-      { id: 'img-7-1', url: '/images/products/periyar-chaise.svg', alt: 'Periyar Curved Chaise Lounge in Cream Bouclé', isCover: true, order: 1 },
+      { id: 'img-7-1', url: '/images/real/cozly-photo-01.jpg', alt: 'Periyar Curved Chaise Lounge in Cream Bouclé', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-19', name: 'Luxury Bouclé', type: 'Bouclé', colorName: 'Ivory Cream', colorHex: '#F6F3EC', priceModifier: 0 },
@@ -408,7 +408,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: false,
     isPublished: true,
     images: [
-      { id: 'img-8-1', url: '/images/products/wayanad-compact.svg', alt: 'Wayanad Apartment 3-Seater in Slate Grey', isCover: true, order: 1 },
+      { id: 'img-8-1', url: '/images/real/cozly-photo-23.jpg', alt: 'Wayanad Apartment 3-Seater in Slate Grey', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-21', name: 'Everyday Performance Weave', type: 'Woven', colorName: 'Slate Grey', colorHex: '#5C6269', priceModifier: 0 },
@@ -455,7 +455,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: false,
     isPublished: true,
     images: [
-      { id: 'img-9-1', url: '/images/products/anamudi-highback.svg', alt: 'Anamudi High-Back Orthopedic 3-Seater Sofa', isCover: true, order: 1 },
+      { id: 'img-9-1', url: '/images/real/cozly-photo-19.jpg', alt: 'Anamudi High-Back Orthopedic 3-Seater Sofa', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-24', name: 'Heavy Cotton-Linen Canvas', type: 'Canvas', colorName: 'Earthy Clay', colorHex: '#A36851', priceModifier: 0 },
@@ -502,7 +502,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: false,
     isPublished: true,
     images: [
-      { id: 'img-10-1', url: '/images/products/kumarakom-daybed.svg', alt: 'Kumarakom Teak Daybed Bench with Bolster', isCover: true, order: 1 },
+      { id: 'img-10-1', url: '/images/real/cozly-photo-04.jpg', alt: 'Kumarakom Teak Daybed Bench with Bolster', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-27', name: 'Natural Jute-Cotton', type: 'Natural Fiber', colorName: 'Raw Ecru', colorHex: '#E5DDCB', priceModifier: 0 },
@@ -548,7 +548,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-11-1', url: '/images/products/travancore-suite.svg', alt: 'Travancore Classic 3+1+1 Heritage Teak Sofa Suite', isCover: true, order: 1 },
+      { id: 'img-11-1', url: '/images/real/cozly-photo-05.jpg', alt: 'Travancore Classic 3+1+1 Heritage Teak Sofa Suite', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-29', name: 'Heavy Tapestry Jacquard', type: 'Jacquard', colorName: 'Kerala Heritage Gold', colorHex: '#D4AF37', priceModifier: 0 },
@@ -595,7 +595,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isFeatured: true,
     isPublished: true,
     images: [
-      { id: 'img-12-1', url: '/images/products/calicut-deepseat.svg', alt: 'Calicut Deep Seat Corner Lounger in Midnight Velvet', isCover: true, order: 1 },
+      { id: 'img-12-1', url: '/images/real/cozly-photo-11.jpg', alt: 'Calicut Deep Seat Corner Lounger in Midnight Velvet', isCover: true, order: 1 },
     ],
     fabrics: [
       { id: 'fab-32', name: 'Pet-Friendly Performance Velvet', type: 'Performance', colorName: 'Midnight Slate', colorHex: '#18222D', priceModifier: 0 },
@@ -640,7 +640,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
         tag: 'ARTISANAL FURNITURE • KERALA HERITAGE',
         ctaText: 'Explore Collection',
         ctaLink: '/collection',
-        imageUrl: '/images/hero/hero-atelier.svg',
+        imageUrl: '/images/real/cozly-photo-05.jpg',
       },
       {
         id: 'hero-2',
@@ -649,7 +649,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
         tag: 'BESPOKE SOFA CONFIGURATOR',
         ctaText: 'Customize Your Sofa',
         ctaLink: '/customize',
-        imageUrl: '/images/hero/hero-customizer.svg',
+        imageUrl: '/images/real/cozly-photo-08.jpg',
       },
       {
         id: 'hero-3',
@@ -658,7 +658,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
         tag: 'DIRECT FACTORY DELIVERY',
         ctaText: 'View Delivery Coverage',
         ctaLink: '/#delivery',
-        imageUrl: '/images/hero/hero-delivery.svg',
+        imageUrl: '/images/real/cozly-photo-11.jpg',
       },
     ],
   },

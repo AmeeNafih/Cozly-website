@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       name: body.name,
       slug,
       description: body.description || '',
-      imageUrl: body.imageUrl || '/images/products/malabar-teak.svg',
+      imageUrl: body.imageUrl || '/images/real/cozly-photo-14.jpg',
       productCount: body.productCount || 0,
     });
 

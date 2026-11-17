@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { ShoppingBag, Menu, X, MessageCircle, Phone, SlidersHorizontal, Instagram, MapPin, ExternalLink } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ShoppingBag, Menu, X, MessageCircle, Search } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 interface HeaderProps {
@@ -18,43 +18,65 @@ export default function Header({
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
+  const router = useRouter();
   const { totalItems, setIsCartOpen } = useCart();
+
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 24);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setSearchOpen(false);
+  }, [pathname]);
+
   const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Collection', href: '/collection' },
-    { label: 'Customize', href: '/customize', highlight: true },
-    { label: 'Why COZLY', href: '/#why-cozly' },
+    { label: 'Shop', href: '/collection' },
+    { label: 'Customize', href: '/customize' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ];
 
   const cleanWaNumber = whatsappNumber.replace(/\D/g, '');
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/collection?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
+
+  // Determine appearance based on route and scroll
+  const isTransparent = isHome && !isScrolled;
+
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 bg-white ${
-        isScrolled
-          ? 'border-b border-brand-border shadow-sm'
-          : 'border-b border-brand-border/60'
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        isTransparent
+          ? 'bg-transparent text-white border-b border-white/10'
+          : 'bg-white text-black border-b border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.02)]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo - Black logo on white background */}
+          {/* Logo (left-aligned) */}
           <Link href="/" className="flex items-center shrink-0 py-2 group">
-            <div className="relative w-44 sm:w-52 h-11 transition-opacity duration-200 group-hover:opacity-85">
+            <div className="relative w-40 sm:w-48 h-10 transition-opacity duration-200 group-hover:opacity-80">
               <Image
-                src="/brand/logo-black.svg"
+                src={isTransparent ? '/brand/logo-white.svg' : '/brand/logo-black.svg'}
                 alt="COZLY by Zoffaro IN"
                 fill
                 priority
@@ -63,32 +85,46 @@ export default function Header({
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          {/* Centered / Right-Aligned Navigation Links */}
+          <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3.5 py-2 rounded-cozly text-xs tracking-wider uppercase font-semibold transition-all duration-200 ${
-                    link.highlight
-                      ? 'bg-black text-white hover:bg-brand-charcoal-800 shadow-sm flex items-center gap-1.5'
+                  className={`text-xs tracking-[0.16em] uppercase transition-all duration-200 ${
+                    isTransparent
+                      ? isActive
+                        ? 'text-white font-semibold underline underline-offset-8 decoration-1'
+                        : 'text-white/80 hover:text-white'
                       : isActive
-                      ? 'text-black font-bold bg-brand-grey-100'
-                      : 'text-brand-charcoal-700 hover:text-black hover:bg-brand-grey-100'
+                      ? 'text-black font-semibold underline underline-offset-8 decoration-1'
+                      : 'text-neutral-600 hover:text-black'
                   }`}
                 >
-                  {link.highlight && <SlidersHorizontal className="w-3 h-3 text-brand-kraft" />}
-                  <span>{link.label}</span>
+                  {link.label}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Action Buttons: WhatsApp & Cart */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            {/* WhatsApp Direct Chat (WhatsApp Green #25D366 ONLY) */}
+          {/* Action Icons: Search, WhatsApp, Cart, Mobile Toggle */}
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Search Trigger */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              aria-label="Search catalogue"
+              className={`p-2 transition-colors ${
+                isTransparent
+                  ? 'text-white/90 hover:text-white'
+                  : 'text-neutral-700 hover:text-black'
+              }`}
+            >
+              <Search className="w-[18px] h-[18px] stroke-[1.5]" />
+            </button>
+
+            {/* WhatsApp Link */}
             <a
               href={`https://wa.me/${cleanWaNumber}?text=${encodeURIComponent(
                 'Hello COZLY by Zoffaro IN! I am visiting your website and would like to enquire about your handcrafted sofas.'
@@ -96,21 +132,25 @@ export default function Header({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat on WhatsApp"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-cozly transition-all shadow-sm"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-[4px] transition-colors"
             >
-              <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
+              <MessageCircle className="w-3.5 h-3.5 fill-white text-[#25D366]" />
               <span>WhatsApp</span>
             </a>
 
             {/* Cart Trigger */}
             <button
               onClick={() => setIsCartOpen(true)}
-              aria-label="Open shopping cart"
-              className="relative p-2.5 rounded-cozly text-black hover:bg-brand-grey-100 transition-colors"
+              aria-label="Open cart"
+              className={`relative p-2 transition-colors ${
+                isTransparent
+                  ? 'text-white/90 hover:text-white'
+                  : 'text-neutral-700 hover:text-black'
+              }`}
             >
-              <ShoppingBag className="w-5 h-5 text-black stroke-[1.75]" />
+              <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold h-5 min-w-[20px] px-1 rounded-full flex items-center justify-center shadow-sm">
+                <span className="absolute -top-0.5 -right-0.5 bg-black text-white text-[10px] font-medium h-4 min-w-[16px] px-1 rounded-full flex items-center justify-center border border-white">
                   {totalItems}
                 </span>
               )}
@@ -119,85 +159,82 @@ export default function Header({
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              className="md:hidden p-2 rounded-lg text-black hover:bg-brand-grey-100"
+              aria-label="Toggle navigation menu"
+              className={`md:hidden p-2 transition-colors ${
+                isTransparent
+                  ? 'text-white'
+                  : 'text-black'
+              }`}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 stroke-[1.5]" /> : <Menu className="w-6 h-6 stroke-[1.5]" />}
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 stroke-[1.5]" />
+              ) : (
+                <Menu className="w-6 h-6 stroke-[1.5]" />
+              )}
             </button>
           </div>
         </div>
+
+        {/* Inline Search Dropdown */}
+        {searchOpen && (
+          <div className="pb-4 pt-1 border-t border-neutral-200">
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                type="text"
+                placeholder="Search sofas, materials, categories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+                className="w-full text-sm bg-neutral-50 border border-neutral-200 px-4 py-2.5 rounded-[4px] focus:outline-none focus:border-black text-black placeholder:text-neutral-400"
+              />
+              <button
+                type="submit"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs uppercase tracking-wider font-medium px-2.5 py-1 bg-black text-white rounded-[2px]"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+        )}
       </div>
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-brand-border bg-white px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-xl max-h-[85vh] overflow-y-auto">
-          <div className="space-y-1">
+        <div className="md:hidden border-t border-neutral-200 bg-white text-black px-6 pt-6 pb-8 space-y-6 animate-fadeIn shadow-lg">
+          <div className="space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-3.5 py-3 rounded-cozly text-xs uppercase tracking-wider font-semibold transition-colors ${
-                  link.highlight
-                    ? 'bg-black text-white font-bold flex items-center justify-between'
-                    : pathname === link.href
-                    ? 'bg-brand-grey-100 text-black font-bold'
-                    : 'text-brand-charcoal-700 hover:bg-brand-grey-100'
+                className={`block text-sm tracking-[0.16em] uppercase transition-colors ${
+                  pathname === link.href
+                    ? 'font-semibold text-black underline underline-offset-4'
+                    : 'text-neutral-600 hover:text-black'
                 }`}
               >
-                <span>{link.label}</span>
-                {link.highlight && <SlidersHorizontal className="w-3.5 h-3.5 text-brand-kraft" />}
+                {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Social & Workshop Quick Links on Mobile */}
-          <div className="pt-3 border-t border-brand-border grid grid-cols-2 gap-2 text-xs">
-            <a
-              href="https://www.instagram.com/cozly_by_zoffaro.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 p-2.5 rounded-cozly bg-brand-grey-50 border border-brand-border text-black hover:bg-brand-grey-100 transition-colors"
-            >
-              <Instagram className="w-4 h-4 text-black shrink-0" />
-              <div className="min-w-0">
-                <p className="font-bold text-[11px] truncate">Instagram</p>
-                <p className="text-[9px] text-brand-charcoal-500 truncate">@cozly_by_zoffaro.in</p>
-              </div>
-            </a>
-
-            <a
-              href="https://maps.app.goo.gl/XbcbCJcaut3oDnjx8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 p-2.5 rounded-cozly bg-brand-grey-50 border border-brand-border text-black hover:bg-brand-grey-100 transition-colors"
-            >
-              <MapPin className="w-4 h-4 text-brand-kraft shrink-0" />
-              <div className="min-w-0">
-                <p className="font-bold text-[11px] truncate">Factory Map</p>
-                <p className="text-[9px] text-brand-charcoal-500 truncate">Erattupetta</p>
-              </div>
-            </a>
-          </div>
-
-          <div className="pt-2 space-y-2">
+          <div className="pt-4 border-t border-neutral-200 space-y-3">
             <a
               href={`https://wa.me/${cleanWaNumber}?text=${encodeURIComponent(
                 'Hello COZLY by Zoffaro IN! I would like to enquire about your sofas.'
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-cozly font-semibold text-xs uppercase tracking-wider shadow-sm"
+              className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-[4px] text-xs font-medium uppercase tracking-[0.14em]"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>Order on WhatsApp</span>
             </a>
             <a
               href={`tel:${phone}`}
-              className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-white border border-brand-border text-black rounded-cozly font-semibold text-xs uppercase tracking-wider"
+              className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-white border border-neutral-200 text-black rounded-[4px] text-xs font-medium uppercase tracking-[0.14em] hover:bg-neutral-50"
             >
-              <Phone className="w-4 h-4" />
-              <span>Call Atelier: {phone}</span>
+              <span>Call: {phone}</span>
             </a>
           </div>
         </div>
