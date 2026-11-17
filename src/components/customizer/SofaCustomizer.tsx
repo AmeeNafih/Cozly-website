@@ -213,21 +213,21 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                 <span
                   className={`w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition-all ${
                     currentStep === s.num
-                      ? 'bg-brand-accent text-white ring-4 ring-brand-accent/20'
+                      ? 'bg-black text-white ring-4 ring-black/10'
                       : currentStep > s.num
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-brand-secondary text-brand-muted'
+                      ? 'bg-black text-white'
+                      : 'bg-brand-grey-100 text-brand-charcoal-400'
                   }`}
                 >
-                  {currentStep > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
+                  {currentStep > s.num ? <Check className="w-3.5 h-3.5 stroke-[2.5]" /> : s.num}
                 </span>
                 <span
-                  className={`text-xs font-semibold uppercase tracking-wider ${
+                  className={`text-xs uppercase tracking-wider ${
                     currentStep === s.num
-                      ? 'text-brand-primary'
+                      ? 'text-black font-bold'
                       : currentStep > s.num
-                      ? 'text-emerald-700'
-                      : 'text-brand-muted'
+                      ? 'text-black font-semibold'
+                      : 'text-brand-charcoal-400 font-medium'
                   }`}
                 >
                   {s.label}
@@ -236,7 +236,7 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
               {idx < stepsList.length - 1 && (
                 <div
                   className={`flex-1 h-[2px] mx-2 transition-colors ${
-                    currentStep > s.num ? 'bg-emerald-600' : 'bg-brand-border'
+                    currentStep > s.num ? 'bg-black' : 'bg-brand-border'
                   }`}
                 />
               )}
@@ -253,9 +253,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 1 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 1 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Sofa Silhouette & Type</h3>
-                <p className="text-xs text-brand-muted">Choose the underlying layout structure for your room.</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 1 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Sofa Silhouette & Type</h3>
+                <p className="text-xs text-brand-charcoal-600">Choose the underlying layout structure for your room.</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -265,15 +265,15 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedType(t)}
                     className={`p-4 rounded-cozly border text-left transition-all ${
                       selectedType.id === t.id
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
-                    <div className="relative h-24 w-full bg-brand-surface rounded-lg mb-2 overflow-hidden">
+                    <div className="relative h-24 w-full bg-brand-grey-100 rounded-lg mb-2 overflow-hidden">
                       <Image src={t.image} alt={t.name} fill className="object-contain p-2" />
                     </div>
-                    <h4 className="font-bold text-xs text-brand-primary">{t.name}</h4>
-                    <p className="text-xs font-semibold text-brand-accent mt-1">From {formatINR(t.basePrice)}</p>
+                    <h4 className="font-bold text-xs text-black">{t.name}</h4>
+                    <p className="text-xs font-semibold text-brand-charcoal-700 mt-1">From {formatINR(t.basePrice)}</p>
                   </button>
                 ))}
               </div>
@@ -284,9 +284,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 2 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 2 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Seating Proportions & Depth</h3>
-                <p className="text-xs text-brand-muted">Scale the length and seat depth to your room's blueprint.</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 2 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Seating Proportions & Depth</h3>
+                <p className="text-xs text-brand-charcoal-600">Scale the length and seat depth to your room's blueprint.</p>
               </div>
 
               <div className="space-y-3 pt-2">
@@ -296,15 +296,15 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedSize(s)}
                     className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
                       selectedSize.id === s.id
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
                     <div>
-                      <h4 className="font-bold text-sm text-brand-primary">{s.name}</h4>
-                      <p className="text-xs text-brand-muted mt-0.5">{s.desc}</p>
+                      <h4 className="font-bold text-sm text-black">{s.name}</h4>
+                      <p className="text-xs text-brand-charcoal-600 mt-0.5">{s.desc}</p>
                     </div>
-                    <span className="text-xs font-bold text-brand-accent">
+                    <span className="text-xs font-bold text-black">
                       {s.modifier === 0 ? 'Included' : `+${formatINR(s.modifier)}`}
                     </span>
                   </button>
@@ -317,9 +317,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 3 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 3 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Frame Timber & Exposed Finish</h3>
-                <p className="text-xs text-brand-muted">All our timber is kiln-dried to sub-10% moisture to eliminate warping in tropical weather.</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 3 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Frame Timber & Exposed Finish</h3>
+                <p className="text-xs text-brand-charcoal-600">All our timber is kiln-dried to sub-10% moisture to eliminate warping in tropical weather.</p>
               </div>
 
               <div className="space-y-3 pt-2">
@@ -329,15 +329,15 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedWood(w)}
                     className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
                       selectedWood.id === w.id
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
                     <div>
-                      <h4 className="font-bold text-sm text-brand-primary">{w.name}</h4>
-                      <p className="text-xs text-brand-muted mt-0.5">{w.desc}</p>
+                      <h4 className="font-bold text-sm text-black">{w.name}</h4>
+                      <p className="text-xs text-brand-charcoal-600 mt-0.5">{w.desc}</p>
                     </div>
-                    <span className="text-xs font-bold text-brand-accent">
+                    <span className="text-xs font-bold text-black">
                       {w.modifier === 0 ? 'Included' : `+${formatINR(w.modifier)}`}
                     </span>
                   </button>
@@ -350,9 +350,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 4 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 4 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Upholstery Fabric Category</h3>
-                <p className="text-xs text-brand-muted">High Rub-Count (30,000+ Martindale) designer fabrics woven for everyday resilience.</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 4 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Upholstery Fabric Category</h3>
+                <p className="text-xs text-brand-charcoal-600">High Rub-Count (30,000+ Martindale) designer fabrics woven for everyday resilience.</p>
               </div>
 
               <div className="space-y-3 pt-2">
@@ -362,17 +362,17 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedFabric(f)}
                     className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
                       selectedFabric.id === f.id
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
                     <div>
-                      <h4 className="font-bold text-sm text-brand-primary">{f.name}</h4>
-                      <span className="text-[10px] uppercase tracking-wider font-semibold text-brand-accent">
+                      <h4 className="font-bold text-sm text-black">{f.name}</h4>
+                      <span className="text-[10px] uppercase tracking-wider font-semibold text-brand-charcoal-600">
                         {f.type}
                       </span>
                     </div>
-                    <span className="text-xs font-bold text-brand-accent">
+                    <span className="text-xs font-bold text-black">
                       {f.modifier === 0 ? 'Included' : `+${formatINR(f.modifier)}`}
                     </span>
                   </button>
@@ -385,9 +385,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 5 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 5 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Fabric Color Shade</h3>
-                <p className="text-xs text-brand-muted">Chosen: <strong className="text-brand-primary">{selectedColor.name}</strong></p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 5 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Fabric Color Shade</h3>
+                <p className="text-xs text-brand-charcoal-600">Chosen: <strong className="text-black">{selectedColor.name}</strong></p>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
@@ -397,15 +397,15 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedColor(c)}
                     className={`p-3 rounded-cozly border text-center flex flex-col items-center gap-2 transition-all ${
                       selectedColor.name === c.name
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30 shadow-sm'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
                     <span
                       className="w-10 h-10 rounded-full border-2 border-white shadow-md"
                       style={{ backgroundColor: c.hex }}
                     />
-                    <span className="text-xs font-semibold text-brand-primary">{c.name}</span>
+                    <span className="text-xs font-semibold text-black">{c.name}</span>
                   </button>
                 ))}
               </div>
@@ -416,9 +416,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 6 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 6 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Cushion Core Density</h3>
-                <p className="text-xs text-brand-muted">Tailor the seating firmness to your comfort preference.</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 6 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Cushion Core Density</h3>
+                <p className="text-xs text-brand-charcoal-600">Tailor the seating firmness to your comfort preference.</p>
               </div>
 
               <div className="space-y-3 pt-2">
@@ -428,15 +428,15 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedFirmness(fm)}
                     className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
                       selectedFirmness.id === fm.id
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
                     <div>
-                      <h4 className="font-bold text-sm text-brand-primary">{fm.name}</h4>
-                      <p className="text-xs text-brand-muted mt-0.5">{fm.desc}</p>
+                      <h4 className="font-bold text-sm text-black">{fm.name}</h4>
+                      <p className="text-xs text-brand-charcoal-600 mt-0.5">{fm.desc}</p>
                     </div>
-                    <span className="text-xs font-bold text-brand-accent">
+                    <span className="text-xs font-bold text-black">
                       {fm.modifier === 0 ? 'Included' : `+${formatINR(fm.modifier)}`}
                     </span>
                   </button>
@@ -449,9 +449,9 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
           {currentStep === 7 && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Step 7 of 7</span>
-                <h3 className="font-serif font-bold text-xl text-brand-primary">Select Foot & Leg Style</h3>
-                <p className="text-xs text-brand-muted">Complete the architecture with solid wood or brass accented legs.</p>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal-600">Step 7 of 7</span>
+                <h3 className="font-bold text-xl text-black">Select Foot & Leg Style</h3>
+                <p className="text-xs text-brand-charcoal-600">Complete the architecture with solid wood or brass accented legs.</p>
               </div>
 
               <div className="space-y-3 pt-2">
@@ -461,12 +461,12 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
                     onClick={() => setSelectedLegs(lg)}
                     className={`w-full p-4 rounded-cozly border text-left flex items-center justify-between transition-all ${
                       selectedLegs.id === lg.id
-                        ? 'border-brand-accent bg-brand-accent/5 ring-2 ring-brand-accent/30'
-                        : 'border-brand-border hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black shadow-sm'
+                        : 'border-brand-border hover:border-black/30'
                     }`}
                   >
-                    <h4 className="font-bold text-sm text-brand-primary">{lg.name}</h4>
-                    <span className="text-xs font-bold text-brand-accent">
+                    <h4 className="font-bold text-sm text-black">{lg.name}</h4>
+                    <span className="text-xs font-bold text-black">
                       {lg.modifier === 0 ? 'Included' : `+${formatINR(lg.modifier)}`}
                     </span>
                   </button>
@@ -483,7 +483,7 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
               className={`px-4 py-2.5 rounded-cozly text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors ${
                 currentStep === 1
                   ? 'text-gray-300 cursor-not-allowed'
-                  : 'text-brand-charcoal hover:bg-black/5'
+                  : 'text-black hover:bg-brand-grey-100'
               }`}
             >
               <ChevronLeft className="w-4 h-4" />
@@ -493,14 +493,14 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
             {currentStep < 7 ? (
               <button
                 onClick={() => setCurrentStep((prev) => Math.min(7, prev + 1))}
-                className="px-6 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-1.5 shadow-sm transition-colors"
+                className="px-6 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-1.5 shadow-sm transition-colors"
               >
                 <span>Continue to Step {currentStep + 1}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             ) : (
-              <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
-                <Check className="w-4 h-4" />
+              <span className="text-xs font-bold text-black flex items-center gap-1.5">
+                <Check className="w-4 h-4 stroke-[2]" />
                 Configuration Complete!
               </span>
             )}
@@ -511,7 +511,7 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
         <div className="lg:col-span-5 space-y-6">
           {/* Visual Stage */}
           <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
-            <div className="relative aspect-[4/3] rounded-lg bg-brand-surface overflow-hidden border border-brand-border/60">
+            <div className="relative aspect-[4/3] rounded-lg bg-brand-grey-50 overflow-hidden border border-brand-border">
               <Image
                 src={selectedType.image}
                 alt={selectedType.name}
@@ -520,12 +520,12 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
               />
 
               {/* Color Swatch Badge Overlay */}
-              <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-brand-border shadow-sm">
+              <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-brand-border shadow-sm">
                 <span
                   className="w-3.5 h-3.5 rounded-full border border-black/20"
                   style={{ backgroundColor: selectedColor.hex }}
                 />
-                <span className="text-[11px] font-semibold text-brand-primary">
+                <span className="text-[11px] font-bold text-black">
                   {selectedColor.name}
                 </span>
               </div>
@@ -533,43 +533,43 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
 
             {/* Live Breakdown List */}
             <div className="space-y-2.5 text-xs">
-              <h4 className="font-serif font-bold text-sm text-brand-primary pb-2 border-b border-brand-border flex items-center justify-between">
+              <h4 className="font-bold text-sm text-black pb-2 border-b border-brand-border flex items-center justify-between">
                 <span>Custom Specification Summary</span>
-                <span className="text-[10px] text-brand-accent font-sans uppercase">Atelier Blueprint</span>
+                <span className="text-[10px] text-brand-kraft font-semibold uppercase tracking-wider">Workshop Blueprint</span>
               </h4>
 
               <div className="flex justify-between">
-                <span className="text-brand-muted">Base Model:</span>
-                <span className="font-semibold text-brand-primary text-right">{selectedType.name}</span>
+                <span className="text-brand-charcoal-600">Base Model:</span>
+                <span className="font-semibold text-black text-right">{selectedType.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-brand-muted">Dimensions:</span>
-                <span className="font-semibold text-brand-primary text-right">{selectedSize.name}</span>
+                <span className="text-brand-charcoal-600">Dimensions:</span>
+                <span className="font-semibold text-black text-right">{selectedSize.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-brand-muted">Frame Wood:</span>
-                <span className="font-semibold text-brand-primary text-right">{selectedWood.name}</span>
+                <span className="text-brand-charcoal-600">Frame Wood:</span>
+                <span className="font-semibold text-black text-right">{selectedWood.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-brand-muted">Fabric:</span>
-                <span className="font-semibold text-brand-primary text-right">{selectedFabric.name}</span>
+                <span className="text-brand-charcoal-600">Fabric:</span>
+                <span className="font-semibold text-black text-right">{selectedFabric.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-brand-muted">Firmness:</span>
-                <span className="font-semibold text-brand-primary text-right">{selectedFirmness.name}</span>
+                <span className="text-brand-charcoal-600">Firmness:</span>
+                <span className="font-semibold text-black text-right">{selectedFirmness.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-brand-muted">Legs:</span>
-                <span className="font-semibold text-brand-primary text-right">{selectedLegs.name}</span>
+                <span className="text-brand-charcoal-600">Legs:</span>
+                <span className="font-semibold text-black text-right">{selectedLegs.name}</span>
               </div>
 
               {/* Total Row */}
               <div className="pt-3 border-t border-brand-border flex items-baseline justify-between">
                 <div>
-                  <span className="text-xs text-brand-muted block">Estimated Factory Total</span>
-                  <span className="font-serif font-bold text-2xl text-brand-primary">{formatINR(totalPrice)}</span>
+                  <span className="text-xs text-brand-charcoal-600 block">Estimated Workshop Total</span>
+                  <span className="font-bold text-2xl text-black">{formatINR(totalPrice)}</span>
                 </div>
-                <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 font-semibold">
+                <span className="text-[10px] text-black bg-brand-grey-100 px-2.5 py-1 rounded-full border border-brand-border font-semibold">
                   Inclusive of GST
                 </span>
               </div>
@@ -579,17 +579,17 @@ export default function SofaCustomizer({ whatsappNumber = '+919846581241' }: Cus
             <div className="pt-2 space-y-2.5">
               <button
                 onClick={handleAddToCart}
-                className="w-full py-3.5 px-4 bg-brand-primary hover:bg-brand-primary-light text-white font-semibold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-md transition-colors"
+                className="w-full py-3.5 px-4 bg-black hover:bg-brand-charcoal-800 text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-md transition-colors"
               >
-                <ShoppingBag className="w-4 h-4 text-brand-accent" />
+                <ShoppingBag className="w-4 h-4 text-brand-kraft" />
                 <span>Add Custom Design to Cart</span>
               </button>
 
               <button
                 onClick={handleDirectWhatsApp}
-                className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-sm transition-colors"
+                className="w-full py-3.5 px-4 bg-brand-whatsapp hover:bg-[#20ba59] text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-sm transition-colors"
               >
-                <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
+                <MessageCircle className="w-4 h-4 fill-white text-brand-whatsapp" />
                 <span>Enquire Design on WhatsApp</span>
               </button>
             </div>

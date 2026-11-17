@@ -99,7 +99,7 @@ export function generateWhatsAppOrderUrl(
   const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const coverage = checkDeliveryCoverage(customer.pincode, customer.city);
 
-  let message = `🛋️ *NEW ORDER FROM COZLY.IN*\n`;
+  let message = `🛋️ *NEW ORDER FROM COZLY by Zoffaro IN*\n`;
   message += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
   message += `👤 *CUSTOMER DETAILS:*\n`;
   message += `• *Name:* ${customer.name || 'Not provided'}\n`;
@@ -141,7 +141,7 @@ export function generateWhatsAppOrderUrl(
     message += `✅ *(Delivery within ${coverage.stateDetected} coverage zone)*\n`;
   }
   message += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  message += `Sent from cozly.in • Handcrafted in Erattupetta, Kottayam`;
+  message += `Sent from COZLY by Zoffaro IN (cozly.in) • Crafted for every comfort.\nHandcrafted in Erattupetta, Kottayam`;
 
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 }
@@ -157,7 +157,7 @@ export function generateProductEnquiryUrl(
   origin: string = 'https://cozly.in'
 ): string {
   const cleanNumber = cleanWhatsAppNumber(whatsappNumber);
-  let text = `Hello COZLY Team! 👋\n\n`;
+  let text = `Hello COZLY by Zoffaro IN Team! 👋\n\n`;
   text += `I am interested in *${product.name}* (${formatINR(product.price)}) from cozly.in.\n\n`;
   text += `🔗 *Link:* ${origin}/collection/${product.slug}\n`;
   if (selectedFabric) text += `• *Fabric Preferred:* ${selectedFabric}\n`;

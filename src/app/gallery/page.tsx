@@ -6,9 +6,9 @@ import { Camera, ArrowRight, MessageCircle } from 'lucide-react';
 import { getSiteSettings } from '@/lib/data-store';
 
 export const metadata: Metadata = {
-  title: 'Gallery & Client Projects | Handcrafted in Kerala',
+  title: 'Gallery & Client Projects | COZLY by Zoffaro IN',
   description:
-    'Explore photos of COZLY handcrafted sofas in real living rooms across Kerala, Bangalore, and Tamil Nadu, plus behind-the-scenes carpentry in Erattupetta.',
+    'Explore photos of COZLY by Zoffaro IN handcrafted sofas in real living rooms across Kerala, Bangalore, and Tamil Nadu, plus behind-the-scenes carpentry in Erattupetta.',
 };
 
 export default async function GalleryPage() {
@@ -67,17 +67,17 @@ export default async function GalleryPage() {
   ];
 
   return (
-    <div className="py-12 sm:py-20">
+    <div className="py-12 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-brand-accent">
-            <Camera className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600">
+            <Camera className="w-3.5 h-3.5 stroke-[1.5]" />
             <span>Living Space Showcase</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-brand-primary">
+          <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-tight">
             Projects & Factory Gallery
           </h1>
-          <p className="text-xs sm:text-sm text-brand-muted leading-relaxed">
+          <p className="text-xs sm:text-sm text-brand-charcoal-600 leading-relaxed">
             Real homes, real timber, real comfort. See how our bespoke sofas settle into apartments and heritage homes across South India.
           </p>
         </div>
@@ -88,7 +88,7 @@ export default async function GalleryPage() {
           {galleryItems.map((item, idx) => (
             <div
               key={idx}
-              className={`relative rounded-cozly overflow-hidden group bg-brand-surface border border-brand-border shadow-soft hover:shadow-elevated transition-all duration-300 ${item.span}`}
+              className={`relative rounded-cozly overflow-hidden group bg-brand-grey-100 border border-brand-border shadow-soft hover:shadow-md transition-all duration-300 ${item.span}`}
             >
               <Image
                 src={item.image}
@@ -96,13 +96,13 @@ export default async function GalleryPage() {
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
               <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="text-[10px] uppercase tracking-wider text-brand-accent font-bold block mb-1">
+                <span className="text-[10px] uppercase tracking-wider text-brand-kraft font-semibold block mb-1">
                   {item.category} • {item.location}
                 </span>
-                <h3 className="font-serif font-bold text-base sm:text-xl leading-snug">
+                <h3 className="font-bold text-base sm:text-xl leading-snug">
                   {item.title}
                 </h3>
               </div>
@@ -113,22 +113,22 @@ export default async function GalleryPage() {
         {/* WhatsApp Request CTA */}
         <div className="mt-16 p-8 rounded-cozly bg-white border border-brand-border shadow-soft flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center sm:text-left">
-            <h3 className="font-serif font-bold text-xl text-brand-primary">
+            <h3 className="font-bold text-xl text-black">
               Want more photos of a specific sofa model or timber finish?
             </h3>
-            <p className="text-xs text-brand-muted">
+            <p className="text-xs text-brand-charcoal-600">
               Our workshop craftsmen are happy to take live photos and video clips of finished pieces and send them via WhatsApp.
             </p>
           </div>
           <a
             href={`https://wa.me/${settings.whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(
-              'Hello COZLY! Could you please send me some workshop photos and video clips of your latest sofa builds?'
+              'Hello COZLY by Zoffaro IN! Could you please send me some workshop photos and video clips of your latest sofa builds?'
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold uppercase tracking-wider rounded-cozly shrink-0 flex items-center gap-2 shadow-sm transition-colors"
+            className="px-6 py-3.5 bg-brand-whatsapp hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider rounded-cozly shrink-0 flex items-center gap-2 shadow-sm transition-colors"
           >
-            <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
+            <MessageCircle className="w-4 h-4 fill-white text-brand-whatsapp" />
             <span>Request Photos on WhatsApp</span>
           </a>
         </div>

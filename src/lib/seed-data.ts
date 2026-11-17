@@ -613,19 +613,21 @@ export const INITIAL_PRODUCTS: Product[] = [
 ];
 
 export const INITIAL_SITE_SETTINGS: SiteSettings = {
-  brandName: 'COZLY',
-  tagline: 'Sofa Atelier • Erattupetta, Kerala',
+  brandName: 'COZLY by Zoffaro IN',
+  tagline: 'Crafted for every comfort.',
   whatsappNumber: '+919846581241',
   phone: '+919846581241',
   email: 'sales@cozly.in',
-  factoryAddress: 'Cozly Sofa Works, Main Road, Erattupetta, Kottayam District, Kerala 686122, India',
+  factoryAddress: 'Zoffaro Furniture / COZLY Atelier, Main Road, Erattupetta, Kottayam District, Kerala 686122, India',
+  googleMapsUrl: 'https://maps.app.goo.gl/XbcbCJcaut3oDnjx8',
+  googleMapsEmbedUrl: 'https://maps.google.com/maps?q=9.6808537,76.7796198&hl=en&z=16&output=embed',
   city: 'Erattupetta',
   state: 'Kerala',
   pincode: '686122',
   workingHours: 'Monday – Saturday: 9:00 AM – 7:30 PM (IST)',
   deliveryStates: ['Kerala', 'Tamil Nadu', 'Karnataka (incl. Bangalore)'],
   socialLinks: {
-    instagram: 'https://instagram.com/cozly_sofas',
+    instagram: 'https://www.instagram.com/cozly_by_zoffaro.in',
     facebook: 'https://facebook.com/cozlysofas',
     youtube: 'https://youtube.com/@cozly',
   },

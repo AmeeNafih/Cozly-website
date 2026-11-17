@@ -212,15 +212,15 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
         <div className="flex items-center gap-3">
           <Link
             href="/admin/products"
-            className="p-2 rounded-lg bg-white border border-brand-border text-brand-charcoal hover:bg-brand-secondary transition-colors"
+            className="p-2 rounded-lg bg-white border border-brand-border text-black hover:bg-brand-grey-100 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 stroke-[1.5]" />
           </Link>
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+            <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
               {isNew ? 'Create New Design' : 'Editing Product'}
             </span>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-brand-primary">
+            <h1 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
               {name || 'Untitled Sofa Model'}
             </h1>
           </div>
@@ -231,7 +231,7 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
             <Link
               href={`/collection/${initialProduct.slug}`}
               target="_blank"
-              className="px-4 py-2.5 rounded-cozly border border-brand-border bg-white text-xs font-bold text-brand-charcoal hover:bg-brand-secondary flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2.5 rounded-cozly border border-brand-border bg-white text-xs font-bold text-black hover:bg-brand-grey-100 flex items-center gap-1.5 transition-colors"
             >
               <span>Live Page</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -241,9 +241,9 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
+            className="px-6 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
           >
-            <Save className="w-4 h-4 text-brand-accent" />
+            <Save className="w-4 h-4 text-brand-kraft" />
             <span>{loading ? 'Saving...' : 'Save Product'}</span>
           </button>
         </div>
@@ -269,12 +269,12 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
         <div className="lg:col-span-2 space-y-6">
           {/* 1. Basic Information */}
           <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
-            <h3 className="font-serif font-bold text-base text-brand-primary pb-2 border-b border-brand-border">
+            <h3 className="font-bold text-base text-black pb-2 border-b border-brand-border">
               Basic Product Information
             </h3>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-black block mb-1">
                 Model Name *
               </label>
               <input
@@ -283,7 +283,7 @@ export default function ProductFormEditor({ initialProduct, isNew = false }: Pro
                 placeholder="e.g. The Malabar Solid Teak 3-Seater"
                 value={name}
                 onChange={(e) => handleNameChange(e.target.value)}
-                className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-brand-accent font-medium"
+                className="w-full text-xs px-3.5 py-2.5 bg-brand-grey-50 border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-black font-medium"
               />
             </div>
 

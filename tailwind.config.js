@@ -9,32 +9,63 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          primary: '#18222D',      // Midnight Indigo Slate
-          'primary-dark': '#0F161E',
-          'primary-light': '#243242',
-          secondary: '#E9ECF0',    // Soft Stone Linen
-          'secondary-light': '#F4F6F8',
-          accent: '#D9822B',       // Warm Kerala Ochre
-          'accent-hover': '#C07122',
-          'accent-light': '#FDF3E7',
-          surface: '#FAF8F5',      // Warm Off-White
+          black: '#000000',
+          charcoal: {
+            DEFAULT: '#1A1A1A',
+            900: '#1A1A1A',
+            800: '#333333',
+            700: '#4D4D4D',
+            500: '#666666',
+            400: '#888888',
+          },
+          white: '#FFFFFF',
+          grey: {
+            light: '#F5F5F5',
+            50: '#FAFAFA',
+            100: '#F5F5F5',
+            200: '#EEEEEE',
+            300: '#E0E0E0',
+          },
+          border: '#E5E5E5',
+          borderDark: '#2A2A2A',
+          kraft: {
+            DEFAULT: '#B8956A',
+            hover: '#A38055',
+            light: '#F9F6F0',
+          },
+          whatsapp: {
+            DEFAULT: '#25D366',
+            hover: '#20BA5A',
+          },
+          // Semantic alias tokens
+          primary: '#000000',
+          'primary-dark': '#000000',
+          'primary-light': '#1A1A1A',
+          secondary: '#F5F5F5',
+          'secondary-light': '#FAFAFA',
+          accent: '#B8956A',
+          'accent-hover': '#A38055',
+          'accent-light': '#F9F6F0',
+          surface: '#FFFFFF',
           card: '#FFFFFF',
-          charcoal: '#222222',
-          muted: '#6B7280',
-          border: '#E8E4DD',
+          muted: '#666666',
         },
       },
       fontFamily: {
-        serif: ['var(--font-playfair)', 'Playfair Display', 'Georgia', 'serif'],
-        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-poppins)', 'Poppins', '-apple-system', 'sans-serif'],
+        heading: ['var(--font-poppins)', 'Poppins', '-apple-system', 'sans-serif'],
+        serif: ['var(--font-poppins)', 'Poppins', '-apple-system', 'sans-serif'],
       },
       borderRadius: {
         cozly: '12px',
       },
       boxShadow: {
-        soft: '0 4px 20px -2px rgba(24, 34, 45, 0.05)',
-        elevated: '0 12px 36px -4px rgba(24, 34, 45, 0.09)',
-        modal: '0 24px 60px -8px rgba(24, 34, 45, 0.16)',
+        soft: '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+        elevated: '0 12px 32px -4px rgba(0, 0, 0, 0.08)',
+        modal: '0 24px 60px -8px rgba(0, 0, 0, 0.16)',
+      },
+      letterSpacing: {
+        widestSection: '0.2em',
       },
     },
   },

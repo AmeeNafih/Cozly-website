@@ -1,15 +1,36 @@
-# COZLY (cozly.in) — Sofa Brand & Catalogue Website
+# COZLY by Zoffaro IN (cozly.in) — Sofa Brand & Catalogue Website
 
-A complete, production-ready brand and catalogue website with an interactive 7-step sofa customizer, cart with WhatsApp order dispatch, and secure Admin Control Panel for **COZLY**, an artisanal sofa manufacturer based in **Erattupetta, Kottayam District, Kerala, India**.
+> **"Crafted for every comfort."**
+
+A complete, production-ready brand and catalogue website with an interactive 7-step sofa customizer, cart with WhatsApp order dispatch, and secure Admin Control Panel for **COZLY by Zoffaro IN**, an artisanal sofa manufacturer based in **Erattupetta, Kottayam District, Kerala, India**.
+
+---
+
+## 🛋️ Brand & Visual Identity
+
+- **Brand Name:** **COZLY by Zoffaro IN**
+- **Tagline:** *"Crafted for every comfort."*
+- **Vector Logo Assets (`/public/brand/`):**
+  - Primary / Light Background: `/brand/logo.svg` & `/brand/logo-black.svg` (solid black vector glyphs extracted directly from the official Illustrator Logofolio)
+  - Dark Background / Footer & Admin Login: `/brand/logo-white.svg` & `/brand/logo-light.svg` (crisp white vector glyphs)
+  - Standalone Sofa Icon: `/brand/sofa-icon.svg` & `/brand/sofa-icon-white.svg` (used as favicon, loading indicator, and subtle watermark)
+- **Monochrome Editorial Palette:**
+  - **Black (`#000000`):** Header, primary buttons, footer, dark sections
+  - **Charcoal (`#1A1A1A`, `#333333`, `#4D4D4D`):** Body copy, dark cards, hover states
+  - **White (`#FFFFFF`) & Light Grey (`#F5F5F5`):** Clean page backgrounds and alternating editorial sections
+  - **Warm Kraft Brown (`#B8956A`):** Used sparingly for offer badges, small underlines, and subtle accents
+  - **WhatsApp Green (`#25D366`):** Dedicated exclusively to WhatsApp enquiry & order action buttons
+- **Typography:**
+  - **Poppins Everywhere:** Bold for headings, Medium/Regular for body copy, with uppercase wide letter spacing for sub-mark labels (`BY ZOFFARO IN`).
+- **Brand Value Strip:**
+  - Featured on homepage and product pages with thin outline icons: **Comfort**, **Quality**, **Style**, and **Durability**.
 
 ---
 
 ## 🛋️ Key Features
 
-- **Brand & Aesthetics:** Scandinavian minimalism (IKEA / Muuto / Castlery aesthetic) paired with warm Kerala timber craftsmanship.
-- **Color System:** Midnight Slate (`#18222D`), Soft Stone (`#E9ECF0`), Warm Kerala Ochre (`#D9822B`), with Warm Off-White (`#FAF8F5`) and Deep Charcoal (`#222222`) neutrals.
 - **Product Catalogue:** Faceted instant filtering by Type (Solid Teakwood / Premium Upholstered), Seating Capacity (1, 2, 3-Seater, L-Shape Sectional, Sofa-Cum-Bed, Recliner, Chaise), Price Slider, and Stock Status. All prices displayed in Indian Rupees (`₹42,500`) with optional offer strike-through.
-- **Product Detail Pages:** Multi-photo gallery, dimensions diagram, craftsmanship specifications, fabric & wood finish swatches, live price recalculation, and sticky mobile order buttons.
+- **Product Detail Pages:** Multi-photo gallery, dimensions diagram, craftsmanship specifications, fabric & wood finish swatches, live price recalculation, brand value strip, and sticky mobile order buttons.
 - **7-Step Sofa Customizer (`/customize`):** Interactive configurator allowing customers to choose Silhouette → Dimensions → Frame Timber → Fabric → Color Swatch → Foam Firmness → Leg Style with live 3D/2D preview and price calculation.
 - **Cart & WhatsApp Ordering:** No online payment gateway needed. Customers add sofas, enter delivery city/pincode, and click **"Place Order on WhatsApp"**. Generates a clean URL-encoded WhatsApp message sent directly to `+91 9846581241`.
 - **Smart Delivery Verification:** Automatically detects if delivery is within Kerala, Tamil Nadu, or Karnataka (including Bangalore), and provides helpful advice for all-India orders.
@@ -19,7 +40,7 @@ A complete, production-ready brand and catalogue website with an interactive 7-s
   - **Product Manager:** Add, edit, clone (1-click duplicate), hide/publish, and delete models.
   - **Quick Price Editor:** Spreadsheet-like table to adjust prices and offer discounts across all products at once.
   - **Media Management:** Multi-image gallery with cover image selector.
-  - **Homepage Editor:** Modify hero carousel banners, headlines, and "Why COZLY" highlights.
+  - **Homepage Editor:** Modify hero carousel banners, headlines, and craftsmanship highlights.
   - **Settings:** Update WhatsApp ordering phone number, address, and delivery zones.
 - **SEO & Performance:** JSON-LD Product Schema markup, OpenGraph cards, dynamic `sitemap.xml`, and `robots.txt`.
 - **Localization Ready:** Centralized dictionary files (`/messages/en.json`, `/messages/ml.json`, etc.) ready for Malayalam, Tamil, Kannada, and Hindi.
@@ -52,6 +73,7 @@ npm start
 - **Admin URL:** [http://localhost:3000/admin](http://localhost:3000/admin) (or `https://cozly.in/admin`)
 - **Default Email:** `admin@cozly.in`
 - **Default Password:** `cozly2026`
+- **Theme:** High-contrast monochrome with white logo on black background.
 
 *(When you connect Supabase Auth, you can use any email and password created in your Supabase project).*
 
@@ -137,7 +159,7 @@ NEXT_PUBLIC_SITE_URL=https://cozly.in
 5. Clicking **"Place Order on WhatsApp"** automatically opens WhatsApp with a pre-written message:
 
 ```text
-🛋️ *NEW ORDER FROM COZLY.IN*
+🛋️ *NEW ORDER FROM COZLY by Zoffaro IN*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 👤 *CUSTOMER DETAILS:*
 • Name: Anandhu Krishnan
@@ -156,7 +178,8 @@ NEXT_PUBLIC_SITE_URL=https://cozly.in
 💰 *ESTIMATED TOTAL:* *₹42,500*
 ✅ *(Delivery within Kerala coverage zone)*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-Sent from cozly.in • Handcrafted in Erattupetta, Kottayam
+Sent from COZLY by Zoffaro IN (cozly.in) • Crafted for every comfort.
+Handcrafted in Erattupetta, Kottayam
 ```
 
 ---
@@ -167,7 +190,7 @@ Sent from cozly.in • Handcrafted in Erattupetta, Kottayam
    ```bash
    git init
    git add .
-   git commit -m "Initial commit of COZLY sofa catalogue"
+   git commit -m "Visual rebranding: COZLY by Zoffaro IN"
    git remote add origin https://github.com/your-username/cozly-website.git
    git push -u origin main
    ```
@@ -184,7 +207,8 @@ Sent from cozly.in • Handcrafted in Erattupetta, Kottayam
 
 ## 📍 Brand Information
 
-- **Brand:** COZLY (cozly.in)
+- **Brand:** COZLY by Zoffaro IN (`cozly.in`)
+- **Tagline:** Crafted for every comfort.
 - **Atelier Location:** Main Road, Erattupetta, Kottayam District, Kerala 686122, India
 - **WhatsApp / Phone:** `+91 9846581241`
 - **Email:** `sales@cozly.in`

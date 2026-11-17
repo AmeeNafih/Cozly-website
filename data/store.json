@@ -135,7 +135,7 @@
         {
           "id": "img-2-1",
           "url": "/images/products/vembanad-lshape.svg",
-          "alt": "Vembanad Modular L-Shape Sectional in Sand Bouclé",
+          "alt": "Vembanad Modular L-Shape Sectional in Sand Boucl\u00e9",
           "isCover": true,
           "order": 1
         },
@@ -150,8 +150,8 @@
       "fabrics": [
         {
           "id": "fab-4",
-          "name": "Architectural Bouclé",
-          "type": "Bouclé",
+          "name": "Architectural Boucl\u00e9",
+          "type": "Boucl\u00e9",
           "colorName": "Alabaster White",
           "colorHex": "#F0ECE1",
           "priceModifier": 0
@@ -561,7 +561,7 @@
         {
           "id": "img-7-1",
           "url": "/images/products/periyar-chaise.svg",
-          "alt": "Periyar Curved Chaise Lounge in Cream Bouclé",
+          "alt": "Periyar Curved Chaise Lounge in Cream Boucl\u00e9",
           "isCover": true,
           "order": 1
         }
@@ -569,8 +569,8 @@
       "fabrics": [
         {
           "id": "fab-19",
-          "name": "Luxury Bouclé",
-          "type": "Bouclé",
+          "name": "Luxury Boucl\u00e9",
+          "type": "Boucl\u00e9",
           "colorName": "Ivory Cream",
           "colorHex": "#F6F3EC",
           "priceModifier": 0
@@ -597,7 +597,7 @@
         }
       ],
       "seoTitle": "Periyar Organic Curved Chaise Lounge | COZLY Furniture Kerala",
-      "seoDescription": "Designer curved chaise lounge sofa in premium cream bouclé. Custom crafted in Erattupetta, Kottayam.",
+      "seoDescription": "Designer curved chaise lounge sofa in premium cream boucl\u00e9. Custom crafted in Erattupetta, Kottayam.",
       "createdAt": "2024-02-14T10:00:00Z",
       "updatedAt": "2024-02-16T10:00:00Z"
     },
@@ -1012,7 +1012,7 @@
       "id": "cat-upholstered",
       "slug": "premium-upholstered",
       "name": "Premium Upholstered",
-      "description": "Deep-cushioned comfort in imported velvets, heavy-duty linens, and Scandinavian bouclés.",
+      "description": "Deep-cushioned comfort in imported velvets, heavy-duty linens, and Scandinavian boucl\u00e9s.",
       "imageUrl": "/images/products/vembanad-lshape.svg",
       "productCount": 4
     },
@@ -1042,23 +1042,23 @@
     }
   ],
   "siteSettings": {
-    "brandName": "COZLY",
-    "tagline": "Sofa Atelier • Erattupetta, Kerala",
+    "brandName": "COZLY by Zoffaro IN",
+    "tagline": "Crafted for every comfort.",
     "whatsappNumber": "+919846581241",
     "phone": "+919846581241",
     "email": "sales@cozly.in",
-    "factoryAddress": "Cozly Sofa Works, Main Road, Erattupetta, Kottayam District, Kerala 686122, India",
+    "factoryAddress": "Zoffaro Furniture / COZLY Atelier, Main Road, Erattupetta, Kottayam District, Kerala 686122, India",
     "city": "Erattupetta",
     "state": "Kerala",
     "pincode": "686122",
-    "workingHours": "Monday – Saturday: 9:00 AM – 7:30 PM (IST)",
+    "workingHours": "Monday \u2013 Saturday: 9:00 AM \u2013 7:30 PM (IST)",
     "deliveryStates": [
       "Kerala",
       "Tamil Nadu",
       "Karnataka (incl. Bangalore)"
     ],
     "socialLinks": {
-      "instagram": "https://instagram.com/cozly_sofas",
+      "instagram": "https://www.instagram.com/cozly_by_zoffaro.in",
       "facebook": "https://facebook.com/cozlysofas",
       "youtube": "https://youtube.com/@cozly"
     },
@@ -1068,7 +1068,7 @@
           "id": "hero-1",
           "title": "Mastercrafted Sofas. Direct from Our Kerala Atelier.",
           "subtitle": "Solid Teakwood & bespoke upholstery tailored to your living space. Handcrafted in Erattupetta, Kottayam with factory-direct transparent pricing.",
-          "tag": "ARTISANAL FURNITURE • KERALA HERITAGE",
+          "tag": "ARTISANAL FURNITURE \u2022 KERALA HERITAGE",
           "ctaText": "Explore Collection",
           "ctaLink": "/collection",
           "imageUrl": "/images/hero/hero-atelier.svg"
@@ -1117,9 +1117,11 @@
     ],
     "announcementBar": {
       "enabled": true,
-      "text": "🛋️ Direct Factory Delivery across Kerala, Tamil Nadu & Bangalore • Order directly on WhatsApp with 0% advance options",
+      "text": "\ud83d\udecb\ufe0f Direct Factory Delivery across Kerala, Tamil Nadu & Bangalore \u2022 Order directly on WhatsApp with 0% advance options",
       "link": "/collection"
-    }
+    },
+    "googleMapsUrl": "https://maps.app.goo.gl/XbcbCJcaut3oDnjx8",
+    "googleMapsEmbedUrl": "https://maps.google.com/maps?q=9.6808537,76.7796198&hl=en&z=16&output=embed"
   },
   "reviews": [
     {

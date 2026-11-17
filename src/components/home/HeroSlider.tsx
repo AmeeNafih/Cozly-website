@@ -16,27 +16,27 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
   const activeSlides = slides && slides.length > 0 ? slides : [
     {
       id: 'default-1',
-      title: 'Mastercrafted Sofas. Direct from Our Kerala Atelier.',
-      subtitle: 'Solid Teakwood & bespoke upholstery tailored to your living space. Handcrafted in Erattupetta, Kottayam with factory-direct transparent pricing.',
-      tag: 'ARTISANAL FURNITURE • KERALA HERITAGE',
+      title: 'Crafted for every comfort.',
+      subtitle: 'Bespoke solid timber and upholstered sofas handcrafted in Erattupetta, Kottayam. Factory-direct honest pricing with South India delivery.',
+      tag: 'COZLY BY ZOFFARO IN • KERALA ATELIER',
       ctaText: 'Explore Collection',
       ctaLink: '/collection',
       imageUrl: '/images/hero/hero-atelier.svg',
     },
     {
       id: 'default-2',
-      title: 'Design Your Custom Sofa in 7 Simple Steps.',
-      subtitle: 'Choose your configuration, solid wood frame, premium fabrics, cushion firmness, and leg finishes with real-time preview and WhatsApp ordering.',
-      tag: 'BESPOKE SOFA CONFIGURATOR',
+      title: 'Design your custom sofa in 7 simple steps.',
+      subtitle: 'Choose your silhouette, solid teak frame, premium fabrics, cushion firmness, and leg finishes with real-time preview and WhatsApp ordering.',
+      tag: 'BESPOKE CONFIGURATOR • TAILORED LIVING',
       ctaText: 'Customize Your Sofa',
       ctaLink: '/customize',
       imageUrl: '/images/hero/hero-customizer.svg',
     },
     {
       id: 'default-3',
-      title: 'White-Glove Delivery Across Kerala, Bangalore & Tamil Nadu.',
-      subtitle: 'Fully assembled direct from our factory to your living room. Inspected, leveled, and placed with care by our dedicated delivery team.',
-      tag: 'DIRECT FACTORY DELIVERY',
+      title: 'White-glove delivery across South India.',
+      subtitle: 'Fully assembled direct from our factory to your living room across Kerala, Bangalore, and Tamil Nadu by our trained specialists.',
+      tag: 'FACTORY DIRECT • FULLY ASSEMBLED',
       ctaText: 'View Delivery Coverage',
       ctaLink: '/#delivery',
       imageUrl: '/images/hero/hero-delivery.svg',
@@ -53,9 +53,9 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
   const slide = activeSlides[current];
 
   return (
-    <section className="relative overflow-hidden bg-brand-primary text-white">
+    <section className="relative overflow-hidden bg-black text-white">
       {/* Background Slides */}
-      <div className="relative min-h-[540px] sm:min-h-[620px] lg:min-h-[680px] flex items-center">
+      <div className="relative min-h-[560px] sm:min-h-[640px] lg:min-h-[700px] flex items-center">
         {activeSlides.map((item, index) => (
           <div
             key={item.id}
@@ -70,37 +70,37 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
               priority={index === 0}
               className="object-cover object-center"
             />
-            {/* Gradient Dark Overlay for strong contrast */}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/95 via-brand-primary/80 to-transparent lg:w-3/4" />
+            {/* Editorial Monochrome Dark Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-transparent lg:w-3/4" />
           </div>
         ))}
 
         {/* Hero Content Overlay */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="max-w-2xl space-y-6">
-            {/* Tag Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/30 backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
-                {slide.tag || 'ARTISANAL SOFAS • KERALA'}
+            {/* Small section label in uppercase with wide letter spacing like "BY ZOFFARO IN" */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-kraft" />
+              <span className="text-[10px] font-bold uppercase tracking-widestSection text-gray-200">
+                {slide.tag || 'COZLY BY ZOFFARO IN'}
               </span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+            {/* Main Headline in Poppins Bold */}
+            <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight">
               {slide.title}
             </h1>
 
-            {/* Subheadline */}
-            <p className="text-base sm:text-lg text-brand-surface/80 leading-relaxed font-normal">
+            {/* Subheadline in Poppins Regular/Medium */}
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal max-w-xl">
               {slide.subtitle}
             </p>
 
-            {/* Action Buttons */}
+            {/* Action Buttons: Solid black with white text, secondary with outline */}
             <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 href={slide.ctaLink || '/collection'}
-                className="px-6 py-3.5 rounded-cozly bg-brand-accent hover:bg-brand-accent-hover text-white font-semibold text-sm tracking-wider uppercase transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2"
+                className="px-6 py-3.5 rounded-cozly bg-white text-black hover:bg-gray-200 font-bold text-xs tracking-wider uppercase transition-all shadow-md inline-flex items-center gap-2"
               >
                 <span>{slide.ctaText || 'Explore Collection'}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -108,26 +108,26 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
 
               <Link
                 href="/customize"
-                className="px-6 py-3.5 rounded-cozly bg-white/10 hover:bg-white/20 text-white font-semibold text-sm tracking-wider uppercase backdrop-blur-md border border-white/20 transition-all inline-flex items-center gap-2"
+                className="px-6 py-3.5 rounded-cozly bg-black/60 hover:bg-black text-white font-bold text-xs tracking-wider uppercase backdrop-blur-md border border-white/30 transition-all inline-flex items-center gap-2"
               >
-                <SlidersHorizontal className="w-4 h-4 text-brand-accent" />
+                <SlidersHorizontal className="w-4 h-4 text-brand-kraft" />
                 <span>Customize Your Sofa</span>
               </Link>
             </div>
 
             {/* Micro Highlights */}
-            <div className="pt-6 grid grid-cols-3 gap-4 border-t border-white/15 text-xs text-brand-surface/70">
+            <div className="pt-6 grid grid-cols-3 gap-4 border-t border-white/15 text-xs text-gray-400">
               <div>
-                <p className="font-bold text-white text-sm">Solid Teakwood</p>
-                <p className="text-[11px]">Kiln-Dried Moisture &lt;10%</p>
+                <p className="font-bold text-white text-xs uppercase tracking-wider">Solid Teakwood</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Kiln-Dried Moisture &lt;10%</p>
               </div>
               <div>
-                <p className="font-bold text-white text-sm">Direct Factory</p>
-                <p className="text-[11px]">No Showroom Markups</p>
+                <p className="font-bold text-white text-xs uppercase tracking-wider">Direct Factory</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Zero Showroom Markups</p>
               </div>
               <div>
-                <p className="font-bold text-white text-sm">Kerala • TN • BLR</p>
-                <p className="text-[11px]">White-Glove Delivery</p>
+                <p className="font-bold text-white text-xs uppercase tracking-wider">Kerala • TN • BLR</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">White-Glove Delivery</p>
               </div>
             </div>
           </div>
@@ -138,16 +138,16 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
           <button
             onClick={() => setCurrent((prev) => (prev - 1 + activeSlides.length) % activeSlides.length)}
             aria-label="Previous slide"
-            className="p-3 rounded-full bg-black/40 hover:bg-brand-accent text-white backdrop-blur-md border border-white/10 transition-colors"
+            className="p-3 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={() => setCurrent((prev) => (prev + 1) % activeSlides.length)}
             aria-label="Next slide"
-            className="p-3 rounded-full bg-black/40 hover:bg-brand-accent text-white backdrop-blur-md border border-white/10 transition-colors"
+            className="p-3 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-colors"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
@@ -158,7 +158,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
               key={i}
               onClick={() => setCurrent(i)}
               className={`h-1.5 rounded-full transition-all ${
-                i === current ? 'w-6 bg-brand-accent' : 'w-2 bg-white/40'
+                i === current ? 'w-6 bg-white' : 'w-2 bg-white/30'
               }`}
             />
           ))}

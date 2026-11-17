@@ -70,24 +70,24 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
           <Link href="/admin" className="relative w-36 h-10 block">
             <Image
               src="/brand/logo.svg"
-              alt="COZLY Admin"
+              alt="COZLY by Zoffaro IN Admin"
               fill
               className="object-contain object-left"
             />
           </Link>
-          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-brand-secondary text-brand-primary">
+          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-black text-white">
             Admin
           </span>
         </div>
 
         {/* User Info */}
-        <div className="px-6 py-3 bg-brand-surface/60 border-b border-brand-border flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs font-bold shrink-0">
+        <div className="px-6 py-3 bg-brand-grey-50 border-b border-brand-border flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold shrink-0">
             <User className="w-3.5 h-3.5" />
           </div>
           <div className="min-w-0">
-            <p className="text-[11px] font-bold text-brand-primary truncate">{userEmail}</p>
-            <p className="text-[9px] text-emerald-600 font-semibold">Active Session</p>
+            <p className="text-[11px] font-bold text-black truncate">{userEmail}</p>
+            <p className="text-[9px] text-brand-charcoal-500 font-semibold">Active Session</p>
           </div>
         </div>
 
@@ -102,13 +102,13 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-cozly text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-brand-primary text-white shadow-sm'
+                    ? 'bg-black text-white shadow-sm font-bold'
                     : item.highlight
-                    ? 'text-brand-accent hover:bg-brand-accent/10 font-bold'
-                    : 'text-brand-charcoal hover:bg-brand-secondary'
+                    ? 'text-brand-kraft hover:bg-brand-grey-100 font-bold'
+                    : 'text-brand-charcoal-700 hover:bg-brand-grey-100'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-brand-accent' : ''}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : ''}`} />
                 <span>{item.label}</span>
               </Link>
             );
@@ -120,10 +120,10 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
           <Link
             href="/"
             target="_blank"
-            className="flex items-center justify-between px-3.5 py-2 rounded-cozly text-xs font-medium text-brand-charcoal hover:bg-brand-secondary transition-colors"
+            className="flex items-center justify-between px-3.5 py-2 rounded-cozly text-xs font-medium text-black hover:bg-brand-grey-100 transition-colors"
           >
             <span>View Public Store</span>
-            <ExternalLink className="w-3.5 h-3.5 text-brand-muted" />
+            <ExternalLink className="w-3.5 h-3.5 text-brand-charcoal-400" />
           </Link>
 
           <button
@@ -139,11 +139,11 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
       {/* Mobile Top Header */}
       <div className="md:hidden bg-white border-b border-brand-border p-4 flex items-center justify-between sticky top-0 z-30">
         <Link href="/admin" className="relative w-32 h-8 block">
-          <Image src="/brand/logo.svg" alt="COZLY Admin" fill className="object-contain object-left" />
+          <Image src="/brand/logo.svg" alt="COZLY by Zoffaro IN Admin" fill className="object-contain object-left" />
         </Link>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="p-2 text-brand-primary hover:bg-brand-secondary rounded-lg"
+          className="p-2 text-black hover:bg-brand-grey-100 rounded-lg"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -161,7 +161,7 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-cozly text-xs font-semibold ${
-                  isActive ? 'bg-brand-primary text-white' : 'text-brand-charcoal hover:bg-brand-secondary'
+                  isActive ? 'bg-black text-white font-bold' : 'text-brand-charcoal-700 hover:bg-brand-grey-100'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -170,7 +170,7 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
             );
           })}
           <div className="pt-2 border-t border-brand-border flex items-center justify-between text-xs">
-            <Link href="/" target="_blank" className="text-brand-accent font-semibold flex items-center gap-1">
+            <Link href="/" target="_blank" className="text-black font-semibold flex items-center gap-1">
               <span>View Store</span>
               <ExternalLink className="w-3 h-3" />
             </Link>
@@ -182,7 +182,7 @@ export default function AdminNav({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 bg-brand-grey-50">
         {children}
       </main>
     </div>

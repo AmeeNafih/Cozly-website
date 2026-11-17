@@ -134,13 +134,13 @@ export default function QuickPriceEditorPage() {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
             Batch Pricing Controls
           </span>
-          <h1 className="font-serif text-2xl sm:text-4xl font-bold text-brand-primary mt-1">
+          <h1 className="text-2xl sm:text-4xl font-bold text-black mt-1 tracking-tight">
             Quick Price Editor
           </h1>
-          <p className="text-xs text-brand-muted mt-1">
+          <p className="text-xs text-brand-charcoal-600 mt-1">
             Edit selling prices, strike-through original prices, and stock statuses inline across all products at once
           </p>
         </div>
@@ -150,7 +150,7 @@ export default function QuickPriceEditorPage() {
           disabled={saving || modifiedCount === 0}
           className={`px-6 py-3 rounded-cozly text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-sm ${
             modifiedCount > 0
-              ? 'bg-brand-accent hover:bg-brand-accent-hover text-white animate-pulse'
+              ? 'bg-black hover:bg-brand-charcoal-800 text-white'
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
           }`}
         >
@@ -179,19 +179,19 @@ export default function QuickPriceEditorPage() {
       {/* Filter / Search Bar */}
       <div className="bg-white p-4 rounded-cozly border border-brand-border shadow-soft flex items-center justify-between gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-brand-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-brand-charcoal-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search product to adjust price..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-3.5 py-2 text-xs bg-brand-surface border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-brand-accent"
+            className="w-full pl-10 pr-3.5 py-2 text-xs bg-brand-grey-50 border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-black"
           />
         </div>
 
-        <span className="text-xs text-brand-muted">
+        <span className="text-xs text-brand-charcoal-600">
           {modifiedCount > 0 ? (
-            <strong className="text-brand-accent">{modifiedCount} unsaved change(s)</strong>
+            <strong className="text-black font-bold">{modifiedCount} unsaved change(s)</strong>
           ) : (
             'All rows up to date'
           )}
@@ -201,11 +201,11 @@ export default function QuickPriceEditorPage() {
       {/* Table */}
       <div className="bg-white rounded-cozly border border-brand-border shadow-soft overflow-hidden">
         {loading ? (
-          <div className="p-12 text-center text-xs text-brand-muted">Loading pricing table...</div>
+          <div className="p-12 text-center text-xs text-brand-charcoal-500">Loading pricing table...</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-brand-surface border-b border-brand-border text-brand-muted uppercase tracking-wider font-semibold">
+              <thead className="bg-brand-grey-50 border-b border-brand-border text-brand-charcoal-600 uppercase tracking-wider font-semibold">
                 <tr>
                   <th className="py-3 px-4">Product</th>
                   <th className="py-3 px-4">Category</th>
@@ -215,7 +215,7 @@ export default function QuickPriceEditorPage() {
                   <th className="py-3 px-4">Stock Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-border/60">
+              <tbody className="divide-y divide-brand-border">
                 {filtered.map((row) => {
                   const numPrice = Number(row.price) || 0;
                   const numOffer = Number(row.offerPrice) || 0;
@@ -226,18 +226,18 @@ export default function QuickPriceEditorPage() {
                     <tr
                       key={row.id}
                       className={`transition-colors ${
-                        row.isModified ? 'bg-amber-50/60' : 'hover:bg-brand-surface/40'
+                        row.isModified ? 'bg-amber-50/60' : 'hover:bg-brand-grey-50'
                       }`}
                     >
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-brand-surface shrink-0 border border-brand-border/60">
+                          <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-brand-grey-100 shrink-0 border border-brand-border">
                             <Image src={row.coverImage} alt={row.name} fill className="object-cover" />
                           </div>
                           <div>
                             <Link
                               href={`/admin/products/${row.id}/edit`}
-                              className="font-bold text-brand-primary hover:underline"
+                              className="font-bold text-black hover:underline"
                             >
                               {row.name}
                             </Link>
@@ -250,7 +250,7 @@ export default function QuickPriceEditorPage() {
                         </div>
                       </td>
 
-                      <td className="py-3 px-4 text-brand-charcoal font-medium">
+                      <td className="py-3 px-4 text-brand-charcoal-700 font-medium">
                         {row.category}
                       </td>
 
@@ -261,7 +261,7 @@ export default function QuickPriceEditorPage() {
                             type="number"
                             value={row.price}
                             onChange={(e) => handlePriceChange(row.id, e.target.value)}
-                            className="w-full pl-7 pr-2.5 py-1.5 text-xs font-bold text-brand-primary bg-white border border-brand-border rounded focus:outline-none focus:ring-1 focus:ring-brand-accent shadow-inner"
+                            className="w-full pl-7 pr-2.5 py-1.5 text-xs font-bold text-black bg-white border border-brand-border rounded focus:outline-none focus:ring-1 focus:ring-black shadow-inner"
                           />
                         </div>
                       </td>
@@ -274,18 +274,18 @@ export default function QuickPriceEditorPage() {
                             placeholder="Optional"
                             value={row.offerPrice}
                             onChange={(e) => handleOfferChange(row.id, e.target.value)}
-                            className="w-full pl-7 pr-2.5 py-1.5 text-xs text-brand-muted bg-white border border-brand-border rounded focus:outline-none focus:ring-1 focus:ring-brand-accent shadow-inner"
+                            className="w-full pl-7 pr-2.5 py-1.5 text-xs text-brand-charcoal-600 bg-white border border-brand-border rounded focus:outline-none focus:ring-1 focus:ring-black shadow-inner"
                           />
                         </div>
                       </td>
 
                       <td className="py-3 px-4">
                         {discountPct > 0 ? (
-                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-accent text-white shadow-sm">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-kraft text-white shadow-sm">
                             {discountPct}% OFF
                           </span>
                         ) : (
-                          <span className="text-[10px] text-brand-muted">Standard Price</span>
+                          <span className="text-[10px] text-brand-charcoal-400">Standard Price</span>
                         )}
                       </td>
 

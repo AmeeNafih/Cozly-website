@@ -24,15 +24,16 @@ export default function AdminSettingsPage() {
   const [error, setError] = useState<string | null>(null);
 
   // Form Fields
-  const [brandName, setBrandName] = useState('COZLY');
-  const [tagline, setTagline] = useState('Sofa Atelier • Erattupetta, Kerala');
+  const [brandName, setBrandName] = useState('COZLY by Zoffaro IN');
+  const [tagline, setTagline] = useState('Crafted for every comfort.');
   const [whatsappNumber, setWhatsappNumber] = useState('+919846581241');
   const [phone, setPhone] = useState('+919846581241');
   const [email, setEmail] = useState('sales@cozly.in');
-  const [factoryAddress, setFactoryAddress] = useState('Cozly Sofa Works, Main Road, Erattupetta, Kottayam District, Kerala 686122, India');
+  const [factoryAddress, setFactoryAddress] = useState('Zoffaro Furniture / COZLY Atelier, Main Road, Erattupetta, Kottayam District, Kerala 686122, India');
+  const [googleMapsUrl, setGoogleMapsUrl] = useState('https://maps.app.goo.gl/XbcbCJcaut3oDnjx8');
   const [workingHours, setWorkingHours] = useState('Monday – Saturday: 9:00 AM – 7:30 PM (IST)');
   const [deliveryStatesStr, setDeliveryStatesStr] = useState('Kerala, Tamil Nadu, Karnataka (incl. Bangalore)');
-  const [instagram, setInstagram] = useState('https://instagram.com/cozly_sofas');
+  const [instagram, setInstagram] = useState('https://www.instagram.com/cozly_by_zoffaro.in');
   const [facebook, setFacebook] = useState('https://facebook.com/cozlysofas');
   const [youtube, setYoutube] = useState('https://youtube.com/@cozly');
 
@@ -43,15 +44,16 @@ export default function AdminSettingsPage() {
         if (data.success && data.settings) {
           const s = data.settings;
           setSettings(s);
-          setBrandName(s.brandName || 'COZLY');
-          setTagline(s.tagline || 'Sofa Atelier • Erattupetta, Kerala');
+          setBrandName(s.brandName || 'COZLY by Zoffaro IN');
+          setTagline(s.tagline || 'Crafted for every comfort.');
           setWhatsappNumber(s.whatsappNumber || '+919846581241');
           setPhone(s.phone || '+919846581241');
           setEmail(s.email || 'sales@cozly.in');
-          setFactoryAddress(s.factoryAddress || '');
+          setFactoryAddress(s.factoryAddress || 'Zoffaro Furniture / COZLY Atelier, Main Road, Erattupetta, Kottayam District, Kerala 686122, India');
+          setGoogleMapsUrl(s.googleMapsUrl || 'https://maps.app.goo.gl/XbcbCJcaut3oDnjx8');
           setWorkingHours(s.workingHours || '');
           setDeliveryStatesStr(s.deliveryStates?.join(', ') || 'Kerala, Tamil Nadu, Karnataka');
-          setInstagram(s.socialLinks?.instagram || '');
+          setInstagram(s.socialLinks?.instagram || 'https://www.instagram.com/cozly_by_zoffaro.in');
           setFacebook(s.socialLinks?.facebook || '');
           setYoutube(s.socialLinks?.youtube || '');
         }
@@ -78,6 +80,7 @@ export default function AdminSettingsPage() {
       phone,
       email,
       factoryAddress,
+      googleMapsUrl,
       workingHours,
       deliveryStates,
       socialLinks: {
@@ -117,13 +120,13 @@ export default function AdminSettingsPage() {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
             Store Configuration
           </span>
-          <h1 className="font-serif text-2xl sm:text-4xl font-bold text-brand-primary mt-1">
+          <h1 className="text-2xl sm:text-4xl font-bold text-black mt-1 tracking-tight">
             Store & WhatsApp Settings
           </h1>
-          <p className="text-xs text-brand-muted mt-1">
+          <p className="text-xs text-brand-charcoal-600 mt-1">
             Configure order recipient phone number, workshop location, and business hours
           </p>
         </div>
@@ -131,9 +134,9 @@ export default function AdminSettingsPage() {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
+          className="px-6 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
         >
-          <Save className="w-4 h-4 text-brand-accent" />
+          <Save className="w-4 h-4 text-brand-kraft" />
           <span>{saving ? 'Saving...' : 'Save Settings'}</span>
         </button>
       </div>
@@ -211,6 +214,20 @@ export default function AdminSettingsPage() {
               required
               value={factoryAddress}
               onChange={(e) => setFactoryAddress(e.target.value)}
+              className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-1">
+              Google Maps Location Link *
+            </label>
+            <input
+              type="url"
+              required
+              value={googleMapsUrl}
+              onChange={(e) => setGoogleMapsUrl(e.target.value)}
+              placeholder="https://maps.app.goo.gl/..."
               className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none"
             />
           </div>

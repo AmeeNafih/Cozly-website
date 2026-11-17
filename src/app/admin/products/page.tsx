@@ -112,22 +112,22 @@ export default function AdminProductsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
             Inventory & Catalogue
           </span>
-          <h1 className="font-serif text-2xl sm:text-4xl font-bold text-brand-primary mt-1">
+          <h1 className="text-2xl sm:text-4xl font-bold text-black mt-1 tracking-tight">
             Product Management
           </h1>
-          <p className="text-xs text-brand-muted mt-1">
+          <p className="text-xs text-brand-charcoal-600 mt-1">
             Add, modify specs, set fabric swatches, clone models, and toggle visibility
           </p>
         </div>
 
         <Link
           href="/admin/products/new"
-          className="px-5 py-3 bg-brand-primary hover:bg-brand-primary-light text-white rounded-cozly text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-sm self-start sm:self-auto"
+          className="px-5 py-3 bg-black hover:bg-brand-charcoal-800 text-white rounded-cozly text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-sm self-start sm:self-auto"
         >
-          <Plus className="w-4 h-4 text-brand-accent" />
+          <Plus className="w-4 h-4 text-brand-kraft" />
           <span>Add New Sofa</span>
         </Link>
       </div>
@@ -143,20 +143,20 @@ export default function AdminProductsPage() {
       <div className="bg-white p-4 rounded-cozly border border-brand-border shadow-soft flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3 flex-1 min-w-[260px]">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-brand-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-brand-charcoal-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search product by name or slug..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-3.5 py-2 text-xs bg-brand-surface border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-brand-accent"
+              className="w-full pl-10 pr-3.5 py-2 text-xs bg-brand-grey-50 border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-black"
             />
           </div>
 
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="text-xs px-3 py-2 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none font-medium"
+            className="text-xs px-3 py-2 bg-brand-grey-50 border border-brand-border rounded-cozly focus:outline-none font-medium"
           >
             <option value="">All Categories</option>
             {categories.map((c) => (
@@ -166,11 +166,11 @@ export default function AdminProductsPage() {
         </div>
 
         {/* Status Pills */}
-        <div className="flex items-center gap-1.5 text-xs font-medium bg-brand-surface p-1 rounded-cozly border border-brand-border">
+        <div className="flex items-center gap-1.5 text-xs font-medium bg-brand-grey-100 p-1 rounded-cozly border border-brand-border">
           <button
             onClick={() => setStatusFilter('all')}
             className={`px-3 py-1.5 rounded-lg transition-colors ${
-              statusFilter === 'all' ? 'bg-white shadow-sm font-bold text-brand-primary' : 'text-brand-muted hover:text-brand-primary'
+              statusFilter === 'all' ? 'bg-white shadow-sm font-bold text-black' : 'text-brand-charcoal-600 hover:text-black'
             }`}
           >
             All ({products.length})
@@ -178,7 +178,7 @@ export default function AdminProductsPage() {
           <button
             onClick={() => setStatusFilter('published')}
             className={`px-3 py-1.5 rounded-lg transition-colors ${
-              statusFilter === 'published' ? 'bg-white shadow-sm font-bold text-emerald-700' : 'text-brand-muted hover:text-brand-primary'
+              statusFilter === 'published' ? 'bg-white shadow-sm font-bold text-black' : 'text-brand-charcoal-600 hover:text-black'
             }`}
           >
             Published ({products.filter((p) => p.isPublished).length})
@@ -186,7 +186,7 @@ export default function AdminProductsPage() {
           <button
             onClick={() => setStatusFilter('draft')}
             className={`px-3 py-1.5 rounded-lg transition-colors ${
-              statusFilter === 'draft' ? 'bg-white shadow-sm font-bold text-amber-700' : 'text-brand-muted hover:text-brand-primary'
+              statusFilter === 'draft' ? 'bg-white shadow-sm font-bold text-black' : 'text-brand-charcoal-600 hover:text-black'
             }`}
           >
             Drafts ({products.filter((p) => !p.isPublished).length})
@@ -197,13 +197,13 @@ export default function AdminProductsPage() {
       {/* Products Table */}
       <div className="bg-white rounded-cozly border border-brand-border shadow-soft overflow-hidden">
         {loading ? (
-          <div className="p-12 text-center text-xs text-brand-muted">Loading catalogue...</div>
+          <div className="p-12 text-center text-xs text-brand-charcoal-500">Loading catalogue...</div>
         ) : filtered.length === 0 ? (
-          <div className="p-12 text-center text-xs text-brand-muted space-y-2">
+          <div className="p-12 text-center text-xs text-brand-charcoal-500 space-y-2">
             <p>No products match your search or filter.</p>
             <button
               onClick={() => { setSearch(''); setCategoryFilter(''); setStatusFilter('all'); }}
-              className="text-brand-accent font-semibold hover:underline"
+              className="text-black font-bold hover:underline"
             >
               Clear filters
             </button>
@@ -211,7 +211,7 @@ export default function AdminProductsPage() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-brand-surface border-b border-brand-border text-brand-muted uppercase tracking-wider font-semibold">
+              <thead className="bg-brand-grey-50 border-b border-brand-border text-brand-charcoal-600 uppercase tracking-wider font-semibold">
                 <tr>
                   <th className="py-3 px-4">Photo</th>
                   <th className="py-3 px-4">Product Name & Specs</th>

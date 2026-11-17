@@ -97,6 +97,8 @@ export interface SiteSettings {
   phone: string;
   email: string;
   factoryAddress: string;
+  googleMapsUrl?: string;
+  googleMapsEmbedUrl?: string;
   city: string;
   state: string;
   pincode: string;

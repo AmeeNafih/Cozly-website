@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import AnnouncementBar from '@/components/layout/AnnouncementBar';
@@ -6,41 +7,49 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
 import FloatingWhatsApp from '@/components/common/FloatingWhatsApp';
+import MobileBottomNav from '@/components/layout/MobileBottomNav';
 import { getSiteSettings } from '@/lib/data-store';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cozly.in'),
   title: {
-    default: 'COZLY | Mastercrafted Teak & Upholstered Sofas | Erattupetta, Kerala',
-    template: '%s | COZLY Sofa Atelier',
+    default: 'COZLY by Zoffaro IN | Crafted for every comfort.',
+    template: '%s | COZLY by Zoffaro IN',
   },
   description:
-    'Artisanal wooden-frame and premium upholstered sofas handcrafted in Erattupetta, Kottayam, Kerala. Direct factory delivery across Kerala, Tamil Nadu, and Bangalore. Order seamlessly on WhatsApp.',
+    'COZLY by Zoffaro IN — Crafted for every comfort. Artisanal solid timber and bespoke upholstered sofas designed with Scandinavian minimalism. Direct white-glove delivery across South India with WhatsApp ordering.',
   keywords: [
+    'COZLY by Zoffaro IN',
+    'Zoffaro IN',
+    'cozly.in',
     'sofa manufacturer Kerala',
     'teak wood sofa Kottayam',
     'Erattupetta sofa works',
     'custom sofa Bangalore',
     'L shape sofa Kochi',
     'sofa cum bed Kerala',
-    'Tamil Nadu sofa delivery',
     'handcrafted furniture India',
-    'IKEA style sofa Kerala',
-    'COZLY sofas',
   ],
-  authors: [{ name: 'COZLY Sofa Atelier' }],
+  authors: [{ name: 'COZLY by Zoffaro IN' }],
   openGraph: {
-    title: 'COZLY | Mastercrafted Sofas Direct from Kerala Atelier',
+    title: 'COZLY by Zoffaro IN | Crafted for every comfort.',
     description:
-      'Solid Teakwood & bespoke upholstered sofas crafted in Erattupetta, Kottayam. Direct factory transparent pricing with WhatsApp ordering.',
+      'Solid timber frames & bespoke upholstered sofas crafted with Scandinavian minimalism. Direct factory transparent pricing with WhatsApp ordering.',
     url: 'https://cozly.in',
-    siteName: 'COZLY',
+    siteName: 'COZLY by Zoffaro IN',
     images: [
       {
-        url: '/images/hero/hero-atelier.svg',
+        url: '/brand/logo-black.svg',
         width: 1200,
         height: 630,
-        alt: 'COZLY Sofa Atelier Erattupetta',
+        alt: 'COZLY by Zoffaro IN',
       },
     ],
     locale: 'en_IN',
@@ -61,13 +70,13 @@ export default async function RootLayout({
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en">
+    <html lang="en" className={poppins.variable}>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
         {/* Google Analytics Placeholder */}
@@ -82,7 +91,7 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-brand-surface text-brand-charcoal min-h-screen flex flex-col selection:bg-brand-accent/20 selection:text-brand-primary">
+      <body className="font-sans antialiased bg-white text-brand-charcoal min-h-screen flex flex-col selection:bg-black selection:text-white">
         <CartProvider>
           {settings.announcementBar?.enabled && (
             <AnnouncementBar
@@ -94,10 +103,11 @@ export default async function RootLayout({
             whatsappNumber={settings.whatsappNumber}
             phone={settings.phone}
           />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pb-16 md:pb-0">{children}</main>
           <Footer settings={settings} />
           <CartDrawer whatsappNumber={settings.whatsappNumber} />
           <FloatingWhatsApp whatsappNumber={settings.whatsappNumber} />
+          <MobileBottomNav whatsappNumber={settings.whatsappNumber} />
         </CartProvider>
       </body>
     </html>

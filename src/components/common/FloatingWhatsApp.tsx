@@ -17,10 +17,10 @@ export default function FloatingWhatsApp({ whatsappNumber = '+919846581241' }: F
   );
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex items-end gap-3 group">
+    <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-30 flex items-end gap-3 group">
       {/* Tooltip speech bubble */}
       {!tooltipDismissed && (
-        <div className="hidden sm:flex items-center gap-2 bg-white px-3.5 py-2 rounded-2xl shadow-elevated border border-brand-border animate-bounce text-xs font-medium text-brand-charcoal">
+        <div className="hidden sm:flex items-center gap-2 bg-white px-3.5 py-2 rounded-2xl shadow-elevated border border-brand-border text-xs font-medium text-brand-charcoal">
           <span>Direct chat with our factory craftsmen</span>
           <button
             onClick={() => setTooltipDismissed(true)}
@@ -38,10 +38,9 @@ export default function FloatingWhatsApp({ whatsappNumber = '+919846581241' }: F
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with COZLY on WhatsApp"
-        className="relative flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-modal hover:scale-105 active:scale-95 transition-all duration-200"
+        className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-200"
       >
-        <span className="absolute -inset-1 rounded-full bg-emerald-500 opacity-30 animate-ping pointer-events-none" />
-        <MessageCircle className="w-7 h-7 fill-white text-emerald-500 relative z-10" />
+        <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-[#25D366] relative z-10" />
       </a>
     </div>
   );

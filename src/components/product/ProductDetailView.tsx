@@ -22,6 +22,7 @@ import { Product } from '@/types';
 import { formatINR, generateProductEnquiryUrl } from '@/lib/formatters';
 import { useCart } from '@/context/CartContext';
 import ProductCard from '@/components/product/ProductCard';
+import BrandValueStrip from '@/components/common/BrandValueStrip';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -105,15 +106,15 @@ export default function ProductDetailView({
             />
             {/* Tag Badges */}
             <div className="absolute top-4 left-4 flex gap-2">
-              <span className="px-2.5 py-1 rounded bg-brand-primary/90 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-md">
+              <span className="px-2.5 py-1 rounded bg-black/90 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-md">
                 {product.seatingCapacity}
               </span>
               {product.stockStatus === 'in_stock' ? (
-                <span className="px-2.5 py-1 rounded bg-emerald-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-sm">
-                  In Stock • Quick Dispatch
+                <span className="px-2.5 py-1 rounded bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-sm border border-white/20">
+                  In Stock • Dispatch in 5-8 Days
                 </span>
               ) : (
-                <span className="px-2.5 py-1 rounded bg-brand-accent text-white text-[11px] font-bold uppercase tracking-wider shadow-sm">
+                <span className="px-2.5 py-1 rounded bg-brand-kraft text-white text-[11px] font-bold uppercase tracking-wider shadow-sm">
                   Made to Order
                 </span>
               )}
@@ -129,8 +130,8 @@ export default function ProductDetailView({
                   onClick={() => setActiveImageIdx(idx)}
                   className={`relative w-20 h-20 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
                     idx === activeImageIdx
-                      ? 'border-brand-accent shadow-md scale-95'
-                      : 'border-brand-border hover:border-brand-primary/40 opacity-70 hover:opacity-100'
+                      ? 'border-black shadow-md scale-95'
+                      : 'border-brand-border hover:border-black/40 opacity-70 hover:opacity-100'
                   }`}
                 >
                   <Image src={img.url} alt={img.alt} fill className="object-cover" />
@@ -142,19 +143,19 @@ export default function ProductDetailView({
           {/* Quick Craftsmanship Highlights */}
           <div className="grid grid-cols-3 gap-3 pt-4 border-t border-brand-border text-center">
             <div className="p-3 bg-white rounded-cozly border border-brand-border">
-              <ShieldCheck className="w-5 h-5 text-brand-accent mx-auto mb-1" />
-              <p className="text-xs font-bold text-brand-primary">{product.warrantyYears} Years</p>
-              <p className="text-[10px] text-brand-muted">Frame Warranty</p>
+              <ShieldCheck className="w-5 h-5 text-black mx-auto mb-1 stroke-[1.5]" />
+              <p className="text-xs font-bold text-black">{product.warrantyYears} Years</p>
+              <p className="text-[10px] text-brand-charcoal-500">Frame Warranty</p>
             </div>
             <div className="p-3 bg-white rounded-cozly border border-brand-border">
-              <Truck className="w-5 h-5 text-brand-accent mx-auto mb-1" />
-              <p className="text-xs font-bold text-brand-primary">Direct Delivery</p>
-              <p className="text-[10px] text-brand-muted">Kerala, TN & BLR</p>
+              <Truck className="w-5 h-5 text-black mx-auto mb-1 stroke-[1.5]" />
+              <p className="text-xs font-bold text-black">Direct Delivery</p>
+              <p className="text-[10px] text-brand-charcoal-500">Kerala, TN & BLR</p>
             </div>
             <div className="p-3 bg-white rounded-cozly border border-brand-border">
-              <Sparkles className="w-5 h-5 text-brand-accent mx-auto mb-1" />
-              <p className="text-xs font-bold text-brand-primary">Customizable</p>
-              <p className="text-[10px] text-brand-muted">Any Size / Fabric</p>
+              <Sparkles className="w-5 h-5 text-black mx-auto mb-1 stroke-[1.5]" />
+              <p className="text-xs font-bold text-black">Customizable</p>
+              <p className="text-[10px] text-brand-charcoal-500">Any Size / Fabric</p>
             </div>
           </div>
         </div>
@@ -163,16 +164,16 @@ export default function ProductDetailView({
         <div className="lg:col-span-5 space-y-6">
           {/* Title & Origin */}
           <div className="space-y-1.5 border-b border-brand-border pb-5">
-            <div className="flex items-center justify-between text-xs text-brand-accent font-bold uppercase tracking-wider">
+            <div className="flex items-center justify-between text-xs tracking-widest uppercase font-semibold text-brand-charcoal-600">
               <span>{product.style} • {product.materialType === 'wooden' ? 'Solid Wood' : 'Upholstered'}</span>
-              <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                Atelier Direct
+              <span className="text-black bg-brand-grey-100 px-2.5 py-0.5 rounded-full border border-brand-border font-medium text-[10px]">
+                Workshop Direct
               </span>
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-brand-primary">
+            <h1 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
               {product.name}
             </h1>
-            <p className="text-xs text-brand-muted leading-relaxed">
+            <p className="text-xs text-brand-charcoal-600 leading-relaxed">
               {product.shortDescription}
             </p>
           </div>
@@ -181,21 +182,21 @@ export default function ProductDetailView({
           <div className="p-4 bg-white rounded-cozly border border-brand-border shadow-soft flex items-baseline justify-between">
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="font-serif text-2xl sm:text-3xl font-bold text-brand-primary">
+                <span className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
                   {formatINR(currentPrice)}
                 </span>
                 {currentOriginalPrice && (
-                  <span className="text-sm text-gray-400 line-through">
+                  <span className="text-sm text-brand-charcoal-400 line-through">
                     {formatINR(currentOriginalPrice)}
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-brand-muted mt-0.5">
+              <p className="text-[11px] text-brand-charcoal-500 mt-0.5">
                 Transparent workshop pricing • Inclusive of GST
               </p>
             </div>
             <div className="text-right">
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 block">
+              <span className="text-[10px] uppercase tracking-wider font-semibold text-brand-charcoal-800 bg-brand-grey-100 px-2.5 py-1 rounded-full border border-brand-border block">
                 {product.stockStatus === 'in_stock' ? 'Ships in 5-8 Days' : product.deliveryTime}
               </span>
             </div>
@@ -205,10 +206,10 @@ export default function ProductDetailView({
           {product.fabrics && product.fabrics.length > 0 && (
             <div className="space-y-2.5">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold uppercase tracking-wider text-brand-primary">
+                <span className="font-bold uppercase tracking-wider text-black">
                   Select Fabric & Color:
                 </span>
-                <span className="text-brand-accent font-semibold">
+                <span className="text-brand-kraft font-semibold">
                   {selectedFabric ? `${selectedFabric.type} — ${selectedFabric.colorName}` : ''}
                 </span>
               </div>
@@ -219,8 +220,8 @@ export default function ProductDetailView({
                     onClick={() => setSelectedFabric(fab)}
                     className={`p-2 rounded-lg border text-left flex items-center gap-2 transition-all ${
                       selectedFabric?.id === fab.id
-                        ? 'border-brand-primary bg-brand-secondary/60 ring-1 ring-brand-primary'
-                        : 'border-brand-border bg-white hover:border-brand-primary/40'
+                        ? 'border-black bg-brand-grey-50 ring-1 ring-black'
+                        : 'border-brand-border bg-white hover:border-black/40'
                     }`}
                   >
                     <span
@@ -228,8 +229,8 @@ export default function ProductDetailView({
                       style={{ backgroundColor: fab.colorHex }}
                     />
                     <div className="min-w-0">
-                      <p className="text-[11px] font-bold text-brand-primary truncate">{fab.colorName}</p>
-                      <p className="text-[9px] text-brand-muted truncate">{fab.type}</p>
+                      <p className="text-[11px] font-bold text-black truncate">{fab.colorName}</p>
+                      <p className="text-[9px] text-brand-charcoal-500 truncate">{fab.type}</p>
                     </div>
                   </button>
                 ))}
@@ -241,10 +242,10 @@ export default function ProductDetailView({
           {product.woodFinishes && product.woodFinishes.length > 0 && (
             <div className="space-y-2.5">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold uppercase tracking-wider text-brand-primary">
+                <span className="font-bold uppercase tracking-wider text-black">
                   Wood Frame / Leg Finish:
                 </span>
-                <span className="text-brand-accent font-semibold">
+                <span className="text-brand-kraft font-semibold">
                   {selectedFinish?.name}
                 </span>
               </div>
@@ -255,8 +256,8 @@ export default function ProductDetailView({
                     onClick={() => setSelectedFinish(wf)}
                     className={`px-3 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-2 transition-all ${
                       selectedFinish?.id === wf.id
-                        ? 'border-brand-primary bg-brand-primary text-white'
-                        : 'border-brand-border bg-white text-brand-charcoal hover:bg-brand-secondary'
+                        ? 'border-black bg-black text-white'
+                        : 'border-brand-border bg-white text-black hover:bg-brand-grey-100'
                     }`}
                   >
                     <span
@@ -277,17 +278,17 @@ export default function ProductDetailView({
               <div className="flex items-center border border-brand-border rounded-cozly bg-white overflow-hidden shadow-sm">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="p-3 hover:bg-brand-secondary text-brand-charcoal transition-colors"
+                  className="p-3 hover:bg-brand-grey-100 text-black transition-colors"
                   aria-label="Decrease quantity"
                 >
                   <Minus className="w-4 h-4" />
                 </button>
-                <span className="px-4 text-sm font-bold text-brand-charcoal min-w-[32px] text-center">
+                <span className="px-4 text-sm font-bold text-black min-w-[32px] text-center">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity((q) => q + 1)}
-                  className="p-3 hover:bg-brand-secondary text-brand-charcoal transition-colors"
+                  className="p-3 hover:bg-brand-grey-100 text-black transition-colors"
                   aria-label="Increase quantity"
                 >
                   <Plus className="w-4 h-4" />
@@ -297,7 +298,7 @@ export default function ProductDetailView({
               {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
-                className="flex-1 py-3.5 px-6 bg-brand-primary hover:bg-brand-primary-light text-white font-semibold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+                className="flex-1 py-3.5 px-6 bg-black hover:bg-brand-charcoal-800 text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
               >
                 {isAddedFeedback ? (
                   <>
@@ -306,7 +307,7 @@ export default function ProductDetailView({
                   </>
                 ) : (
                   <>
-                    <ShoppingBag className="w-4 h-4 text-brand-accent" />
+                    <ShoppingBag className="w-4 h-4 text-brand-kraft" />
                     <span>Add to Cart</span>
                   </>
                 )}
@@ -316,9 +317,9 @@ export default function ProductDetailView({
             {/* Direct WhatsApp Enquiry Button */}
             <button
               onClick={handleWhatsAppEnquire}
-              className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-sm transition-colors"
+              className="w-full py-3.5 px-4 bg-brand-whatsapp hover:bg-[#20ba59] text-white font-bold text-xs tracking-wider uppercase rounded-cozly flex items-center justify-center gap-2 shadow-sm transition-colors"
             >
-              <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
+              <MessageCircle className="w-4 h-4 fill-white text-brand-whatsapp" />
               <span>Enquire & Order on WhatsApp</span>
             </button>
           </div>
@@ -340,8 +341,8 @@ export default function ProductDetailView({
               onClick={() => setActiveTab(tab.key as any)}
               className={`px-6 py-4 text-xs font-bold uppercase tracking-wider transition-colors shrink-0 ${
                 activeTab === tab.key
-                  ? 'border-b-2 border-brand-accent text-brand-primary bg-white'
-                  : 'text-brand-muted hover:text-brand-primary'
+                  ? 'border-b-2 border-black text-black bg-white'
+                  : 'text-brand-charcoal-500 hover:text-black'
               }`}
             >
               {tab.label}
@@ -353,25 +354,25 @@ export default function ProductDetailView({
         <div className="p-6 sm:p-8 text-sm">
           {activeTab === 'specs' && (
             <div className="space-y-6">
-              <p className="text-xs text-brand-charcoal/80 leading-relaxed max-w-3xl">
+              <p className="text-xs text-brand-charcoal-700 leading-relaxed max-w-3xl">
                 {product.fullDescription}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-brand-border">
-                <div className="p-4 bg-brand-surface rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Frame Wood</span>
-                  <p className="font-semibold text-brand-primary text-xs">{product.materialsSpec.frameWood}</p>
+                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Frame Wood</span>
+                  <p className="font-semibold text-black text-xs">{product.materialsSpec.frameWood}</p>
                 </div>
-                <div className="p-4 bg-brand-surface rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Foam Density</span>
-                  <p className="font-semibold text-brand-primary text-xs">{product.materialsSpec.foamType}</p>
+                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Foam Density</span>
+                  <p className="font-semibold text-black text-xs">{product.materialsSpec.foamType}</p>
                 </div>
-                <div className="p-4 bg-brand-surface rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Suspension System</span>
-                  <p className="font-semibold text-brand-primary text-xs">{product.materialsSpec.springSystem}</p>
+                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Suspension System</span>
+                  <p className="font-semibold text-black text-xs">{product.materialsSpec.springSystem}</p>
                 </div>
-                <div className="p-4 bg-brand-surface rounded-lg space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent">Legs & Polish</span>
-                  <p className="font-semibold text-brand-primary text-xs">{product.materialsSpec.legMaterial}</p>
+                <div className="p-4 bg-brand-grey-50 rounded-lg space-y-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-charcoal-600">Legs & Polish</span>
+                  <p className="font-semibold text-black text-xs">{product.materialsSpec.legMaterial}</p>
                 </div>
               </div>
             </div>
@@ -380,36 +381,36 @@ export default function ProductDetailView({
           {activeTab === 'dimensions' && (
             <div className="space-y-4">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="p-4 bg-brand-surface rounded-lg text-center">
-                  <span className="text-xs text-brand-muted block">Length (Width)</span>
-                  <span className="font-serif font-bold text-xl text-brand-primary">{product.dimensions.width} cm</span>
-                  <span className="text-[10px] text-brand-muted block mt-0.5">≈ {(product.dimensions.width / 2.54).toFixed(0)} inches</span>
+                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
+                  <span className="text-xs text-brand-charcoal-500 block">Length (Width)</span>
+                  <span className="font-bold text-xl text-black">{product.dimensions.width} cm</span>
+                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">≈ {(product.dimensions.width / 2.54).toFixed(0)} inches</span>
                 </div>
-                <div className="p-4 bg-brand-surface rounded-lg text-center">
-                  <span className="text-xs text-brand-muted block">Depth</span>
-                  <span className="font-serif font-bold text-xl text-brand-primary">{product.dimensions.depth} cm</span>
-                  <span className="text-[10px] text-brand-muted block mt-0.5">≈ {(product.dimensions.depth / 2.54).toFixed(0)} inches</span>
+                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
+                  <span className="text-xs text-brand-charcoal-500 block">Depth</span>
+                  <span className="font-bold text-xl text-black">{product.dimensions.depth} cm</span>
+                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">≈ {(product.dimensions.depth / 2.54).toFixed(0)} inches</span>
                 </div>
-                <div className="p-4 bg-brand-surface rounded-lg text-center">
-                  <span className="text-xs text-brand-muted block">Total Height</span>
-                  <span className="font-serif font-bold text-xl text-brand-primary">{product.dimensions.height} cm</span>
-                  <span className="text-[10px] text-brand-muted block mt-0.5">≈ {(product.dimensions.height / 2.54).toFixed(0)} inches</span>
+                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
+                  <span className="text-xs text-brand-charcoal-500 block">Total Height</span>
+                  <span className="font-bold text-xl text-black">{product.dimensions.height} cm</span>
+                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">≈ {(product.dimensions.height / 2.54).toFixed(0)} inches</span>
                 </div>
-                <div className="p-4 bg-brand-surface rounded-lg text-center">
-                  <span className="text-xs text-brand-muted block">Seating Height</span>
-                  <span className="font-serif font-bold text-xl text-brand-primary">{product.dimensions.seatingHeight || 45} cm</span>
-                  <span className="text-[10px] text-brand-muted block mt-0.5">Standard Ergonomic Height</span>
+                <div className="p-4 bg-brand-grey-50 rounded-lg text-center">
+                  <span className="text-xs text-brand-charcoal-500 block">Seating Height</span>
+                  <span className="font-bold text-xl text-black">{product.dimensions.seatingHeight || 45} cm</span>
+                  <span className="text-[10px] text-brand-charcoal-500 block mt-0.5">Standard Ergonomic Height</span>
                 </div>
               </div>
-              <p className="text-xs text-brand-muted pt-2">
+              <p className="text-xs text-brand-charcoal-500 pt-2">
                 *Need custom dimensions to fit your living room wall or elevator passage? Message us on WhatsApp and our carpentry draftsmen will modify the blueprint.
               </p>
             </div>
           )}
 
           {activeTab === 'delivery' && (
-            <div className="space-y-3 text-xs text-brand-charcoal/80 leading-relaxed">
-              <p className="font-semibold text-brand-primary text-sm">Direct Factory Delivery Coverage:</p>
+            <div className="space-y-3 text-xs text-brand-charcoal-700 leading-relaxed">
+              <p className="font-semibold text-black text-sm">Direct Factory Delivery Coverage:</p>
               <ul className="list-disc pl-5 space-y-1.5">
                 <li><strong>Kerala:</strong> 5 to 10 Business Days via direct workshop transport to all districts.</li>
                 <li><strong>Karnataka (Bangalore):</strong> 7 to 12 Business Days with apartment elevator carriage and living room placement.</li>
@@ -420,8 +421,8 @@ export default function ProductDetailView({
           )}
 
           {activeTab === 'warranty' && (
-            <div className="space-y-3 text-xs text-brand-charcoal/80 leading-relaxed">
-              <p className="font-semibold text-brand-primary text-sm">{product.warrantyYears}-Year Manufacturer Frame Warranty</p>
+            <div className="space-y-3 text-xs text-brand-charcoal-700 leading-relaxed">
+              <p className="font-semibold text-black text-sm">{product.warrantyYears}-Year Manufacturer Frame Warranty</p>
               <p>
                 Every solid timber frame manufactured in our Erattupetta workshop is guaranteed against borer attack, termite infestation, and structural joint failure for {product.warrantyYears} full years.
               </p>
@@ -433,19 +434,24 @@ export default function ProductDetailView({
         </div>
       </div>
 
+      {/* Brand Value Strip */}
+      <div className="mt-16">
+        <BrandValueStrip />
+      </div>
+
       {/* Related Sofas Carousel / Grid */}
       {relatedProducts && relatedProducts.length > 0 && (
         <div className="mt-20 space-y-8">
           <div className="flex items-end justify-between border-b border-brand-border pb-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+              <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
                 Complementary Pieces
               </span>
-              <h2 className="font-serif text-2xl font-bold text-brand-primary mt-1">
+              <h2 className="text-2xl font-bold text-black mt-1">
                 You May Also Admire
               </h2>
             </div>
-            <Link href="/collection" className="text-xs font-semibold uppercase text-brand-primary hover:text-brand-accent">
+            <Link href="/collection" className="text-xs font-semibold uppercase tracking-wider text-black hover:text-brand-charcoal-700">
               View All →
             </Link>
           </div>
@@ -457,26 +463,51 @@ export default function ProductDetailView({
         </div>
       )}
 
-      {/* Sticky Mobile Bottom Bar */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-brand-border shadow-modal flex items-center justify-between gap-3">
-        <div>
-          <span className="text-[10px] text-brand-muted uppercase block">Total Price</span>
-          <span className="font-bold text-base text-brand-primary">{formatINR(currentPrice)}</span>
+      {/* Sticky Mobile Purchase Bar */}
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 px-3.5 py-2.5 bg-white/95 backdrop-blur-md border-t border-brand-border shadow-[0_-4px_25px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3 pb-safe">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-10 h-10 rounded-lg overflow-hidden bg-brand-surface border border-brand-border shrink-0 relative">
+            <Image
+              src={currentImage.url}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="min-w-0">
+            <span className="font-heading font-extrabold text-sm text-black block truncate font-['Poppins']">
+              {formatINR(currentPrice)}
+            </span>
+            <span className="text-[10px] text-brand-charcoal-500 block truncate">
+              {selectedFabric ? selectedFabric.colorName : product.name}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={handleAddToCart}
-            className="py-2.5 px-4 bg-brand-primary text-white text-xs font-semibold rounded-cozly flex items-center gap-1 shadow-sm"
+            className="py-2.5 px-3.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-1.5 shadow-sm transition-all"
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-brand-accent" />
-            <span>Add to Cart</span>
+            {isAddedFeedback ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Added</span>
+              </>
+            ) : (
+              <>
+                <ShoppingBag className="w-3.5 h-3.5 text-brand-kraft" />
+                <span>Add</span>
+              </>
+            )}
           </button>
           <button
             onClick={handleWhatsAppEnquire}
-            className="p-2.5 bg-emerald-600 text-white rounded-cozly shadow-sm"
+            className="p-2.5 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-cozly shadow-sm transition-all"
             aria-label="Enquire on WhatsApp"
+            title="Chat on WhatsApp"
           >
-            <MessageCircle className="w-4 h-4" />
+            <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
           </button>
         </div>
       </div>

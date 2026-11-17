@@ -3,35 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #18222D;
-  --color-secondary: #E9ECF0;
-  --color-accent: #D9822B;
-  --color-surface: #FAF8F5;
-  --color-charcoal: #222222;
+  --color-black: #000000;
+  --color-charcoal: #1A1A1A;
+  --color-charcoal-800: #333333;
+  --color-charcoal-700: #4D4D4D;
+  --color-white: #FFFFFF;
+  --color-grey-light: #F5F5F5;
+  --color-kraft: #B8956A;
+  --color-whatsapp: #25D366;
+  --color-border: #E5E5E5;
 }
 
 body {
   color: var(--color-charcoal);
-  background: var(--color-surface);
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  background: var(--color-white);
+  font-family: var(--font-poppins), 'Poppins', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF8F5;
+  background: #F5F5F5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
+  background: #CCCCCC;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: #999999;
+}
+
+/* Subtle Watermark utility */
+.watermark-sofa {
+  background-image: url('/brand/sofa-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.watermark-sofa-white {
+  background-image: url('/brand/sofa-icon-white.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 @keyframes fadeIn {
@@ -40,5 +59,14 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Section label with wide letter spacing like "BY ZOFFARO IN" */
+.section-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #4D4D4D;
 }

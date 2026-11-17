@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroSlider from '@/components/home/HeroSlider';
+import BrandValueStrip from '@/components/common/BrandValueStrip';
 import CategoryTiles from '@/components/home/CategoryTiles';
 import FeaturedSofas from '@/components/home/FeaturedSofas';
 import WhyCozly from '@/components/home/WhyCozly';
@@ -23,6 +24,9 @@ export default async function HomePage() {
     <div>
       {/* 1. Hero Section (Controlled from Admin) */}
       <HeroSlider slides={settings.heroContent?.slides} />
+
+      {/* 1.5. Brand Value Strip (Comfort, Quality, Style, Durability) */}
+      <BrandValueStrip />
 
       {/* 2. Category Tiles */}
       <CategoryTiles categories={categories} />

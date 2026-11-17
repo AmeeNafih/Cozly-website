@@ -124,13 +124,13 @@ export default function HomepageEditorPage() {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
             Visual Content Management
           </span>
-          <h1 className="font-serif text-2xl sm:text-4xl font-bold text-brand-primary mt-1">
+          <h1 className="text-2xl sm:text-4xl font-bold text-black mt-1 tracking-tight">
             Homepage Editor
           </h1>
-          <p className="text-xs text-brand-muted mt-1">
+          <p className="text-xs text-brand-charcoal-600 mt-1">
             Control hero slides, headlines, promotional banners, and craftsmanship highlights
           </p>
         </div>
@@ -138,9 +138,9 @@ export default function HomepageEditorPage() {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
+          className="px-6 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
         >
-          <Save className="w-4 h-4 text-brand-accent" />
+          <Save className="w-4 h-4 text-brand-kraft" />
           <span>{saving ? 'Saving...' : 'Save All Changes'}</span>
         </button>
       </div>
@@ -162,16 +162,16 @@ export default function HomepageEditorPage() {
       {/* 1. Announcement Bar Banner */}
       <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
         <div className="flex items-center justify-between border-b border-brand-border pb-3">
-          <div className="flex items-center gap-2 text-brand-primary">
-            <Megaphone className="w-4 h-4 text-brand-accent" />
-            <h3 className="font-serif font-bold text-base">Top Announcement Banner</h3>
+          <div className="flex items-center gap-2 text-black">
+            <Megaphone className="w-4 h-4 stroke-[1.5]" />
+            <h3 className="font-bold text-base">Top Announcement Banner</h3>
           </div>
-          <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-brand-primary">
+          <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-black">
             <input
               type="checkbox"
               checked={announcementEnabled}
               onChange={(e) => setAnnouncementEnabled(e.target.checked)}
-              className="rounded text-brand-accent w-4 h-4"
+              className="rounded accent-black w-4 h-4"
             />
             <span>Enable Announcement</span>
           </label>

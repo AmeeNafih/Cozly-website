@@ -75,13 +75,13 @@ export default function AdminCategoriesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
             Catalogue Taxonomies
           </span>
-          <h1 className="font-serif text-2xl sm:text-4xl font-bold text-brand-primary mt-1">
+          <h1 className="text-2xl sm:text-4xl font-bold text-black mt-1 tracking-tight">
             Category Manager
           </h1>
-          <p className="text-xs text-brand-muted mt-1">
+          <p className="text-xs text-brand-charcoal-600 mt-1">
             Manage product categories, filter tags, and visual catalogue groupings
           </p>
         </div>
@@ -96,14 +96,14 @@ export default function AdminCategoriesPage() {
 
       {/* Add New Category Card */}
       <div className="bg-white p-6 rounded-cozly border border-brand-border shadow-soft space-y-4">
-        <h3 className="font-serif font-bold text-base text-brand-primary">
+        <h3 className="font-bold text-base text-black">
           Add New Category
         </h3>
 
         <form onSubmit={handleAddCategory} className="space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-black block mb-1">
                 Category Name *
               </label>
               <input
@@ -112,12 +112,12 @@ export default function AdminCategoriesPage() {
                 placeholder="e.g. Modular Corner Sofas"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-brand-accent font-medium"
+                className="w-full text-xs px-3.5 py-2.5 bg-brand-grey-50 border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-black font-medium"
               />
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-black block mb-1">
                 Short Description
               </label>
               <input
@@ -125,7 +125,7 @@ export default function AdminCategoriesPage() {
                 placeholder="Brief summary for category card..."
                 value={newDesc}
                 onChange={(e) => setNewDesc(e.target.value)}
-                className="w-full text-xs px-3.5 py-2.5 bg-brand-surface border border-brand-border rounded-cozly focus:outline-none"
+                className="w-full text-xs px-3.5 py-2.5 bg-brand-grey-50 border border-brand-border rounded-cozly focus:outline-none focus:ring-1 focus:ring-black"
               />
             </div>
           </div>
@@ -133,9 +133,9 @@ export default function AdminCategoriesPage() {
           <button
             type="submit"
             disabled={saving}
-            className="px-5 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
+            className="px-5 py-2.5 bg-black hover:bg-brand-charcoal-800 text-white text-xs font-bold uppercase tracking-wider rounded-cozly flex items-center gap-2 shadow-sm transition-colors"
           >
-            <Plus className="w-4 h-4 text-brand-accent" />
+            <Plus className="w-4 h-4 text-brand-kraft" />
             <span>{saving ? 'Adding...' : 'Add Category'}</span>
           </button>
         </form>

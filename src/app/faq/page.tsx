@@ -39,16 +39,16 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="py-12 sm:py-20">
+    <div className="py-12 sm:py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="text-center space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal-600 block">
             Got Questions?
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-brand-primary">
+          <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-tight">
             Frequently Asked Questions
           </h1>
-          <p className="text-xs sm:text-sm text-brand-muted max-w-xl mx-auto">
+          <p className="text-xs sm:text-sm text-brand-charcoal-600 max-w-xl mx-auto">
             Everything you need to know about our Kerala teakwood frames, WhatsApp ordering, custom dimensions, and white-glove South India delivery.
           </p>
         </div>
@@ -65,17 +65,17 @@ export default function FAQPage() {
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base text-brand-primary hover:text-brand-accent transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-base text-black hover:text-brand-charcoal-700 transition-colors"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-brand-accent shrink-0 transition-transform duration-200 ${
+                    className={`w-5 h-5 text-black shrink-0 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-brand-charcoal/80 leading-relaxed border-t border-brand-border/60 pt-3">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-brand-charcoal-700 leading-relaxed border-t border-brand-border pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -85,16 +85,16 @@ export default function FAQPage() {
         </div>
 
         {/* WhatsApp Help Banner */}
-        <div className="mt-12 p-8 rounded-cozly bg-brand-primary text-white text-center space-y-4 shadow-elevated">
-          <h3 className="font-serif font-bold text-xl text-white">Have a question not listed here?</h3>
-          <p className="text-xs text-brand-surface/75 max-w-md mx-auto">
+        <div className="mt-12 p-8 rounded-cozly bg-black text-white text-center space-y-4 shadow-soft">
+          <h3 className="font-bold text-xl text-white">Have a question not listed here?</h3>
+          <p className="text-xs text-gray-300 max-w-md mx-auto">
             Chat directly with our Erattupetta workshop craftsmen. We respond within a few minutes.
           </p>
           <a
-            href="https://wa.me/919846581241?text=Hello%20COZLY!%20I%20have%20a%20question%20about%20ordering%20a%20sofa."
+            href="https://wa.me/919846581241?text=Hello%20COZLY%20by%20Zoffaro%20IN!%20I%20have%20a%20question%20about%20ordering%20a%20sofa."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-cozly text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-brand-whatsapp hover:bg-[#20ba59] text-white rounded-cozly text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
           >
             <MessageCircle className="w-4 h-4" />
             <span>Ask Us on WhatsApp</span>
