@@ -10,21 +10,21 @@ interface DeliveryCoverageProps {
 export default function DeliveryCoverage({ whatsappNumber = '+919846581241' }: DeliveryCoverageProps) {
   const cleanNumber = whatsappNumber.replace(/\D/g, '');
 
-  const regions = [
+  const pillars = [
     {
-      name: 'Kerala',
-      time: '5–10 days',
-      details: 'All districts delivered direct from our Erattupetta workshop.',
+      title: 'All-India Delivery',
+      time: 'Nationwide Doorstep',
+      details: 'Direct delivery across all states and major pin codes throughout India.',
     },
     {
-      name: 'Karnataka (Bangalore)',
-      time: '7–12 days',
-      details: 'Regular routes to Bangalore metropolitan area and Mysore.',
+      title: 'Protective Packaging',
+      time: 'Zero-Damage Transit',
+      details: 'Multi-layer high-density foam, corner guards, and reinforced crating.',
     },
     {
-      name: 'Tamil Nadu',
-      time: '7–12 days',
-      details: 'Coimbatore, Chennai, Madurai, Salem and surrounding regions.',
+      title: 'Dispatch Timelines',
+      time: '7–14 Business Days',
+      details: 'Dispatched direct from our Erattupetta workshop with live tracking updates.',
     },
   ];
 
@@ -35,17 +35,17 @@ export default function DeliveryCoverage({ whatsappNumber = '+919846581241' }: D
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div>
             <span className="block text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 mb-2">
-              Coverage
+              Nationwide Coverage
             </span>
             <h2 className="text-2xl sm:text-4xl font-normal text-black tracking-[-0.015em]">
-              Direct factory delivery
+              All-India delivery
             </h2>
           </div>
 
           <div>
             <a
               href={`https://wa.me/${cleanNumber}?text=${encodeURIComponent(
-                'Hello COZLY by Zoffaro IN! I would like to check delivery timelines and rates for my city.'
+                'Hello COZLY by Zoffaro IN! I would like to check delivery timelines for my pincode.'
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -57,18 +57,18 @@ export default function DeliveryCoverage({ whatsappNumber = '+919846581241' }: D
           </div>
         </div>
 
-        {/* Three Short Columns */}
+        {/* Three Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 pt-4 border-t border-neutral-200">
-          {regions.map((region) => (
-            <div key={region.name} className="space-y-2">
+          {pillars.map((pillar) => (
+            <div key={pillar.title} className="space-y-2">
               <h3 className="text-base font-medium text-black">
-                {region.name}
+                {pillar.title}
               </h3>
               <p className="text-sm font-semibold text-black tracking-tight">
-                {region.time}
+                {pillar.time}
               </p>
               <p className="text-xs text-neutral-500 leading-relaxed">
-                {region.details}
+                {pillar.details}
               </p>
             </div>
           ))}

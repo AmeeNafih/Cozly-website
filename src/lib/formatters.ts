@@ -24,65 +24,27 @@ export function cleanWhatsAppNumber(phone: string): string {
 }
 
 /**
- * Checks if a pincode or state indicates delivery within Kerala, Tamil Nadu, or Karnataka
- * Kerala pincodes: 670xxx - 695xxx
- * Tamil Nadu pincodes: 600xxx - 643xxx
- * Karnataka pincodes: 560xxx - 591xxx
+ * Checks delivery coverage across India
  */
 export function checkDeliveryCoverage(pincode: string, city: string = ''): {
   isCovered: boolean;
-  stateDetected?: 'Kerala' | 'Tamil Nadu' | 'Karnataka' | 'Other';
+  stateDetected?: string;
   message: string;
 } {
   const cleanPin = pincode.trim().replace(/\D/g, '');
-  const cleanCity = city.toLowerCase().trim();
 
-  // Kerala check
-  if (
-    (cleanPin.length === 6 && cleanPin.startsWith('67') || cleanPin.startsWith('68') || cleanPin.startsWith('69')) ||
-    cleanCity.includes('kochi') || cleanCity.includes('ernakulam') || cleanCity.includes('kottayam') ||
-    cleanCity.includes('trivandrum') || cleanCity.includes('thiruvananthapuram') || cleanCity.includes('calicut') ||
-    cleanCity.includes('kozhikode') || cleanCity.includes('thrissur') || cleanCity.includes('erattupetta') ||
-    cleanCity.includes('pala') || cleanCity.includes('kannur') || cleanCity.includes('kollam')
-  ) {
+  if (cleanPin.length === 6) {
     return {
       isCovered: true,
-      stateDetected: 'Kerala',
-      message: 'Direct Factory Delivery Available within Kerala (7–12 Business Days)',
-    };
-  }
-
-  // Karnataka check
-  if (
-    (cleanPin.length === 6 && (cleanPin.startsWith('56') || cleanPin.startsWith('57') || cleanPin.startsWith('58') || cleanPin.startsWith('59'))) ||
-    cleanCity.includes('bangalore') || cleanCity.includes('bengaluru') || cleanCity.includes('mysore') ||
-    cleanCity.includes('mysuru') || cleanCity.includes('mangalore') || cleanCity.includes('mangaluru') ||
-    cleanCity.includes('hubli') || cleanCity.includes('dharwad')
-  ) {
-    return {
-      isCovered: true,
-      stateDetected: 'Karnataka',
-      message: 'Direct Delivery Available to Karnataka / Bangalore with White-Glove Installation',
-    };
-  }
-
-  // Tamil Nadu check
-  if (
-    (cleanPin.length === 6 && (cleanPin.startsWith('60') || cleanPin.startsWith('61') || cleanPin.startsWith('62') || cleanPin.startsWith('63') || cleanPin.startsWith('64'))) ||
-    cleanCity.includes('chennai') || cleanCity.includes('coimbatore') || cleanCity.includes('madurai') ||
-    cleanCity.includes('salem') || cleanCity.includes('tirupur') || cleanCity.includes('trichy')
-  ) {
-    return {
-      isCovered: true,
-      stateDetected: 'Tamil Nadu',
-      message: 'Direct Delivery Available to Tamil Nadu (Safe Multi-Layer Packaging)',
+      stateDetected: 'All India',
+      message: 'All-India delivery available to your pincode with protective transit packaging.',
     };
   }
 
   return {
-    isCovered: false,
-    stateDetected: 'Other',
-    message: 'Your location is outside our primary 3-state delivery zone (Kerala, Tamil Nadu, Karnataka). We still deliver all-India via specialized logistics! Please confirm transit details with our team on WhatsApp.',
+    isCovered: true,
+    stateDetected: 'All India',
+    message: 'All-India delivery available across all states and cities.',
   };
 }
 
@@ -97,22 +59,19 @@ export function generateWhatsAppOrderUrl(
 ): string {
   const cleanNumber = cleanWhatsAppNumber(whatsappNumber);
   const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const coverage = checkDeliveryCoverage(customer.pincode, customer.city);
 
-  let message = `🛋️ *NEW ORDER FROM COZLY by Zoffaro IN*\n`;
-  message += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-  message += `👤 *CUSTOMER DETAILS:*\n`;
-  message += `• *Name:* ${customer.name || 'Not provided'}\n`;
-  message += `• *Phone:* ${customer.phone || 'Not provided'}\n`;
-  message += `• *Delivery City & Pincode:* ${customer.city || ''} - ${customer.pincode || ''}\n`;
-  if (coverage.stateDetected) {
-    message += `• *Region:* ${coverage.stateDetected} (${coverage.isCovered ? 'Direct Coverage Zone' : 'Special Route Inquiry'})\n`;
-  }
+  let message = `*NEW ORDER — COZLY by Zoffaro IN*\n`;
+  message += `─────────────────────────\n\n`;
+  message += `CUSTOMER DETAILS:\n`;
+  message += `• Name: ${customer.name || 'Not provided'}\n`;
+  message += `• Phone: ${customer.phone || 'Not provided'}\n`;
+  message += `• Delivery City & Pincode: ${customer.city || ''} - ${customer.pincode || ''}\n`;
+  message += `• Coverage: All-India Doorstep Delivery\n`;
   if (customer.notes && customer.notes.trim()) {
-    message += `• *Special Notes:* ${customer.notes.trim()}\n`;
+    message += `• Notes: ${customer.notes.trim()}\n`;
   }
 
-  message += `\n📦 *ORDERED ITEMS (${items.length}):*\n`;
+  message += `\nORDERED ITEMS (${items.length}):\n`;
 
   items.forEach((item, index) => {
     message += `\n*${index + 1}. ${item.name}*\n`;
@@ -133,15 +92,11 @@ export function generateWhatsAppOrderUrl(
     message += `   • *Quantity:* ${item.quantity} × ${formatINR(item.price)} = *${formatINR(item.price * item.quantity)}*\n`;
   });
 
-  message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  message += `💰 *ESTIMATED TOTAL:* *${formatINR(totalAmount)}*\n`;
-  if (!coverage.isCovered) {
-    message += `⚠️ *(Customer noted delivery outside primary coverage zone - confirming logistics)*\n`;
-  } else {
-    message += `✅ *(Delivery within ${coverage.stateDetected} coverage zone)*\n`;
-  }
-  message += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  message += `Sent from COZLY by Zoffaro IN (cozly.in) • Crafted for every comfort.\nHandcrafted in Erattupetta, Kottayam`;
+  message += `\n─────────────────────────\n`;
+  message += `TOTAL: ${formatINR(totalAmount)}\n`;
+  message += `(All-India delivery with protective transit packaging)\n`;
+  message += `─────────────────────────\n`;
+  message += `Sent from COZLY by Zoffaro IN (cozly.in) • Crafted for every comfort.\nWorkshop: Erattupetta, Kottayam, Kerala`;
 
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 }
@@ -157,7 +112,7 @@ export function generateProductEnquiryUrl(
   origin: string = 'https://cozly.in'
 ): string {
   const cleanNumber = cleanWhatsAppNumber(whatsappNumber);
-  let text = `Hello COZLY by Zoffaro IN Team! 👋\n\n`;
+  let text = `Hello COZLY by Zoffaro IN!\n\n`;
   text += `I am interested in *${product.name}* (${formatINR(product.price)}) from cozly.in.\n\n`;
   text += `🔗 *Link:* ${origin}/collection/${product.slug}\n`;
   if (selectedFabric) text += `• *Fabric Preferred:* ${selectedFabric}\n`;

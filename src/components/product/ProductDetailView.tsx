@@ -291,7 +291,7 @@ export default function ProductDetailView({
 
             {/* Quiet Delivery Note */}
             <p className="text-xs text-neutral-500 pt-2 border-t border-neutral-200">
-              Direct factory delivery to Kerala, Karnataka (Bangalore) and Tamil Nadu.
+              Direct factory delivery to any pin code across India.
             </p>
           </div>
         </div>
@@ -366,9 +366,8 @@ export default function ProductDetailView({
             </button>
             {openAccordions.delivery && (
               <div className="pt-2 pb-4 text-xs sm:text-sm text-neutral-600 space-y-2 leading-relaxed">
-                <p>Kerala: Delivered within 5 to 10 days direct from our Erattupetta workshop.</p>
-                <p>Karnataka (Bangalore) & Tamil Nadu: Delivered within 7 to 12 days fully assembled.</p>
-                <p>Our team handles unloading, placement in your room, and inspection.</p>
+                <p>All-India Delivery: Dispatched direct from our Erattupetta workshop within 7 to 14 days nationwide.</p>
+                <p>Every piece is protected with multi-layer high-density foam, corner guards, and reinforced wooden crating.</p>
               </div>
             )}
           </div>

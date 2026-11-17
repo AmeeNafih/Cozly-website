@@ -44,7 +44,7 @@ export default async function HomePage() {
       {/* 5. Customize teaser: One clean split section (photo left, short text + button right) */}
       <CustomizerTeaser />
 
-      {/* 6. Delivery and contact strip: 3 short columns (Kerala, Karnataka/Bangalore, Tamil Nadu) + WhatsApp button */}
+      {/* 6. Delivery and contact strip: All-India delivery coverage + WhatsApp button */}
       <DeliveryCoverage whatsappNumber={settings.whatsappNumber} />
     </div>
   );

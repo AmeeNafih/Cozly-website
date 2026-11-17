@@ -90,7 +90,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       { id: 'wf-3', name: 'Charcoal Smoked Oak', colorHex: '#222222' },
     ],
     seoTitle: 'The Malabar Solid Teak 3-Seater Sofa | Handcrafted in Kerala | COZLY',
-    seoDescription: 'Order the Malabar 3-seater solid teakwood sofa handcrafted in Erattupetta, Kottayam. Direct factory delivery across Kerala, Bangalore & Tamil Nadu.',
+    seoDescription: 'Order the Malabar 3-seater solid teakwood sofa handcrafted in Erattupetta, Kottayam. Direct factory delivery across India.',
     createdAt: '2024-01-15T10:00:00Z',
     updatedAt: '2024-02-01T12:00:00Z',
   },
@@ -186,7 +186,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       { id: 'wf-7', name: 'Ebonized Black Teak', colorHex: '#111111' },
     ],
     seoTitle: 'Royal Chesterfield Sofa 3-Seater | Hand-Tufted in Kerala | COZLY',
-    seoDescription: 'Hand-tufted Chesterfield sofas crafted with passion in Kottayam, Kerala. Delivered safe to Kerala, Bangalore, and Tamil Nadu.',
+    seoDescription: 'Hand-tufted Chesterfield sofas crafted with passion in Kottayam, Kerala. Delivered safe across India.',
     createdAt: '2024-02-01T10:00:00Z',
     updatedAt: '2024-02-10T10:00:00Z',
   },
@@ -606,7 +606,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       { id: 'wf-23', name: 'Hidden Low Block', colorHex: '#18222D' },
     ],
     seoTitle: 'Calicut Deep Seat Corner Sofa | Stain Resistant Velvet | COZLY',
-    seoDescription: 'Ultra-deep sectional sofa handcrafted for utmost relaxation. Factory direct delivery across Kerala, Bangalore & Tamil Nadu.',
+    seoDescription: 'Ultra-deep sectional sofa handcrafted for utmost relaxation. Factory direct delivery across all of India.',
     createdAt: '2024-02-25T10:00:00Z',
     updatedAt: '2024-02-28T10:00:00Z',
   },
@@ -625,7 +625,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
   state: 'Kerala',
   pincode: '686122',
   workingHours: 'Monday – Saturday: 9:00 AM – 7:30 PM (IST)',
-  deliveryStates: ['Kerala', 'Tamil Nadu', 'Karnataka (incl. Bangalore)'],
+  deliveryStates: ['All India Delivery', 'Pan-India Shipping'],
   socialLinks: {
     instagram: 'https://www.instagram.com/cozly_by_zoffaro.in',
     facebook: 'https://facebook.com/cozlysofas',
@@ -653,7 +653,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
       },
       {
         id: 'hero-3',
-        title: 'White-Glove Delivery Across Kerala, Bangalore & Tamil Nadu.',
+        title: 'Protective Packaging & All-India Delivery.',
         subtitle: 'Fully assembled direct from our factory to your living room. Inspected, leveled, and placed with care by our dedicated delivery team.',
         tag: 'DIRECT FACTORY DELIVERY',
         ctaText: 'View Delivery Coverage',
@@ -686,7 +686,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
   ],
   announcementBar: {
     enabled: true,
-    text: '🛋️ Direct Factory Delivery across Kerala, Tamil Nadu & Bangalore • Order directly on WhatsApp with 0% advance options',
+    text: 'Factory-direct sofas with All-India delivery.',
     link: '/collection',
   },
 };

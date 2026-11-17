@@ -9,7 +9,7 @@ interface AnnouncementBarProps {
 }
 
 export default function AnnouncementBar({
-  text = 'Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore.',
+  text = 'Factory-direct sofas with All-India delivery.',
   link = '/collection',
 }: AnnouncementBarProps) {
   if (!text) return null;

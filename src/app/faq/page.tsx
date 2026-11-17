@@ -18,7 +18,7 @@ export default function FAQPage() {
     },
     {
       q: 'Which states and cities do you deliver to?',
-      a: 'We deliver directly across Kerala, Karnataka (Bangalore and surrounding cities), and Tamil Nadu. Delivery includes bringing the sofa into your room and checking the setup.',
+      a: 'We provide delivery across all states, union territories, and pin codes in India. Every sofa is safely packed with multi-layer high-density foam, corner edge guards, and reinforced wooden crating to reach your home in perfect condition.',
     },
     {
       q: 'What wood do you use for your frames?',

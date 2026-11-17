@@ -21,7 +21,7 @@ export default function HomepageEditorPage() {
 
   // Announcement Bar
   const [announcementEnabled, setAnnouncementEnabled] = useState(true);
-  const [announcementText, setAnnouncementText] = useState('Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore.');
+  const [announcementText, setAnnouncementText] = useState('Factory-direct sofas with All-India delivery.');
   const [announcementLink, setAnnouncementLink] = useState('/collection');
 
   // Hero Section
@@ -45,7 +45,7 @@ export default function HomepageEditorPage() {
           const s = data.settings;
           setSettings(s);
           setAnnouncementEnabled(s.announcementBar?.enabled ?? true);
-          setAnnouncementText(s.announcementBar?.text || 'Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore.');
+          setAnnouncementText(s.announcementBar?.text || 'Factory-direct sofas with All-India delivery.');
           setAnnouncementLink(s.announcementBar?.link || '/collection');
 
           const hc = s.heroContent;
@@ -184,7 +184,7 @@ export default function HomepageEditorPage() {
                 type="text"
                 value={announcementText}
                 onChange={(e) => setAnnouncementText(e.target.value)}
-                placeholder="Factory-direct sofas, delivered across Kerala, Tamil Nadu and Bangalore."
+                placeholder="Factory-direct sofas with All-India delivery."
                 className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-[4px] focus:outline-none focus:border-black text-black"
               />
             </div>

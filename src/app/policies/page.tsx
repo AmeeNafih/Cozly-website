@@ -50,7 +50,7 @@ export default function PoliciesPage() {
             </h2>
             <div className="text-xs sm:text-sm text-neutral-600 leading-relaxed space-y-2">
               <p>
-                We deliver direct from our Erattupetta workshop across Kerala (5–10 days), Karnataka / Bangalore (7–12 days), and Tamil Nadu (7–12 days).
+                We deliver direct from our Erattupetta workshop across all states and major pin codes in India within 7 to 14 business days.
               </p>
               <p>
                 Our delivery personnel bring the piece into your designated room, attach legs if shipped detached for transit security, and inspect the item with you upon delivery.

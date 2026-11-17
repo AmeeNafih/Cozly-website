@@ -32,7 +32,7 @@ export default function AdminSettingsPage() {
   const [factoryAddress, setFactoryAddress] = useState('Zoffaro Furniture / COZLY Atelier, Main Road, Erattupetta, Kottayam District, Kerala 686122, India');
   const [googleMapsUrl, setGoogleMapsUrl] = useState('https://maps.app.goo.gl/XbcbCJcaut3oDnjx8');
   const [workingHours, setWorkingHours] = useState('Monday – Saturday: 9:00 AM – 7:30 PM (IST)');
-  const [deliveryStatesStr, setDeliveryStatesStr] = useState('Kerala, Tamil Nadu, Karnataka (incl. Bangalore)');
+  const [deliveryStatesStr, setDeliveryStatesStr] = useState('All India Delivery, Pan-India Shipping');
   const [instagram, setInstagram] = useState('https://www.instagram.com/cozly_by_zoffaro.in');
   const [facebook, setFacebook] = useState('https://facebook.com/cozlysofas');
   const [youtube, setYoutube] = useState('https://youtube.com/@cozly');
@@ -52,7 +52,7 @@ export default function AdminSettingsPage() {
           setFactoryAddress(s.factoryAddress || 'Zoffaro Furniture / COZLY Atelier, Main Road, Erattupetta, Kottayam District, Kerala 686122, India');
           setGoogleMapsUrl(s.googleMapsUrl || 'https://maps.app.goo.gl/XbcbCJcaut3oDnjx8');
           setWorkingHours(s.workingHours || '');
-          setDeliveryStatesStr(s.deliveryStates?.join(', ') || 'Kerala, Tamil Nadu, Karnataka');
+          setDeliveryStatesStr(s.deliveryStates?.join(', ') || 'All India Delivery, Pan-India Shipping');
           setInstagram(s.socialLinks?.instagram || 'https://www.instagram.com/cozly_by_zoffaro.in');
           setFacebook(s.socialLinks?.facebook || '');
           setYoutube(s.socialLinks?.youtube || '');

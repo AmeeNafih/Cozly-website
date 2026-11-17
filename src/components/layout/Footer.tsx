@@ -126,7 +126,7 @@ export default function Footer({ settings }: FooterProps) {
               </li>
               <li>
                 <Link href="/faq#delivery" className="hover:text-white transition-colors">
-                  Delivery: Kerala, Bangalore, TN
+                  All-India Delivery
                 </Link>
               </li>
               <li>
@@ -198,7 +198,7 @@ export default function Footer({ settings }: FooterProps) {
         {/* Bottom Bar: Copyright & Location Only (Admin link removed from public footer) */}
         <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-neutral-500 gap-3">
           <p>© {new Date().getFullYear()} COZLY by Zoffaro IN (cozly.in). Handcrafted in Erattupetta, Kerala.</p>
-          <p className="text-neutral-500 text-[11px]">Factory-direct delivery across Kerala, Karnataka (Bangalore) & Tamil Nadu.</p>
+          <p className="text-neutral-500 text-[11px]">Factory-direct delivery across all of India.</p>
         </div>
       </div>
     </footer>

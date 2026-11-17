@@ -6,7 +6,7 @@ import CollectionCatalogue from '@/components/product/CollectionCatalogue';
 export const metadata: Metadata = {
   title: 'Sofa Collection | Solid Teak & Upholstered Designs',
   description:
-    'Browse our handcrafted sofa catalogue: 3-seaters, modular L-shapes, recliners, and hydraulic sofa-cum-beds. Factory direct delivery across Kerala, Bangalore & Tamil Nadu.',
+    'Browse our handcrafted sofa catalogue: 3-seaters, modular L-shapes, recliners, and hydraulic sofa-cum-beds with All-India factory-direct delivery.',
 };
 
 export const revalidate = 60;
